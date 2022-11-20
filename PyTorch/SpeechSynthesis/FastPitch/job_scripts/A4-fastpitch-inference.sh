@@ -7,7 +7,7 @@
 #$ -pe gpu-titanx 1
 #$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/$JOB_NAME_$JOB_ID.stdout
 #$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/$JOB_NAME_$JOB_ID.stderr
-#$ -M niamhcorkey@gmail.com
+#$ -M s1936986@ed.ac.uk
 #$ -m beas
 
 # initialise environment modules
@@ -15,14 +15,14 @@
 
 module load cuda/10.2.89
 module load anaconda
-source activate fastpitch
+source activate fastpitchnew
 
 . /exports/applications/support/set_cuda_visible_devices.sh
 
 set -euo pipefail
 
-UUN=s1234567
-YOUR_NAME=Firstname_Lastname
+UUN=s1936986
+YOUR_NAME=Niamh_Corkey
 
 DS_HOME=/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/${UUN}_${YOUR_NAME}
 FP=$DS_HOME/FastPitches/PyTorch/SpeechSynthesis/FastPitch

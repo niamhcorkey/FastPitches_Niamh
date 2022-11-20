@@ -6,27 +6,27 @@
 #$ -l h_vmem=1G
 #$ -pe sharedmem 8
 #$ -R y
-#$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/UUN_Firstname_Lastname/job_logs/$JOB_NAME_$JOB_ID.stdout
-#$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/UUN_Firstname_Lastname/job_logs/$JOB_NAME_$JOB_ID.stderr
-#$ -M your.email@example.com
+#$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stdout
+#$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stderr
+#$ -M s1936986@ed.ac.uk
 #$ -m beas
 
 # initialise environment modules
 . /etc/profile.d/modules.sh
 
 module load anaconda
-source activate fastpitch
+source activate fastpitchnew
 
 set -euo pipefail
 
-UUN=s1234567
-YOUR_NAME=Firstname_Lastname
+UUN=s1936986
+YOUR_NAME=Niamh_Corkey
 
 DS_HOME=/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/${UUN}_${YOUR_NAME}
-FP=$DS_HOME/FastPitches/PyTorch/SpeechSynthesis/FastPitch
+FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-SCRATCH=/exports/eddie/scratch/s1462938
-DATA_DIR="$SCRATCH/LJSpeech-1.1"
+SCRATCH=/exports/eddie/scratch/s1936986
+DATA_DIR="$DS_HOME/LJSpeech-1.1"
 
 cd $FP
 for FILELIST in ljs_audio_text_train_v3.txt \
@@ -41,6 +41,7 @@ for FILELIST in ljs_audio_text_train_v3.txt \
         --n-workers 1 \
         --batch-size 1 \
         --extract-pitch
+        --extract-mels
     # NB: this has to use `--batch-size 1` otherwise archives get saved with
     # padding and everything ends up the wrong shape!
 done

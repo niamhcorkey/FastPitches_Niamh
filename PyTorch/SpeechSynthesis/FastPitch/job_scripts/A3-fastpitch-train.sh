@@ -5,9 +5,9 @@
 #$ -l h_rt=48:00:00
 #$ -l h_vmem=64G
 #$ -pe gpu-titanx 1
-#$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/UUN_Firstname_Lastname/job_logs/$JOB_NAME_$JOB_ID.stdout
-#$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/UUN_Firstname_Lastname/job_logs/$JOB_NAME_$JOB_ID.stderr
-#$ -M niamhcorkey@gmail.com
+#$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stdout
+#$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stderr
+#$ -M s1936986@ed.ac.uk
 #$ -m beas
 
 # initialise environment modules
@@ -15,25 +15,25 @@
 
 module load cuda/10.2.89
 module load anaconda
-source activate fastpitch
+source activate fastpitchnew
 
 . /exports/applications/support/set_cuda_visible_devices.sh
 
 set -euo pipefail
 
-UUN=s1234567
-YOUR_NAME=Firstname_Lastname
+UUN=s1936986
+YOUR_NAME=Niamh_Corkey
 
 SCRATCH=/exports/eddie/scratch/$UUN
 DS_HOME=/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/${UUN}_${YOUR_NAME}
-FP=$DS_HOME/FastPitches/PyTorch/SpeechSynthesis/FastPitch
+FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
 # set up train script options using environment variables
 # some values are set by the queuing software, e.g. $JOB_ID
 # -- see `man qsub` and search for 'ENVIRONMENT VARIABLES'
 
-export OUTPUT_DIR=$SCRATCH/${JOB_NAME}_${JOB_ID}
-export DATASET_PATH=$SCRATCH/LJSpeech-1.1
+export OUTPUT_DIR=$DS_HOME/${JOB_NAME}_${JOB_ID}
+export DATASET_PATH=$DS_HOME/LJSpeech-1.1
 # if running after A2-fastpitch-prepare-lj-data.sh and with
 # LOAD_PITCH_FROM_DISK=true below, use ljs_audio_pitch_text_*.txt files
 # which point to saved pitch contours. If extracting pitches from audio
