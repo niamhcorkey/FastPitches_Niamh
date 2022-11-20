@@ -40,7 +40,7 @@ for FILELIST in ljs_audio_text_train_v3.txt \
         --wav-text-filelist filelists/$FILELIST \
         --n-workers 1 \
         --batch-size 1 \
-        --extract-pitch
+        --extract-pitch \
         --extract-mels
     # NB: this has to use `--batch-size 1` otherwise archives get saved with
     # padding and everything ends up the wrong shape!
