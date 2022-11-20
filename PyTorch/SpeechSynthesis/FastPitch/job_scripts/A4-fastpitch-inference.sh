@@ -15,7 +15,7 @@
 
 module load cuda/10.2.89
 module load anaconda
-source activate fastpitchnew
+source activate fastpitch1
 
 . /exports/applications/support/set_cuda_visible_devices.sh
 

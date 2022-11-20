@@ -15,7 +15,7 @@
 . /etc/profile.d/modules.sh
 
 module load anaconda
-source activate fastpitchnew
+source activate fastpitch1
 
 set -euo pipefail
 
