@@ -32,7 +32,7 @@ FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 # some values are set by the queuing software, e.g. $JOB_ID
 # -- see `man qsub` and search for 'ENVIRONMENT VARIABLES'
 
-export OUTPUT_DIR=$DS_HOME/${JOB_NAME}_${JOB_ID}
+export OUTPUT_DIR=$DS_HOME/trained_models/${JOB_NAME}
 export DATASET_PATH=$DS_HOME/LJSpeech-1.1
 # if running after A2-fastpitch-prepare-lj-data.sh and with
 # LOAD_PITCH_FROM_DISK=true below, use ljs_audio_pitch_text_*.txt files
