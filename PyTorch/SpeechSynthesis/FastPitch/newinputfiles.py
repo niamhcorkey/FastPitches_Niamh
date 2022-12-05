@@ -16,5 +16,5 @@ def add_column(filepath, newtype):
                 newline = "mels|pitch|coefs|text\n"
                 newfile.write(newline)
 
-add_column("filelists/ljs_audio_pitch_text_test.txt", "test")
+add_column("filelists/ljs_audio_pitch_text_val.txt", "val")
 
