@@ -9,7 +9,7 @@ def add_column(filepath, newtype):
 
             if len(line) > 20:
                 fileno = line[5:15]
-                newline = line[0:40] + f"coefs/{fileno}.txt|" + line[40:]
+                newline = line[0:40] + f"coefs/{fileno}.npy|" + line[40:]
                 newfile.write(newline)
 
             else:

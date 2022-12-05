@@ -592,7 +592,7 @@ def main():
     if args.local_rank == 0:
         prepare_tmp(args.pitch_online_dir)
 
-    trainset = TTSDataset(audiopaths_and_text=args.training_files, **vars(args))
+    trainset = TTSDataset(dataset_path=args.dataset_path, audiopaths_and_text=args.training_files, **vars(args))
     valset = TTSDataset(audiopaths_and_text=args.validation_files, **vars(args))
 
     if distributed_run:
