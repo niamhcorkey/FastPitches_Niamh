@@ -23,7 +23,7 @@ set -euo pipefail
 
 UUN=s1936986
 YOUR_NAME=Niamh_Corkey
-
+JOB_NAME=$1
 SCRATCH=/exports/eddie/scratch/$UUN
 DS_HOME=/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/${UUN}_${YOUR_NAME}
 FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
@@ -33,7 +33,7 @@ FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 # -- see `man qsub` and search for 'ENVIRONMENT VARIABLES'
 
 export OUTPUT_DIR=$DS_HOME/trained_models/${JOB_NAME}
-export DATASET_PATH=$DS_HOME/LJSpeech-1.1
+export DATASET_PATH=$DS_HOME/LJSpeech-1.1/wavs
 # if running after A2-fastpitch-prepare-lj-data.sh and with
 # LOAD_PITCH_FROM_DISK=true below, use ljs_audio_pitch_text_*.txt files
 # which point to saved pitch contours. If extracting pitches from audio
