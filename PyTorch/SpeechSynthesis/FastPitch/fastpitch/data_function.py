@@ -259,7 +259,7 @@ class TTSDataset(torch.utils.data.Dataset):
     def get_coefs(self, filename):
         coefs_np = np.load(filename)
         coefs = torch.from_numpy(coefs_np)
-        return torch.unsqueeze(coefs, 1)
+        return coefs
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
