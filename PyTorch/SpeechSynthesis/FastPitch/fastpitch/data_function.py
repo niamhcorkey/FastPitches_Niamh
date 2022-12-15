@@ -171,6 +171,7 @@ class TTSDataset(torch.utils.data.Dataset):
                 filter_length, hop_length, win_length,
                 n_mel_channels, sampling_rate, mel_fmin, mel_fmax)
         self.load_pitch_from_disk = load_pitch_from_disk
+        self.coefficient_utt_conditioning = coefficient_utt_conditioning
 
         self.prepend_space_to_text = prepend_space_to_text
         self.append_space_to_text = append_space_to_text
@@ -200,7 +201,7 @@ class TTSDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
 
-        if coefficient_utt_conditioning:
+        if self.coefficient_utt_conditioning:
             print("Coefficients being used")
 
         #Indexing items using dictionary entries
