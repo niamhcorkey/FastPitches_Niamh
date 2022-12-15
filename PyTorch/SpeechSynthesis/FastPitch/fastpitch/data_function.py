@@ -215,6 +215,8 @@ class TTSDataset(torch.utils.data.Dataset):
         if self.coefficient_utt_conditioning:
             uttcoefspath = self.audiopaths_and_text[index]['coefs']
             coefs = self.get_coefs(uttcoefspath)
+        else:
+            coefs = None
 
 
         mel = self.get_mel(audiopath)
@@ -230,7 +232,7 @@ class TTSDataset(torch.utils.data.Dataset):
             pitch = pitch[None, :]
 
         return (text, mel, len(text), pitch, energy, speaker, attn_prior,
-                audiopath)
+                audiopath, coefs)
 
     def __len__(self):
         return len(self.audiopaths_and_text)
@@ -252,13 +254,13 @@ class TTSDataset(torch.utils.data.Dataset):
             # assert melspec.size(0) == self.stft.n_mel_channels, (
             #     'Mel dimension mismatch: given {}, expected {}'.format(
             #         melspec.size(0), self.stft.n_mel_channels))
-
+        print(f"mel size: {melspec.size()}")
         return melspec
 
     def get_coefs(self, filename):
         coefs_np = np.load(filename)
         coefs = torch.from_numpy(coefs_np)
-        print(coefs.size())
+        return coefs
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
@@ -269,7 +271,7 @@ class TTSDataset(torch.utils.data.Dataset):
 
         if self.append_space_to_text:
             text = text + space
-
+        print(f"text size: {torch.LongTensor(text).size()}")
         return torch.LongTensor(text)
 
     def get_prior(self, index, mel_len, text_len):
@@ -309,6 +311,7 @@ class TTSDataset(torch.utils.data.Dataset):
             if self.pitch_mean is not None:
                 assert self.pitch_std is not None
                 pitch = normalize_pitch(pitch, self.pitch_mean, self.pitch_std)
+                print(f"pitch size: {pitch.size()}")
             return pitch
 
         if self.pitch_tmp_dir is not None:
