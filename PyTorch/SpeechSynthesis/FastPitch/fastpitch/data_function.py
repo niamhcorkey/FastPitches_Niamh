@@ -381,7 +381,7 @@ class TTSCollate:
             energy = batch[ids_sorted_decreasing[i]][4]
             pitch_padded[i, :, :pitch.shape[1]] = pitch
             energy_padded[i, :energy.shape[0]] = energy
-            print(f"Pitch padded after: {pitch_padded}")
+            print(f"Pitch padded after: {pitch_padded.size()}")
 
         if batch[0][5] is not None:
             speaker = torch.zeros_like(input_lengths)
