@@ -367,21 +367,13 @@ class TTSCollate:
         n_formants = batch[0][3].shape[0]
         pitch_padded = torch.zeros(mel_padded.size(0), n_formants,
                                    mel_padded.size(2), dtype=batch[0][3].dtype)
-        print(f"Mel padded: {mel_padded.size()}")
-        print(f"Pitch padded: {pitch_padded.size()}")
         energy_padded = torch.zeros_like(pitch_padded[:, 0, :])
-
-
-       # if batch[0][8] is not None:
-            #n_coefs = 3
-            #coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
 
         for i in range(len(ids_sorted_decreasing)):
             pitch = batch[ids_sorted_decreasing[i]][3]
             energy = batch[ids_sorted_decreasing[i]][4]
             pitch_padded[i, :, :pitch.shape[1]] = pitch
             energy_padded[i, :energy.shape[0]] = energy
-            print(f"Pitch padded after: {pitch_padded.size()}")
 
         if batch[0][5] is not None:
             speaker = torch.zeros_like(input_lengths)
@@ -402,6 +394,19 @@ class TTSCollate:
         len_x = torch.Tensor(len_x)
 
         audiopaths = [batch[i][7] for i in ids_sorted_decreasing]
+
+        if batch[0][8] is not None:
+            n_coefs = 3
+            coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
+                                       mel_padded.size(2), dtype=batch[0][8].dtype)
+
+            for i in range(len(ids_sorted_decreasing)):
+                coefs = batch[ids_sorted_decreasing[i]][8]
+                coefs_padded[i, :coefs.shape[0], :] = coefs
+            print(f"Coefs padded: {coefs_padded}")
+            print(f"Coefs padded: {coefs_padded.size()}")
+                
+
 
         return (text_padded, input_lengths, mel_padded, output_lengths, len_x,
                 pitch_padded, energy_padded, speaker, attn_prior_padded,
