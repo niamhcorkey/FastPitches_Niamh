@@ -254,13 +254,12 @@ class TTSDataset(torch.utils.data.Dataset):
             # assert melspec.size(0) == self.stft.n_mel_channels, (
             #     'Mel dimension mismatch: given {}, expected {}'.format(
             #         melspec.size(0), self.stft.n_mel_channels))
-        print(f"mel size: {melspec.size()}")
         return melspec
 
     def get_coefs(self, filename):
         coefs_np = np.load(filename)
         coefs = torch.from_numpy(coefs_np)
-        return coefs
+        return torch.unsqueeze(coefs, 1)
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
@@ -271,7 +270,6 @@ class TTSDataset(torch.utils.data.Dataset):
 
         if self.append_space_to_text:
             text = text + space
-        print(f"text size: {torch.LongTensor(text).size()}")
         return torch.LongTensor(text)
 
     def get_prior(self, index, mel_len, text_len):
@@ -311,7 +309,6 @@ class TTSDataset(torch.utils.data.Dataset):
             if self.pitch_mean is not None:
                 assert self.pitch_std is not None
                 pitch = normalize_pitch(pitch, self.pitch_mean, self.pitch_std)
-                print(f"pitch size: {pitch.size()}")
             return pitch
 
         if self.pitch_tmp_dir is not None:
@@ -370,7 +367,14 @@ class TTSCollate:
         n_formants = batch[0][3].shape[0]
         pitch_padded = torch.zeros(mel_padded.size(0), n_formants,
                                    mel_padded.size(2), dtype=batch[0][3].dtype)
+        print(f"Mel padded: {mel_padded.size()}")
+        print(f"Pitch padded: {pitch_padded.size()}")
         energy_padded = torch.zeros_like(pitch_padded[:, 0, :])
+
+        if batch[0][8] is not None:
+            n_coefs = 3
+            coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
+                                       )
 
         for i in range(len(ids_sorted_decreasing)):
             pitch = batch[ids_sorted_decreasing[i]][3]
