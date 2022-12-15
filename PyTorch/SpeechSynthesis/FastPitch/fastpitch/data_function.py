@@ -403,11 +403,20 @@ class TTSCollate:
             for i in range(len(ids_sorted_decreasing)):
                 coefs = batch[ids_sorted_decreasing[i]][8]
                 coefs_padded[i, :coefs.shape[0], :] = coefs
-            print(f"Coefs padded: {coefs_padded}")
-            print(f"Coefs padded: {coefs_padded.size()}")
-                
+            #print(f"Coefs padded: {coefs_padded}")
+            #print(f"Coefs padded: {coefs_padded.size()}")
 
 
+        print(f"text padded: {text_padded.size()}")
+        print(f"input lengths: {input_lengths.size()}")
+        print(f"mel padded: {mel_padded.size()}")
+        print(f"output lengths: {output_lengths.size()}")
+        print(f"length x: {len_x.size()}")
+        print(f"pitch padded: {pitch_padded.size()}")
+        print(f"energy padded: {energy_padded.size()}")
+        print(f"speaker: {speaker.size()}")
+        print(f"attn prior padded: {attn_prior_padded.size()}")
+        print(f"coefs padded: {coefs_padded.size()}")
         return (text_padded, input_lengths, mel_padded, output_lengths, len_x,
                 pitch_padded, energy_padded, speaker, attn_prior_padded,
                 audiopaths)
