@@ -201,11 +201,6 @@ class TTSDataset(torch.utils.data.Dataset):
 
     def __getitem__(self, index):
 
-        if self.coefficient_utt_conditioning:
-            print("Coefficients being used")
-        else:
-            print("Coefficients not being used")
-
         #Indexing items using dictionary entries
         if self.n_speakers > 1:
             audiopath = self.audiopaths_and_text[index]['mels']
@@ -216,6 +211,10 @@ class TTSDataset(torch.utils.data.Dataset):
             audiopath = self.audiopaths_and_text[index]['mels']
             text = self.audiopaths_and_text[index]['text']
             speaker = None
+
+        if self.coefficient_utt_conditioning:
+            uttcoefspath = self.audiopaths_and_text[index]['coefs']
+            coefs = self.get_coefs(uttcoefspath)
 
 
         mel = self.get_mel(audiopath)
@@ -255,6 +254,10 @@ class TTSDataset(torch.utils.data.Dataset):
             #         melspec.size(0), self.stft.n_mel_channels))
 
         return melspec
+
+    def get_coefs(self, filename):
+        coefs = np.load(filename)
+        print(coefs)
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
