@@ -370,11 +370,11 @@ class TTSCollate:
         print(f"Mel padded: {mel_padded.size()}")
         print(f"Pitch padded: {pitch_padded.size()}")
         energy_padded = torch.zeros_like(pitch_padded[:, 0, :])
-'''
-        if batch[0][8] is not None:
-            n_coefs = 3
-            coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
-'''
+
+
+       # if batch[0][8] is not None:
+            #n_coefs = 3
+            #coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
 
         for i in range(len(ids_sorted_decreasing)):
             pitch = batch[ids_sorted_decreasing[i]][3]
