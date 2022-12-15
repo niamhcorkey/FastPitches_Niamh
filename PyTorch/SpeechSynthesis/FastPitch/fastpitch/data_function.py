@@ -256,8 +256,9 @@ class TTSDataset(torch.utils.data.Dataset):
         return melspec
 
     def get_coefs(self, filename):
-        coefs = np.load(filename)
-        print(coefs)
+        coefs_np = np.load(filename)
+        coefs = torch.from_numpy(coefs_np)
+        print(coefs.size())
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
