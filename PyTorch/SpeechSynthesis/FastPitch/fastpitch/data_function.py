@@ -397,26 +397,25 @@ class TTSCollate:
 
         if batch[0][8] is not None:
             n_coefs = 3
-            coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
-                                       mel_padded.size(2), dtype=batch[0][8].dtype)
+            coefs_padded = torch.zeros(mel_padded.size(0), n_coefs, dtype=batch[0][8].dtype)
 
             for i in range(len(ids_sorted_decreasing)):
                 coefs = batch[ids_sorted_decreasing[i]][8]
-                coefs_padded[i, :coefs.shape[0], :] = coefs
-            #print(f"Coefs padded: {coefs_padded}")
-            #print(f"Coefs padded: {coefs_padded.size()}")
+                coefs_padded[i, :coefs.shape[0]] = coefs
+            print(f"Coefs padded: {coefs_padded}")
+            print(f"Coefs padded: {coefs_padded.size()}")
 
 
-        print(f"text padded: {text_padded.size()}")
-        print(f"input lengths: {input_lengths.size()}")
-        print(f"mel padded: {mel_padded.size()}")
-        print(f"output lengths: {output_lengths.size()}")
-        print(f"length x: {len_x.size()}")
-        print(f"pitch padded: {pitch_padded.size()}")
-        print(f"energy padded: {energy_padded.size()}")
-        print(f"speaker: {speaker.size()}")
-        print(f"attn prior padded: {attn_prior_padded.size()}")
-        print(f"coefs padded: {coefs_padded.size()}")
+        #print(f"text padded: {text_padded.size()}") 16, 137
+        #print(f"input lengths: {input_lengths.size()}") 16
+        #print(f"mel padded: {mel_padded.size()}") 16, 80, 867
+        #print(f"output lengths: {output_lengths.size()}") 16
+        #print(f"length x: {len_x.size()}") 16
+        #print(f"pitch padded: {pitch_padded.size()}") 16, 1, 867
+        #print(f"energy padded: {energy_padded.size()}") 16, 867
+        #print(f"speaker: {speaker.size()}")
+        #print(f"attn prior padded: {attn_prior_padded.size()}")
+        #print(f"coefs padded: {coefs_padded.size()}")
         return (text_padded, input_lengths, mel_padded, output_lengths, len_x,
                 pitch_padded, energy_padded, speaker, attn_prior_padded,
                 audiopaths)
