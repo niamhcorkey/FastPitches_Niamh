@@ -370,17 +370,18 @@ class TTSCollate:
         print(f"Mel padded: {mel_padded.size()}")
         print(f"Pitch padded: {pitch_padded.size()}")
         energy_padded = torch.zeros_like(pitch_padded[:, 0, :])
-
+'''
         if batch[0][8] is not None:
             n_coefs = 3
             coefs_padded = torch.zeros(mel_padded.size(0), n_coefs,
-                                       )
+'''
 
         for i in range(len(ids_sorted_decreasing)):
             pitch = batch[ids_sorted_decreasing[i]][3]
             energy = batch[ids_sorted_decreasing[i]][4]
             pitch_padded[i, :, :pitch.shape[1]] = pitch
             energy_padded[i, :energy.shape[0]] = energy
+            print(f"Pitch padded after: {pitch_padded}")
 
         if batch[0][5] is not None:
             speaker = torch.zeros_like(input_lengths)
