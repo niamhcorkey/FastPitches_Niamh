@@ -30,7 +30,7 @@ def absolute_paths(filepath, newtype):
             if len(line) > 20:
                 fileno = line[5:15]
                 text = line[40:]
-                newline = abspath + f"wavs/{fileno}.wav|" + abspath + f"pitch/{fileno}.pt|" + abspath + f"coefs/{fileno}.npy|" + text
+                newline = abspath + f"mels/{fileno}.pt|" + abspath + f"pitch/{fileno}.pt|" + abspath + f"coefs/{fileno}.npy|" + text
 
                 newfile.write(newline)
 
@@ -38,7 +38,7 @@ def absolute_paths(filepath, newtype):
                 newline = "mels|pitch|coefs|text\n"
                 newfile.write(newline)
 
-absolute_paths("filelists/ljs_audio_pitch_text_train_v3.txt", "train")
+absolute_paths("filelists/ljs_audio_pitch_text_test.txt", "test")
 
 
 
