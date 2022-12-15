@@ -203,6 +203,8 @@ class TTSDataset(torch.utils.data.Dataset):
 
         if self.coefficient_utt_conditioning:
             print("Coefficients being used")
+        else:
+            print("Coefficients not being used")
 
         #Indexing items using dictionary entries
         if self.n_speakers > 1:
