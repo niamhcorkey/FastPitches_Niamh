@@ -137,6 +137,7 @@ class TTSDataset(torch.utils.data.Dataset):
                  n_speakers=1,
                  load_mel_from_disk=True,
                  load_pitch_from_disk=True,
+                 coefficient_utt_conditioning=False,
                  pitch_mean=214.72203,  # LJSpeech defaults
                  pitch_std=65.72038,
                  max_wav_value=None,
@@ -198,6 +199,9 @@ class TTSDataset(torch.utils.data.Dataset):
         self.pitch_std = to_tensor(pitch_std)
 
     def __getitem__(self, index):
+
+        if coefficient_utt_conditioning:
+            print("Coefficients being used")
 
         #Indexing items using dictionary entries
         if self.n_speakers > 1:

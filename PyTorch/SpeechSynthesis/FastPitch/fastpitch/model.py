@@ -125,7 +125,7 @@ class FastPitch(nn.Module):
                  energy_conditioning,
                  energy_predictor_kernel_size, energy_predictor_filter_size,
                  p_energy_predictor_dropout, energy_predictor_n_layers,
-                 energy_embedding_kernel_size,
+                 energy_embedding_kernel_size, coefficient_utt_conditioning,
                  n_speakers, speaker_emb_weight, pitch_conditioning_formants=1):
         super(FastPitch, self).__init__()
 

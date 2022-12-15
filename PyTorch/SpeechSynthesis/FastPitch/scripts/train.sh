@@ -27,6 +27,8 @@ export OMP_NUM_THREADS=1
 : ${TEXT_CLEANERS:=english_cleaners_v2}
 # Add dummy space prefix/suffix is audio is not precisely trimmed
 : ${APPEND_SPACES:=false}
+# Enable coefficient conditioning
+: ${COEFFICIENTS:=true}
 
 : ${LOAD_PITCH_FROM_DISK:=true}
 : ${LOAD_MEL_FROM_DISK:=false}
@@ -71,6 +73,7 @@ ARGS+=" --n-speakers $NSPEAKERS"
 [ "$AMP" = "true" ]                && ARGS+=" --amp"
 [ "$PHONE" = "true" ]              && ARGS+=" --p-arpabet 1.0"
 [ "$ENERGY" = "true" ]             && ARGS+=" --energy-conditioning"
+[ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$SEED" != "" ]                  && ARGS+=" --seed $SEED"
 [ "$LOAD_MEL_FROM_DISK" = true ]   && ARGS+=" --load-mel-from-disk"
 [ "$LOAD_PITCH_FROM_DISK" = true ] && ARGS+=" --load-pitch-from-disk"
