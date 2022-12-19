@@ -413,17 +413,15 @@ class TTSCollate:
         #print(f"length x: {len_x.size()}") 16
         #print(f"pitch padded: {pitch_padded.size()}") 16, 1, 867
         #print(f"energy padded: {energy_padded.size()}") 16, 867
-        #print(f"speaker: {speaker.size()}")
-        #print(f"attn prior padded: {attn_prior_padded.size()}")
-        #print(f"coefs padded: {coefs_padded.size()}")
+        #print(f"coefs padded: {coefs_padded.size()}") 16, 3
         return (text_padded, input_lengths, mel_padded, output_lengths, len_x,
                 pitch_padded, energy_padded, speaker, attn_prior_padded,
-                audiopaths)
+                audiopaths, coefs_padded)
 
 
 def batch_to_gpu(batch):
     (text_padded, input_lengths, mel_padded, output_lengths, len_x,
-     pitch_padded, energy_padded, speaker, attn_prior, audiopaths) = batch
+     pitch_padded, energy_padded, speaker, attn_prior, audiopaths, coefs_padded) = batch
 
     text_padded = to_gpu(text_padded).long()
     input_lengths = to_gpu(input_lengths).long()
@@ -432,12 +430,14 @@ def batch_to_gpu(batch):
     pitch_padded = to_gpu(pitch_padded).float()
     energy_padded = to_gpu(energy_padded).float()
     attn_prior = to_gpu(attn_prior).float()
+    if coefs_padded is not None:
+        coefs_padded = to_gpu(coefs_padded).float()
     if speaker is not None:
         speaker = to_gpu(speaker).long()
 
     # Alignments act as both inputs and targets - pass shallow copies
     x = [text_padded, input_lengths, mel_padded, output_lengths,
-         pitch_padded, energy_padded, speaker, attn_prior, audiopaths]
+         pitch_padded, energy_padded, speaker, attn_prior, audiopaths, coefs_padded]
     y = [mel_padded, input_lengths, output_lengths]
     len_x = torch.sum(output_lengths)
     return (x, y, len_x)
