@@ -105,6 +105,27 @@ class TemporalPredictor(nn.Module):
         out = self.fc(out) * enc_out_mask
         return out
 
+class LSTMPredictor(nn.Module):
+    """Predicts a single float per each temporal location"""
+
+    def __init__(self, input_size, filter_size, kernel_size, dropout,
+                 n_layers=2, n_predictions=1):
+        super(LSTMPredictor, self).__init__()
+
+        self.layers = nn.Sequential(*[
+            ConvReLUNorm(input_size if i == 0 else filter_size, filter_size,
+                         kernel_size=kernel_size, dropout=dropout)
+            for i in range(n_layers)]
+        )
+        self.n_predictions = n_predictions
+        self.fc = nn.Linear(filter_size, self.n_predictions, bias=True)
+
+    def forward(self, enc_out, enc_out_mask):
+        out = enc_out * enc_out_mask
+        out = self.layers(out.transpose(1, 2)).transpose(1, 2)
+        out = self.fc(out) * enc_out_mask
+        return out
+
 
 class FastPitch(nn.Module):
     def __init__(self, n_mel_channels, n_symbols, padding_idx,
@@ -201,6 +222,19 @@ class FastPitch(nn.Module):
                 1, symbols_embedding_dim,
                 kernel_size=energy_embedding_kernel_size,
                 padding=int((energy_embedding_kernel_size - 1) / 2))
+
+        self.coefficient_utt_conditioning = coefficient_utt_conditioning
+        if coefficient_utt_conditioning:
+            self.coefficient_predictor = LSTMPredictor(
+                in_fft_output_size,
+                filter_size=pitch_predictor_filter_size,
+                kernel_size=pitch_predictor_kernel_size,
+                dropout=p_pitch_predictor_dropout,
+                n_layers=pitch_predictor_n_layers,
+                n_predictions=1
+            )
+
+            self.coefficient_emb = None
 
         self.proj = nn.Linear(out_fft_output_size, n_mel_channels, bias=True)
 
@@ -307,7 +341,10 @@ class FastPitch(nn.Module):
             energy_pred = None
             energy_tgt = None
 
-        ###do a similar optional thing for coefs
+        # Predict coefficients
+        if self.coefficient_utt_conditioning:
+            print("PREDICTING COEFFICIENTS")
+            coef_pred = self.coefficient_predictor(enc_out, enc_mask).squeeze(-1)
 
         len_regulated, dec_lens = regulate_len(
             dur_tgt, enc_out, pace, mel_max_len)
