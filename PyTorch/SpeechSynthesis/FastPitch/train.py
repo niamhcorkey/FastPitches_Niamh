@@ -340,6 +340,7 @@ def plot_batch_mels(pred_tgt_lists, rank):
     # target: mel, pitch, energy
     for mel_pitch_energy in pred_tgt_lists:
         mels = mel_pitch_energy[0]
+        print(mels.size())
         if mels.size(dim=2) == 80:  # tgt and pred mel have diff dimension order
             mels = mels.permute(0, 2, 1)
         mel_lens = mel_pitch_energy[-1]

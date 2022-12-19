@@ -402,9 +402,6 @@ class TTSCollate:
             for i in range(len(ids_sorted_decreasing)):
                 coefs = batch[ids_sorted_decreasing[i]][8]
                 coefs_padded[i, :coefs.shape[0]] = coefs
-            print(f"Coefs padded: {coefs_padded}")
-            print(f"Coefs padded: {coefs_padded.size()}")
-
 
         #print(f"text padded: {text_padded.size()}") 16, 137
         #print(f"input lengths: {input_lengths.size()}") 16
