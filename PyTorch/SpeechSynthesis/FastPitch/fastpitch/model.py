@@ -340,9 +340,8 @@ class FastPitch(nn.Module):
 
             masked_coef_tgt = coef_tgt_ups * enc_mask_ups
             coef_tgt_emb = self.coefficient_emb(masked_coef_tgt)
-            import pdb
-            pdb.set_trace()
-            
+            enc_out = enc_out + coef_tgt_emb
+
 
         # Predict pitch
         pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
