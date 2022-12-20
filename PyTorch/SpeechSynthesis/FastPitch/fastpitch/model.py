@@ -124,9 +124,9 @@ class LSTMPredictor(nn.Module):
         out = enc_out * enc_out_mask
         out = self.layers(out.transpose(1, 2)).transpose(1, 2)
         outputs, (hn, cn) = self.lstm(out)
+        out = cn[-1]
         import pdb
         pdb.set_trace()
-        out = cn[-1]
         out = self.fc(out) #* enc_out_mask
         return out
 
