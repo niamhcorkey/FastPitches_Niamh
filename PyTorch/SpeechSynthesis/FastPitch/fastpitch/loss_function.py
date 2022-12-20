@@ -36,18 +36,19 @@ from fastpitch.attn_loss_function import AttentionCTCLoss
 class FastPitchLoss(nn.Module):
     def __init__(self, dur_predictor_loss_scale=1.0,
                  pitch_predictor_loss_scale=1.0, attn_loss_scale=1.0,
-                 energy_predictor_loss_scale=0.1):
+                 energy_predictor_loss_scale=0.1, coef_predictor_loss_scale=1.0):
         super(FastPitchLoss, self).__init__()
         self.dur_predictor_loss_scale = dur_predictor_loss_scale
         self.pitch_predictor_loss_scale = pitch_predictor_loss_scale
         self.energy_predictor_loss_scale = energy_predictor_loss_scale
+        self.coef_predictor_loss_scale = coef_predictor_loss_scale
         self.attn_loss_scale = attn_loss_scale
         self.attn_ctc_loss = AttentionCTCLoss()
 
     def forward(self, model_out, targets, is_training=True, meta_agg='mean'):
         (mel_out, dec_mask, dur_pred, log_dur_pred, pitch_pred, pitch_tgt,
          energy_pred, energy_tgt, attn_soft, attn_hard, attn_dur,
-         attn_logprob) = model_out
+         attn_logprob, coef_pred, coef_tgt) = model_out
 
         (mel_tgt, in_lens, out_lens) = targets
 
@@ -83,6 +84,11 @@ class FastPitchLoss(nn.Module):
         else:
             energy_loss = 0
 
+        if coef_pred is not None:
+            coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
+        else:
+            coef_loss = 0
+
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
 
@@ -90,7 +96,8 @@ class FastPitchLoss(nn.Module):
                 + dur_pred_loss * self.dur_predictor_loss_scale
                 + pitch_loss * self.pitch_predictor_loss_scale
                 + energy_loss * self.energy_predictor_loss_scale
-                + attn_loss * self.attn_loss_scale)
+                + attn_loss * self.attn_loss_scale
+                + coef_loss * self.coef_predictor_loss_scale)
 
         meta = {
             'loss': loss.clone().detach(),
@@ -104,6 +111,9 @@ class FastPitchLoss(nn.Module):
 
         if energy_pred is not None:
             meta['energy_loss'] = energy_loss.clone().detach()
+
+        if coef_pred is not None:
+            meta['coef_loss'] = coef_loss.clone().detach()
 
         assert meta_agg in ('sum', 'mean')
         if meta_agg == 'sum':
