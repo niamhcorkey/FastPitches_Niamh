@@ -328,7 +328,7 @@ class FastPitch(nn.Module):
             print(f"Coef prediction size before: {coef_pred.size()}")
             print()
             coef_tgt = coefs  # [16, 3]
-            max_len = max(input_lens[0])
+            max_len = max(input_lens)
             coef_pred_ups = coef_pred.unsqueeze(-1)
             print(f"Coef prediction after unsqueeze: {coef_pred_ups}")
             print(f"Coef prediction size after unsqueeze: {coef_pred_ups.size()}")
