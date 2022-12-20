@@ -100,9 +100,7 @@ class TemporalPredictor(nn.Module):
         self.fc = nn.Linear(filter_size, self.n_predictions, bias=True)
 
     def forward(self, enc_out, enc_out_mask):
-        print(f"Before masking: {enc_out}")
         out = enc_out * enc_out_mask
-        print(f"After masking: {out}")
         out = self.layers(out.transpose(1, 2)).transpose(1, 2)
         out = self.fc(out) * enc_out_mask
         return out
@@ -331,14 +329,20 @@ class FastPitch(nn.Module):
             max_len = max(input_lens)
             batch_size = log_dur_pred.size(dim=0)
 
-            coef_pred_ups = coef_pred.unsqueeze(-1)
-            coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  #[16, 3, 140]
+            #coef_pred_ups = coef_pred.unsqueeze(-1)
+            #coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  #[16, 3, 140]
+
+            coef_tgt_ups = coef_tgt.unsqueeze(-1)
+            coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), 3, max_len)  # [16, 3, 140]
 
             enc_mask_ups = enc_mask.expand(batch_size,max_len,3) #[16, 140, 1] to [16, 140, 3]
             enc_mask_ups = enc_mask_ups.permute(0,2,1) #[16, 3, 140]
 
-            #masked_coef_pred =
-
+            masked_coef_tgt = coef_tgt_ups * enc_mask_ups
+            coef_tgt_emb = self.coefficient_emb(masked_coef_tgt)
+            import pdb
+            pdb.set_trace()
+            
 
         # Predict pitch
         pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
