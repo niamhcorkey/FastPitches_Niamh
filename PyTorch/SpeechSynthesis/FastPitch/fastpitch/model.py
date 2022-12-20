@@ -329,12 +329,12 @@ class FastPitch(nn.Module):
             print()
             coef_tgt = coefs  # [16, 3]
             max_len = max(input_lens)
-            batch_size = log_dur_pred[0]
+            batch_size = log_dur_pred.size(dim=0)
             coef_pred_ups = coef_pred.unsqueeze(-1)
             print(f"Coef prediction after unsqueeze: {coef_pred_ups}")
             print(f"Coef prediction size after unsqueeze: {coef_pred_ups.size()}")
             print()
-            coef_pred_ups = coef_pred_ups.expand(batch_size,3,max_len)
+            coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)
             print(f"Coef prediction after expand: {coef_pred_ups}")
             print(f"Coef prediction size after expand: {coef_pred_ups.size()}")
             print()
