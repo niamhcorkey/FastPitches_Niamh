@@ -339,7 +339,7 @@ class FastPitch(nn.Module):
             print(f"Coef prediction size after expand: {coef_pred_ups.size()}")
             print()
             print(f"Original mask size: {enc_mask.size()}")
-            enc_mask_ups = enc_mask_ups.expand(batch_size,max_len,3)
+            enc_mask_ups = enc_mask.expand(batch_size,max_len,3)
             print(f"Mask size after permute: {enc_mask_ups.permute(0,2,1).size()}")
 
 
