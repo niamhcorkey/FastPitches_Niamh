@@ -100,7 +100,9 @@ class TemporalPredictor(nn.Module):
         self.fc = nn.Linear(filter_size, self.n_predictions, bias=True)
 
     def forward(self, enc_out, enc_out_mask):
+        print(f"Before masking: {out})
         out = enc_out * enc_out_mask
+        print(f"After masking: {out})
         out = self.layers(out.transpose(1, 2)).transpose(1, 2)
         out = self.fc(out) * enc_out_mask
         return out
@@ -324,23 +326,18 @@ class FastPitch(nn.Module):
         # Predict coefficients
         if self.coefficient_utt_conditioning:
             coef_pred = self.coefficient_predictor(enc_out, enc_mask)
-            print(f"Coef prediction before: {coef_pred}")
-            print(f"Coef prediction size before: {coef_pred.size()}")
-            print()
             coef_tgt = coefs  # [16, 3]
+
             max_len = max(input_lens)
             batch_size = log_dur_pred.size(dim=0)
+
             coef_pred_ups = coef_pred.unsqueeze(-1)
-            print(f"Coef prediction after unsqueeze: {coef_pred_ups}")
-            print(f"Coef prediction size after unsqueeze: {coef_pred_ups.size()}")
-            print()
-            coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)
-            print(f"Coef prediction after expand: {coef_pred_ups}")
-            print(f"Coef prediction size after expand: {coef_pred_ups.size()}")
-            print()
-            print(f"Original mask size: {enc_mask.size()}")
-            enc_mask_ups = enc_mask.expand(batch_size,max_len,3)
-            print(f"Mask size after permute: {enc_mask_ups.permute(0,2,1).size()}")
+            coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  #[16, 3, 140]
+
+            enc_mask_ups = enc_mask.expand(batch_size,max_len,3) #[16, 140, 1] to [16, 140, 3]
+            enc_mask_ups = enc_mask_ups.permute(0,2,1) #[16, 3, 140]
+
+            masked_coef_pred =
 
 
         # Predict pitch
