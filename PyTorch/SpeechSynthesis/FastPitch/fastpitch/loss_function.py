@@ -88,6 +88,7 @@ class FastPitchLoss(nn.Module):
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
         else:
             coef_loss = 0
+        print(F"COEF LOSS SHAPE: {coef_loss}")
 
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
@@ -96,8 +97,8 @@ class FastPitchLoss(nn.Module):
                 + dur_pred_loss * self.dur_predictor_loss_scale
                 + pitch_loss * self.pitch_predictor_loss_scale
                 + energy_loss * self.energy_predictor_loss_scale
-                + attn_loss * self.attn_loss_scale
-                + coef_loss * self.coef_predictor_loss_scale)
+                + attn_loss * self.attn_loss_scale)
+                #+ coef_loss * self.coef_predictor_loss_scale)
 
         meta = {
             'loss': loss.clone().detach(),
