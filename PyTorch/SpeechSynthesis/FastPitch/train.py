@@ -421,6 +421,7 @@ def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
                     val_meta[k] += reduce_tensor(v, 1)
                 val_num_frames += reduce_tensor(num_frames.data, 1).item()
             else:
+                print(meta.items())
                 for k, v in meta.items():
                     val_meta[k] += v
                 val_num_frames = num_frames.item()
