@@ -126,8 +126,6 @@ class LSTMPredictor(nn.Module):
         outputs, (hn, cn) = self.lstm(out)
         out = outputs[:,-1,:] #verify this!
         out = self.fc(out) #* enc_out_mask
-        import pdb
-        pdb.set_trace()
         return out
 
 
@@ -293,6 +291,8 @@ class FastPitch(nn.Module):
 
         # Input FFT
         enc_out, enc_mask = self.encoder(inputs, conditioning=spk_emb)
+        import pdb
+        pdb.set_trace()
 
         # Alignment
         text_emb = self.encoder.word_emb(inputs)
