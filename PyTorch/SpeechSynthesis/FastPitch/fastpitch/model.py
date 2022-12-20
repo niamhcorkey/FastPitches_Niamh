@@ -337,6 +337,7 @@ class FastPitch(nn.Module):
             print(f"Coef prediction after expand: {coef_pred_ups}")
             print(f"Coef prediction size after expand: {coef_pred_ups.size()}")
             print()
+            print(f"Mask size after permute: {enc_mask.permute(0,2,1)}")
 
 
         # Predict pitch
