@@ -80,7 +80,9 @@ class FastPitchLoss(nn.Module):
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
             energy_loss = F.mse_loss(energy_tgt, energy_pred, reduction='none')
+            print(f"Energy loss before: {energy_loss}")
             energy_loss = (energy_loss * dur_mask).sum() / dur_mask.sum()
+            print(f"Energy loss after: {energy_loss}")
         else:
             energy_loss = 0
 
