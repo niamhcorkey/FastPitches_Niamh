@@ -97,7 +97,7 @@ def parse_args(parser):
     train.add_argument('--kl-loss-weight', type=float, default=1.0,
                        help='Gradually increase the hard attention loss term')
     train.add_argument('--benchmark-epochs-num', type=int, default=20,
-                        help='Number of epochs for calculating final stats')
+                       help='Number of epochs for calculating final stats')
 
     opt = parser.add_argument_group('optimization setup')
     opt.add_argument('--optimizer', type=str, default='lamb',
@@ -205,7 +205,6 @@ def init_distributed(args, world_size, rank):
 
 
 def last_checkpoint(output):
-
     def corrupted(fpath):
         try:
             torch.load(fpath, map_location='cpu')
@@ -479,7 +478,7 @@ def init_multi_tensor_ema(model, ema_model):
 def apply_multi_tensor_ema(decay, model_weights, ema_weights, overflow_buf):
     amp_C.multi_tensor_axpby(
         65536, overflow_buf, [ema_weights, model_weights, ema_weights],
-        decay, 1-decay, -1)
+        decay, 1 - decay, -1)
 
 
 def log(dictionary, rank):
@@ -593,7 +592,7 @@ def main():
 
     if args.local_rank == 0:
         prepare_tmp(args.pitch_online_dir)
-	
+
     trainset = TTSDataset(audiopaths_and_text=args.training_files, **vars(args))
     valset = TTSDataset(audiopaths_and_text=args.validation_files, **vars(args))
 
@@ -664,9 +663,10 @@ def main():
                     if args.kl_loss_start_epoch == epoch and epoch_iter == 1:
                         print('Begin hard_attn loss')
 
-                    _, _, _, _, _, _, _, _, attn_soft, attn_hard, _, _ = y_pred
+                    _, _, _, _, _, _, _, _, attn_soft, attn_hard, _, _, _, _ = y_pred
                     binarization_loss = attention_kl_loss(attn_hard, attn_soft)
-                    kl_weight = min((epoch - args.kl_loss_start_epoch) / args.kl_loss_warmup_epochs, 1.0) * args.kl_loss_weight
+                    kl_weight = min((epoch - args.kl_loss_start_epoch) / args.kl_loss_warmup_epochs,
+                                    1.0) * args.kl_loss_weight
                     meta['kl_loss'] = binarization_loss.clone().detach() * kl_weight
                     loss += kl_weight * binarization_loss
 
