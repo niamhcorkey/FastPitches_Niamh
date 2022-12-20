@@ -339,9 +339,7 @@ class FastPitch(nn.Module):
             enc_mask_ups = enc_mask_ups.permute(0,2,1) #[16, 3, 140]
 
             masked_coef_tgt = coef_tgt_ups * enc_mask_ups
-            coef_tgt_emb = self.coefficient_emb(masked_coef_tgt)
-            print(f"Coef shape: {coef_tgt_emb.size()}")
-            print(f"Enc shape: {enc_out.size()}")
+            coef_tgt_emb = self.coefficient_emb(masked_coef_tgt).permute(0, 2, 1)
             enc_out = enc_out + coef_tgt_emb
 
 
