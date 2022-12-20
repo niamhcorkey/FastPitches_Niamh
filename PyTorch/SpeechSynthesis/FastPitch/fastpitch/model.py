@@ -294,8 +294,8 @@ class FastPitch(nn.Module):
 
         # Input FFT
         enc_out, enc_mask = self.encoder(inputs, conditioning=spk_emb)
-        import pdb
-        pdb.set_trace()
+        #import pdb
+        #pdb.set_trace()
 
         # Alignment
         text_emb = self.encoder.word_emb(inputs)
