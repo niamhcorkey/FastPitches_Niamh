@@ -100,7 +100,7 @@ class TemporalPredictor(nn.Module):
         self.fc = nn.Linear(filter_size, self.n_predictions, bias=True)
 
     def forward(self, enc_out, enc_out_mask):
-        print(f"Before masking: {out}")
+        print(f"Before masking: {enc_out}")
         out = enc_out * enc_out_mask
         print(f"After masking: {out}")
         out = self.layers(out.transpose(1, 2)).transpose(1, 2)
