@@ -681,7 +681,6 @@ def main():
             meta = {k: v / args.grad_accumulation
                     for k, v in meta.items()}
 
-            print(f"LOSS: {loss}")
             if args.amp:
                 scaler.scale(loss).backward()
             else:

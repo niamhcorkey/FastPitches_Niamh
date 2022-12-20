@@ -85,10 +85,11 @@ class FastPitchLoss(nn.Module):
             energy_loss = 0
 
         if coef_pred is not None:
+            print(f"Pred shape: {coef_pred.size()}")
+            print(f"Tgt shape: {coef_tgt.size()}")
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
         else:
             coef_loss = 0
-        print(F"COEF LOSS SHAPE: {coef_loss}")
 
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
