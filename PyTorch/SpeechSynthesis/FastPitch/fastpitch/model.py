@@ -106,7 +106,6 @@ class TemporalPredictor(nn.Module):
         return out
 
 class LSTMPredictor(nn.Module):
-    """Predicts a single float per each temporal location"""
 
     def __init__(self, input_size, filter_size, kernel_size, dropout,
                  n_layers=2, n_predictions=1):
@@ -118,12 +117,17 @@ class LSTMPredictor(nn.Module):
             for i in range(n_layers)]
         )
         self.n_predictions = n_predictions
-        self.fc = nn.Linear(filter_size, self.n_predictions, bias=True)
+        self.lstm = nn.LSTM(filter_size, 64, bidirectional=True, batch_first=True)
+        self.fc = nn.Linear(128, self.n_predictions, bias=True)
 
     def forward(self, enc_out, enc_out_mask):
         out = enc_out * enc_out_mask
         out = self.layers(out.transpose(1, 2)).transpose(1, 2)
-        out = self.fc(out) * enc_out_mask
+        outputs, (hn, cn) = self.lstm(out)
+        import pdb
+        pdb.set_trace()
+        out = cn[-1]
+        out = self.fc(out) #* enc_out_mask
         return out
 
 
@@ -231,7 +235,7 @@ class FastPitch(nn.Module):
                 kernel_size=pitch_predictor_kernel_size,
                 dropout=p_pitch_predictor_dropout,
                 n_layers=pitch_predictor_n_layers,
-                n_predictions=1
+                n_predictions=3
             )
 
             self.coefficient_emb = None
@@ -311,25 +315,22 @@ class FastPitch(nn.Module):
         assert torch.all(torch.eq(dur_tgt.sum(dim=1), mel_lens))
 
         # Predict durations
-        log_dur_pred = self.duration_predictor(enc_out, enc_mask)
-        print(f"Duration prediction before: {log_dur_pred.size()}")
-        log_dur_pred = self.duration_predictor(enc_out, enc_mask).squeeze(-1)
-        print(f"Duration prediction after: {log_dur_pred.size()}")
+        log_dur_pred = self.duration_predictor(enc_out, enc_mask).squeeze(-1) #[16, 140, 1] to [16, 140]
         dur_pred = torch.clamp(torch.exp(log_dur_pred) - 1, 0, max_duration)
-        print()
+
+        # Predict coefficients
+        if self.coefficient_utt_conditioning:
+            print("PREDICTING COEFFICIENTS")
+            coef_pred = self.coefficient_predictor(enc_out, enc_mask).squeeze(-1)
+            coef_tgt = coefs  # [16, 3]
+            print(f"Coef target: {coef_tgt}")
+            print(f"Coef target size: {coef_tgt.size()}")
 
         # Predict pitch
-        pitch_pred = self.pitch_predictor(enc_out, enc_mask)
-        print(f"Pitch prediction before: {pitch_pred.size()}")
-        pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1)
-        print(f"Pitch prediction after: {pitch_pred.size()}")
-        print()
+        pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
 
         # Average pitch over characters
-        pitch_tgt = average_pitch(pitch_dense, dur_tgt)
-        print(f"Pitch target values: {pitch_tgt}")
-        print(f"Pitch target size: {pitch_tgt.size()}")
-        print()
+        pitch_tgt = average_pitch(pitch_dense, dur_tgt) #[16, 1, 140]
 
         if use_gt_pitch and pitch_tgt is not None:
             pitch_emb = self.pitch_emb(pitch_tgt)
@@ -339,33 +340,18 @@ class FastPitch(nn.Module):
 
         # Predict energy
         if self.energy_conditioning:
-            energy_pred = self.energy_predictor(enc_out, enc_mask)
-            print(f"Energy prediction before: {energy_pred.size()}")
-            energy_pred = self.energy_predictor(enc_out, enc_mask).squeeze(-1)
-            print(f"Energy prediction after: {energy_pred.size()}")
-            print()
+            energy_pred = self.energy_predictor(enc_out, enc_mask).squeeze(-1) #[16, 140, 1] to [16, 140]
 
             # Average energy over characters
             energy_tgt = average_pitch(energy_dense.unsqueeze(1), dur_tgt)
             energy_tgt = torch.log(1.0 + energy_tgt)
 
             energy_emb = self.energy_emb(energy_tgt)
-            energy_tgt = energy_tgt
-            print(f"Energy target before: {energy_tgt.size()}")
-            energy_tgt = energy_tgt.squeeze(1)
-            print(f"Energy target after: {energy_tgt.size()}")
+            energy_tgt = energy_tgt.squeeze(1) #[16, 1, 140] to [16, 140]
             enc_out = enc_out + energy_emb.transpose(1, 2)
         else:
             energy_pred = None
             energy_tgt = None
-
-        # Predict coefficients
-        if self.coefficient_utt_conditioning:
-            print("PREDICTING COEFFICIENTS")
-            coef_pred = self.coefficient_predictor(enc_out, enc_mask).squeeze(-1)
-            coef_tgt = coefs
-            print(f"Coef target: {coef_tgt}")
-            print(f"Coef target size: {coef_tgt.size()}")
 
         len_regulated, dec_lens = regulate_len(
             dur_tgt, enc_out, pace, mel_max_len)
