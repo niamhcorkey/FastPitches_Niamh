@@ -98,6 +98,14 @@ class FastPitchLoss(nn.Module):
                 + energy_loss * self.energy_predictor_loss_scale
                 + attn_loss * self.attn_loss_scale
                 + coef_loss * self.coef_predictor_loss_scale)
+        print(f"Type new loss: {type(loss)}")
+
+        oldloss = loss = (mel_loss
+                + dur_pred_loss * self.dur_predictor_loss_scale
+                + pitch_loss * self.pitch_predictor_loss_scale
+                + energy_loss * self.energy_predictor_loss_scale
+                + attn_loss * self.attn_loss_scale)
+        print(f"Type original loss: {type(oldloss)}")
 
         meta = {
             'loss': loss.clone().detach(),
