@@ -337,7 +337,7 @@ class FastPitch(nn.Module):
             enc_mask_ups = enc_mask.expand(batch_size,max_len,3) #[16, 140, 1] to [16, 140, 3]
             enc_mask_ups = enc_mask_ups.permute(0,2,1) #[16, 3, 140]
 
-            masked_coef_pred =
+            #masked_coef_pred =
 
 
         # Predict pitch
