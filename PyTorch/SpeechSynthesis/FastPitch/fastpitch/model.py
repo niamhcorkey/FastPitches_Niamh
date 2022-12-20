@@ -236,7 +236,10 @@ class FastPitch(nn.Module):
                 n_predictions=3
             )
 
-            self.coefficient_emb = None
+            self.coefficient_emb = nn.Conv1d(
+                3, symbols_embedding_dim,
+                kernel_size=energy_embedding_kernel_size,
+                padding=int((energy_embedding_kernel_size - 1) / 2))
 
         self.proj = nn.Linear(out_fft_output_size, n_mel_channels, bias=True)
 
@@ -320,11 +323,21 @@ class FastPitch(nn.Module):
 
         # Predict coefficients
         if self.coefficient_utt_conditioning:
-            print("PREDICTING COEFFICIENTS")
-            coef_pred = self.coefficient_predictor(enc_out, enc_mask).squeeze(-1)
+            coef_pred = self.coefficient_predictor(enc_out, enc_mask)
+            print(f"Coef prediction before: {coef_pred}")
+            print(f"Coef prediction size before: {coef_pred.size()}")
+            print()
             coef_tgt = coefs  # [16, 3]
-            print(f"Coef target: {coef_tgt}")
-            print(f"Coef target size: {coef_tgt.size()}")
+            max_len = max(input_lens[0])
+            coef_pred_ups = coef_pred.unsqueeze(-1)
+            print(f"Coef prediction after unsqueeze: {coef_pred_ups}")
+            print(f"Coef prediction size after unsqueeze: {coef_pred_ups.size()}")
+            print()
+            coef_pred_ups = coef_pred_ups.expand(16,3,max_len)
+            print(f"Coef prediction after expand: {coef_pred_ups}")
+            print(f"Coef prediction size after expand: {coef_pred_ups.size()}")
+            print()
+
 
         # Predict pitch
         pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
