@@ -75,23 +75,18 @@ class FastPitchLoss(nn.Module):
         ldiff = pitch_tgt.size(2) - pitch_pred.size(2)
         pitch_pred = F.pad(pitch_pred, (0, ldiff, 0, 0, 0, 0), value=0.0)
         pitch_loss = F.mse_loss(pitch_tgt, pitch_pred, reduction='none')
-        print(f"Pitch loss before: {pitch_loss}")
         pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
-        print(f"Pitch loss after: {pitch_loss}")
 
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
             energy_loss = F.mse_loss(energy_tgt, energy_pred, reduction='none')
-            print(f"Energy loss before: {energy_loss}")
             energy_loss = (energy_loss * dur_mask).sum() / dur_mask.sum()
-            print(f"Energy loss after: {energy_loss}")
         else:
             energy_loss = 0
 
         if coef_pred is not None:
-            print(f"Pred shape: {coef_pred.size()}")
-            print(f"Tgt shape: {coef_tgt.size()}")
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
+            coef_loss = coef_loss.mean()
         else:
             coef_loss = 0
 
@@ -102,8 +97,8 @@ class FastPitchLoss(nn.Module):
                 + dur_pred_loss * self.dur_predictor_loss_scale
                 + pitch_loss * self.pitch_predictor_loss_scale
                 + energy_loss * self.energy_predictor_loss_scale
-                + attn_loss * self.attn_loss_scale)
-                #+ coef_loss * self.coef_predictor_loss_scale)
+                + attn_loss * self.attn_loss_scale
+                + coef_loss * self.coef_predictor_loss_scale)
 
         meta = {
             'loss': loss.clone().detach(),
