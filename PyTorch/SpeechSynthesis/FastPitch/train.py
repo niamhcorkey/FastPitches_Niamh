@@ -436,6 +436,7 @@ def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
         'mel-loss/validation-mel-loss': val_meta['mel_loss'].item(),
         'pitch-loss/validation-pitch-loss': val_meta['pitch_loss'].item(),
         'energy-loss/validation-energy-loss': val_meta['energy_loss'].item(),
+        'coefs-loss/validation-coefs-loss': val_meta['coef_loss'],
         'dur-loss/validation-dur-error': val_meta['duration_predictor_loss'].item(),
         'validation-frames per s': num_frames.item() / val_meta['took'],
         'validation-took': val_meta['took'],
@@ -624,6 +625,7 @@ def main():
         epoch_mel_loss = 0.0
         epoch_pitch_loss = 0.0
         epoch_energy_loss = 0.0
+        epoch_coef_loss = 0.0
         epoch_dur_loss = 0.0
         epoch_num_frames = 0
         epoch_frames_per_sec = 0.0
@@ -721,6 +723,7 @@ def main():
                 iter_kl_loss = iter_meta['kl_loss'].item()
                 iter_pitch_loss = iter_meta['pitch_loss'].item()
                 iter_energy_loss = iter_meta['energy_loss'].item()
+                iter_coef_loss = iter_meta['coef_loss'].item()
                 iter_dur_loss = iter_meta['duration_predictor_loss'].item()
                 iter_time = time.perf_counter() - iter_start_time
                 epoch_frames_per_sec += iter_num_frames / iter_time
@@ -729,6 +732,7 @@ def main():
                 epoch_mel_loss += iter_mel_loss
                 epoch_pitch_loss += iter_pitch_loss
                 epoch_energy_loss += iter_energy_loss
+                epoch_coef_loss += iter_coef_loss
                 epoch_dur_loss += iter_dur_loss
 
                 if epoch_iter % 5 == 0:
@@ -743,6 +747,7 @@ def main():
                         'kl_weight': kl_weight,
                         'pitch-loss/pitch_loss': iter_pitch_loss,
                         'energy-loss/energy_loss': iter_energy_loss,
+                        'coef-loss/coef-loss': iter_coef_loss,
                         'dur-loss/dur_loss': iter_dur_loss,
                         'frames per s': iter_num_frames / iter_time,
                         'took': iter_time,
@@ -766,6 +771,7 @@ def main():
             'mel-loss/epoch_mel_loss': epoch_mel_loss,
             'pitch-loss/epoch_pitch_loss': epoch_pitch_loss,
             'energy-loss/epoch_energy_loss': epoch_energy_loss,
+            'coef-loss/epoch_coef_loss': epoch_coef_loss,
             'dur-loss/epoch_dur_loss': epoch_dur_loss,
             'epoch_frames per s': epoch_num_frames / epoch_time,
             'epoch_took': epoch_time,
