@@ -33,13 +33,13 @@ FP=$DS_HOME/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 # -- see `man qsub` and search for 'ENVIRONMENT VARIABLES'
 
 export OUTPUT_DIR=$DS_HOME/trained_models/${JOB_NAME}
-export DATASET_PATH=$DS_HOME/LJSpeech-1.1
+export DATASET_PATH=$DS_HOME/LJSpeech-1.1/wavs
 # if running after A2-fastpitch-prepare-lj-data.sh and with
 # LOAD_PITCH_FROM_DISK=true below, use ljs_audio_pitch_text_*.txt files
 # which point to saved pitch contours. If extracting pitches from audio
 # online with PITCH_ONLINE_DIR set below, use ljs_audio_text_*.txt files
-export TRAIN_FILELIST=$FP/filelists/ljs_audio_pitch_text_train_v3.txt
-export VAL_FILELIST=$FP/filelists/ljs_audio_pitch_text_val.txt
+export TRAIN_FILELIST=$FP/filelists/absolute_paths_norm_train.txt
+export VAL_FILELIST=$FP/filelists/absolute_paths_norm_val.txt
 
 # metadata for wandb logging
 export PROJECT=fastpitches_eddie

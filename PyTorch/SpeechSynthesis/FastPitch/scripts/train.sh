@@ -7,8 +7,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=2}
 : ${OUTPUT_DIR:="./output"}
 : ${DATASET_PATH:=LJSpeech-1.1}
-: ${TRAIN_FILELIST:=filelists/ljs_audio_pitch_text_train_v3.txt}
-: ${VAL_FILELIST:=filelists/ljs_audio_pitch_text_val.txt}
+: ${TRAIN_FILELIST:=filelists/absolute_paths_norm_train.txt}
+: ${VAL_FILELIST:=filelists/absolute_paths_norm_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
@@ -73,7 +73,7 @@ ARGS+=" --n-speakers $NSPEAKERS"
 [ "$AMP" = "true" ]                && ARGS+=" --amp"
 [ "$PHONE" = "true" ]              && ARGS+=" --p-arpabet 1.0"
 [ "$ENERGY" = "true" ]             && ARGS+=" --energy-conditioning"
-[ "$COEFFICIENTS" = true ]       && ARGS+=" --coefficient-utt-conditioning"
+[ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$SEED" != "" ]                  && ARGS+=" --seed $SEED"
 [ "$LOAD_MEL_FROM_DISK" = true ]   && ARGS+=" --load-mel-from-disk"
 [ "$LOAD_PITCH_FROM_DISK" = true ] && ARGS+=" --load-pitch-from-disk"

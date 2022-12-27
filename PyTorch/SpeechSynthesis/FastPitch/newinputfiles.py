@@ -18,9 +18,9 @@ def add_column(filepath, newtype):
 
 #add_column("filelists/ljs_audio_pitch_text_val.txt", "val")
 
-def absolute_paths(filepath, newtype):
-    open(f"filelists/absolute_paths_{newtype}.txt", 'w')
-    newfile = open(f"filelists/absolute_paths_{newtype}.txt", 'a')
+def absolute_paths_norm(filepath, newtype):
+    open(f"filelists/absolute_paths_norm_{newtype}.txt", 'w')
+    newfile = open(f"filelists/absolute_paths_norm_{newtype}.txt", 'a')
 
     abspath = "/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/LJSpeech-1.1/"
 
@@ -30,7 +30,7 @@ def absolute_paths(filepath, newtype):
             if len(line) > 20:
                 fileno = line[5:15]
                 text = line[40:]
-                newline = abspath + f"mels/{fileno}.pt|" + abspath + f"pitch/{fileno}.pt|" + abspath + f"coefs/{fileno}.npy|" + text
+                newline = abspath + f"mels/{fileno}.pt|" + abspath + f"pitch/{fileno}.pt|" + abspath + f"coefs_norm/{fileno}.npy|" + text
 
                 newfile.write(newline)
 
@@ -38,7 +38,7 @@ def absolute_paths(filepath, newtype):
                 newline = "mels|pitch|coefs|text\n"
                 newfile.write(newline)
 
-absolute_paths("filelists/ljs_audio_pitch_text_test.txt", "test")
+absolute_paths_norm("filelists/ljs_audio_pitch_text_train_v3.txt", "train")
 
 
 
