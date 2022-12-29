@@ -382,8 +382,9 @@ class FastPitch(nn.Module):
                 pitch_tgt, energy_pred, energy_tgt, attn_soft, attn_hard,
                 attn_hard_dur, attn_logprob, coef_pred, coef_tgt)
 
+
     def infer(self, inputs, pace=1.0, dur_tgt=None, pitch_tgt=None,
-              energy_tgt=None, pitch_transform=None, max_duration=75,
+              energy_tgt=None, coef_tgt=None, pitch_transform=None, max_duration=75,
               speaker=0):
 
         if self.speaker_emb is None:
@@ -400,6 +401,29 @@ class FastPitch(nn.Module):
         # Predict durations
         log_dur_pred = self.duration_predictor(enc_out, enc_mask).squeeze(-1)
         dur_pred = torch.clamp(torch.exp(log_dur_pred) - 1, 0, max_duration)
+
+        # Predict coefficients
+        if self.coefficient_utt_conditioning:
+            max_len = max(input_lens)
+            batch_size = log_dur_pred.size(dim=0)
+            enc_mask_ups = enc_mask.expand(batch_size, max_len, 3)  # [16, 140, 1] to [16, 140, 3]
+            enc_mask_ups = enc_mask_ups.permute(0, 2, 1)  # [16, 3, 140]
+
+            if coef_tgt is None:
+                coef_pred = self.coefficient_predictor(enc_out, enc_mask)
+                coef_pred_ups = coef_pred.unsqueeze(-1)
+                coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  # [16, 3, 140]
+
+                masked_coef_pred = coef_pred_ups * enc_mask_ups
+                coef_emb = self.coefficient_emb(masked_coef_pred).permute(0, 2, 1)
+            else:
+                coef_tgt_ups = coef_tgt.unsqueeze(-1)
+                coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), 3, max_len) # [16, 3, 140]
+
+                masked_coef_tgt = coef_tgt_ups * enc_mask_ups
+                coef_emb = self.coefficient_emb(masked_coef_tgt).permute(0, 2, 1)
+
+            enc_out = enc_out + coef_emb
 
         # Pitch over chars
         pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1)
@@ -440,4 +464,4 @@ class FastPitch(nn.Module):
         mel_out = self.proj(dec_out)
         # mel_lens = dec_mask.squeeze(2).sum(axis=1).long()
         mel_out = mel_out.permute(0, 2, 1)  # For inference.py
-        return mel_out, dec_lens, dur_pred, pitch_pred, energy_pred
+        return mel_out, dec_lens, dur_pred, pitch_pred, energy_pred, coef_pred

@@ -27,9 +27,13 @@ YOUR_NAME=Niamh_Corkey
 DS_HOME=/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/${UUN}_${YOUR_NAME}
 FP=$DS_HOME/FastPitches/PyTorch/SpeechSynthesis/FastPitch
 
+MODEL=
+CHECKPOINT=
+
 # see $FP/scripts/download_{fastpitch,waveglow}.sh to get pre-trained
 # checkpoints, or substitute your own (can pass as script argument)
-export FASTPITCH="${1:-$FP/pretrained_models/fastpitch/nvidia_fastpitch_210824.pt}"
+#export FASTPITCH="${1:-$FP/pretrained_models/fastpitch/nvidia_fastpitch_210824.pt}"
+export FASTPITCH="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"
 export WAVEGLOW="$FP/pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"
 
 # NB. at least the waveglow checkpoint tries to deserialise straight to
