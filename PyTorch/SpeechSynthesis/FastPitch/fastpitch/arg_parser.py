@@ -119,9 +119,6 @@ def parse_fastpitch_args(parent, add_help=False):
     energy_pred.add_argument('--energy-predictor-n-layers', default=2, type=int,
                             help='Number of conv-1D layers')
 
-    coef_pred = parser.add_argument_group('coefficient predictor parameters')
-    coef_pred.add_argument('--coefficient-utt-conditioning', action='store_true')
-
     cond = parser.add_argument_group('conditioning parameters')
     cond.add_argument('--pitch-embedding-kernel-size', default=3, type=int,
                       help='Pitch embedding conv-1D kernel size')
