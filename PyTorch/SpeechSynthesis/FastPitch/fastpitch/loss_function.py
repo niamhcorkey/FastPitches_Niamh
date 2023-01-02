@@ -73,9 +73,13 @@ class FastPitchLoss(nn.Module):
         mel_loss = (mel_loss * mel_mask).sum() / mel_mask.sum()
 
         ldiff = pitch_tgt.size(2) - pitch_pred.size(2)
-        pitch_pred = F.pad(pitch_pred, (0, ldiff, 0, 0, 0, 0), value=0.0)
-        pitch_loss = F.mse_loss(pitch_tgt, pitch_pred, reduction='none')
-        pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
+
+        if pitch_pred is not None:
+            pitch_pred = F.pad(pitch_pred, (0, ldiff, 0, 0, 0, 0), value=0.0)
+            pitch_loss = F.mse_loss(pitch_tgt, pitch_pred, reduction='none')
+            pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
+        else:
+            pitch_loss = 0
 
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
