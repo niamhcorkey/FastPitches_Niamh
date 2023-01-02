@@ -137,6 +137,7 @@ class TTSDataset(torch.utils.data.Dataset):
                  n_speakers=1,
                  load_mel_from_disk=True,
                  load_pitch_from_disk=True,
+                 pitch_conditioning=True,
                  coefficient_utt_conditioning=False,
                  pitch_mean=214.72203,  # LJSpeech defaults
                  pitch_std=65.72038,
@@ -171,6 +172,7 @@ class TTSDataset(torch.utils.data.Dataset):
                 filter_length, hop_length, win_length,
                 n_mel_channels, sampling_rate, mel_fmin, mel_fmax)
         self.load_pitch_from_disk = load_pitch_from_disk
+        self.pitch_conditioning = pitch_conditioning
         self.coefficient_utt_conditioning = coefficient_utt_conditioning
 
         self.prepend_space_to_text = prepend_space_to_text
@@ -218,10 +220,13 @@ class TTSDataset(torch.utils.data.Dataset):
         else:
             coefs = None
 
+        if self.pitch_conditioning:
+            pitch = self.get_pitch(index, mel.size(-1))
+        else:
+            pitch = None
 
         mel = self.get_mel(audiopath)
         text = self.get_text(text)
-        pitch = self.get_pitch(index, mel.size(-1))
         energy = torch.norm(mel.float(), dim=0, p=2)
         attn_prior = self.get_prior(index, mel.shape[1], text.shape[0])
 

@@ -142,6 +142,7 @@ class FastPitch(nn.Module):
                  p_out_fft_dropout, p_out_fft_dropatt, p_out_fft_dropemb,
                  dur_predictor_kernel_size, dur_predictor_filter_size,
                  p_dur_predictor_dropout, dur_predictor_n_layers,
+                 pitch_conditioning,
                  pitch_predictor_kernel_size, pitch_predictor_filter_size,
                  p_pitch_predictor_dropout, pitch_predictor_n_layers,
                  pitch_embedding_kernel_size,
@@ -192,18 +193,20 @@ class FastPitch(nn.Module):
             d_embed=symbols_embedding_dim
         )
 
-        self.pitch_predictor = TemporalPredictor(
-            in_fft_output_size,
-            filter_size=pitch_predictor_filter_size,
-            kernel_size=pitch_predictor_kernel_size,
-            dropout=p_pitch_predictor_dropout, n_layers=pitch_predictor_n_layers,
-            n_predictions=pitch_conditioning_formants
-        )
+        self.pitch_conditioning = pitch_conditioning
+        if pitch_conditioning:
+            self.pitch_predictor = TemporalPredictor(
+                in_fft_output_size,
+                filter_size=pitch_predictor_filter_size,
+                kernel_size=pitch_predictor_kernel_size,
+                dropout=p_pitch_predictor_dropout, n_layers=pitch_predictor_n_layers,
+                n_predictions=pitch_conditioning_formants
+            )
 
-        self.pitch_emb = nn.Conv1d(
-            pitch_conditioning_formants, symbols_embedding_dim,
-            kernel_size=pitch_embedding_kernel_size,
-            padding=int((pitch_embedding_kernel_size - 1) / 2))
+            self.pitch_emb = nn.Conv1d(
+                pitch_conditioning_formants, symbols_embedding_dim,
+                kernel_size=pitch_embedding_kernel_size,
+                padding=int((pitch_embedding_kernel_size - 1) / 2))
 
         # Store values precomputed for training data within the model
         self.register_buffer('pitch_mean', torch.zeros(1))
@@ -346,16 +349,20 @@ class FastPitch(nn.Module):
             coef_tgt = None
 
         # Predict pitch
-        pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
+        if self.pitch_conditioning:
+            pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1) #[16, 140, 1] to [16, 1, 140]
 
-        # Average pitch over characters
-        pitch_tgt = average_pitch(pitch_dense, dur_tgt) #[16, 1, 140]
+            # Average pitch over characters
+            pitch_tgt = average_pitch(pitch_dense, dur_tgt) #[16, 1, 140]
 
-        if use_gt_pitch and pitch_tgt is not None:
-            pitch_emb = self.pitch_emb(pitch_tgt)
+            if use_gt_pitch and pitch_tgt is not None:
+                pitch_emb = self.pitch_emb(pitch_tgt)
+            else:
+                pitch_emb = self.pitch_emb(pitch_pred)
+            enc_out = enc_out + pitch_emb.transpose(1, 2)
         else:
-            pitch_emb = self.pitch_emb(pitch_pred)
-        enc_out = enc_out + pitch_emb.transpose(1, 2)
+            pitch_pred = None
+            pitch_tgt = None
 
         # Predict energy
         if self.energy_conditioning:
@@ -408,9 +415,9 @@ class FastPitch(nn.Module):
             batch_size = log_dur_pred.size(dim=0)
             enc_mask_ups = enc_mask.expand(batch_size, max_len, 3)  # [16, 140, 1] to [16, 140, 3]
             enc_mask_ups = enc_mask_ups.permute(0, 2, 1)  # [16, 3, 140]
+            coef_pred = self.coefficient_predictor(enc_out, enc_mask)
 
             if coef_tgt is None:
-                coef_pred = self.coefficient_predictor(enc_out, enc_mask)
                 coef_pred_ups = coef_pred.unsqueeze(-1)
                 coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  # [16, 3, 140]
 
@@ -424,24 +431,29 @@ class FastPitch(nn.Module):
                 coef_emb = self.coefficient_emb(masked_coef_tgt).permute(0, 2, 1)
 
             enc_out = enc_out + coef_emb
+        else:
+            coef_pred = None
 
         # Pitch over chars
-        pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1)
+        if self.pitch_conditioning:
+            pitch_pred = self.pitch_predictor(enc_out, enc_mask).permute(0, 2, 1)
 
-        if pitch_transform is not None:
-            if self.pitch_std[0] == 0.0:
-                # XXX LJSpeech-1.1 defaults
-                mean, std = 218.14, 67.24
+            if pitch_transform is not None:
+                if self.pitch_std[0] == 0.0:
+                    # XXX LJSpeech-1.1 defaults
+                    mean, std = 218.14, 67.24
+                else:
+                    mean, std = self.pitch_mean[0], self.pitch_std[0]
+                pitch_pred = pitch_transform(pitch_pred, enc_mask.sum(dim=(1,2)),
+                                             mean, std)
+            if pitch_tgt is None:
+                pitch_emb = self.pitch_emb(pitch_pred).transpose(1, 2)
             else:
-                mean, std = self.pitch_mean[0], self.pitch_std[0]
-            pitch_pred = pitch_transform(pitch_pred, enc_mask.sum(dim=(1,2)),
-                                         mean, std)
-        if pitch_tgt is None:
-            pitch_emb = self.pitch_emb(pitch_pred).transpose(1, 2)
-        else:
-            pitch_emb = self.pitch_emb(pitch_tgt).transpose(1, 2)
+                pitch_emb = self.pitch_emb(pitch_tgt).transpose(1, 2)
 
-        enc_out = enc_out + pitch_emb
+            enc_out = enc_out + pitch_emb
+        else:
+            pitch_pred = None
 
         # Predict energy
         if self.energy_conditioning:

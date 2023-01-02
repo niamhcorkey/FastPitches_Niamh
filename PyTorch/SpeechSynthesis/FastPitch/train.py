@@ -158,8 +158,8 @@ def parse_args(parser):
                       help='Normalization value for pitch')
     cond.add_argument('--load-mel-from-disk', action='store_true',
                       help='Use mel-spectrograms cache on the disk')  # XXX
-    cond.add_argument('--coefficient-utt-conditioning', action='store_true',
-                      help='Condition on polynomial coefficients')
+    #cond.add_argument('--coefficient-utt-conditioning', action='store_true',
+    #                  help='Condition on polynomial coefficients') added to arg_parser.py instead
 
     audio = parser.add_argument_group('audio parameters')
     audio.add_argument('--max-wav-value', default=32768.0, type=float,

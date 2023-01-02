@@ -132,6 +132,7 @@ def get_model_config(model_name, args):
             p_pitch_predictor_dropout=args.p_pitch_predictor_dropout,
             pitch_predictor_n_layers=args.pitch_predictor_n_layers,
             # pitch conditioning
+            pitch_conditioning=args.pitch_conditioning,
             pitch_embedding_kernel_size=args.pitch_embedding_kernel_size,
             # speakers parameters
             n_speakers=args.n_speakers,
