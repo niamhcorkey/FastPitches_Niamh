@@ -230,11 +230,12 @@ class TTSDataset(torch.utils.data.Dataset):
         energy = torch.norm(mel.float(), dim=0, p=2)
         attn_prior = self.get_prior(index, mel.shape[1], text.shape[0])
 
-        assert pitch.size(-1) == mel.size(-1)
+        if self.pitch_conditioning:
+            assert pitch.size(-1) == mel.size(-1)
 
-        # No higher formants?
-        if len(pitch.size()) == 1:
-            pitch = pitch[None, :]
+            # No higher formants?
+            if len(pitch.size()) == 1:
+                pitch = pitch[None, :]
 
         return (text, mel, len(text), pitch, energy, speaker, attn_prior,
                 audiopath, coefs)
