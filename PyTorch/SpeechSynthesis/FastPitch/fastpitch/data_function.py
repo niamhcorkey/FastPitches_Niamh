@@ -370,16 +370,19 @@ class TTSCollate:
             mel_padded[i, :, :mel.size(1)] = mel
             output_lengths[i] = mel.size(1)
 
-        n_formants = batch[0][3].shape[0]
-        pitch_padded = torch.zeros(mel_padded.size(0), n_formants,
-                                   mel_padded.size(2), dtype=batch[0][3].dtype)
-        energy_padded = torch.zeros_like(pitch_padded[:, 0, :])
+        if batch[0][3] is not None:
+            n_formants = batch[0][3].shape[0]
+            pitch_padded = torch.zeros(mel_padded.size(0), n_formants,
+                                       mel_padded.size(2), dtype=batch[0][3].dtype)
+        template = torch.zeros(mel_padded.size(0), 0, mel_padded.size(2))
+        energy_padded = torch.zeros_like(template[:, 0, :])
 
         for i in range(len(ids_sorted_decreasing)):
-            pitch = batch[ids_sorted_decreasing[i]][3]
             energy = batch[ids_sorted_decreasing[i]][4]
-            pitch_padded[i, :, :pitch.shape[1]] = pitch
             energy_padded[i, :energy.shape[0]] = energy
+            if batch[0][3] is not None:
+                pitch = batch[ids_sorted_decreasing[i]][3]
+                pitch_padded[i, :, :pitch.shape[1]] = pitch
 
         if batch[0][5] is not None:
             speaker = torch.zeros_like(input_lengths)
