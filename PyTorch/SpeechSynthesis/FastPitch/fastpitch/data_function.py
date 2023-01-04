@@ -438,7 +438,8 @@ def batch_to_gpu(batch):
     input_lengths = to_gpu(input_lengths).long()
     mel_padded = to_gpu(mel_padded).float()
     output_lengths = to_gpu(output_lengths).long()
-    pitch_padded = to_gpu(pitch_padded).float()
+    if pitch_padded is not None:
+        pitch_padded = to_gpu(pitch_padded).float()
     energy_padded = to_gpu(energy_padded).float()
     attn_prior = to_gpu(attn_prior).float()
     if coefs_padded is not None:
