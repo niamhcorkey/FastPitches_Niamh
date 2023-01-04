@@ -374,6 +374,9 @@ class TTSCollate:
             n_formants = batch[0][3].shape[0]
             pitch_padded = torch.zeros(mel_padded.size(0), n_formants,
                                        mel_padded.size(2), dtype=batch[0][3].dtype)
+        else:
+            pitch_padded = None
+
         template = torch.zeros(mel_padded.size(0), 1, mel_padded.size(2))
         energy_padded = torch.zeros_like(template[:, 0, :])
 
@@ -411,6 +414,8 @@ class TTSCollate:
             for i in range(len(ids_sorted_decreasing)):
                 coefs = batch[ids_sorted_decreasing[i]][8]
                 coefs_padded[i, :coefs.shape[0]] = coefs
+        else:
+            coefs_padded = None
 
         #print(f"text padded: {text_padded.size()}") 16, 137
         #print(f"input lengths: {input_lengths.size()}") 16
