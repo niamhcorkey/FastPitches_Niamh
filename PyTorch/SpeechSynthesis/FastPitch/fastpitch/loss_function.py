@@ -79,6 +79,7 @@ class FastPitchLoss(nn.Module):
             pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
         else:
             pitch_loss = 0
+        print(f"Pitch loss type: {type(pitch_loss)}")
 
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
@@ -86,12 +87,14 @@ class FastPitchLoss(nn.Module):
             energy_loss = (energy_loss * dur_mask).sum() / dur_mask.sum()
         else:
             energy_loss = 0
+        print(f"Energy loss type: {type(energy_loss)}")
 
         if coef_pred is not None:
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
             coef_loss = coef_loss.mean()
         else:
             coef_loss = 0
+        print(f"Coef loss type: {type(coef_loss)}")
 
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
