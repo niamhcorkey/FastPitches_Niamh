@@ -78,23 +78,20 @@ class FastPitchLoss(nn.Module):
             pitch_loss = F.mse_loss(pitch_tgt, pitch_pred, reduction='none')
             pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
         else:
-            pitch_loss = 0
-        print(f"Pitch loss type: {type(pitch_loss)}")
+            pitch_loss = torch.zeros(1)
 
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
             energy_loss = F.mse_loss(energy_tgt, energy_pred, reduction='none')
             energy_loss = (energy_loss * dur_mask).sum() / dur_mask.sum()
         else:
-            energy_loss = 0
-        print(f"Energy loss type: {type(energy_loss)}")
+            energy_loss = torch.zeros(1)
 
         if coef_pred is not None:
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
             coef_loss = coef_loss.mean()
         else:
-            coef_loss = 0
-        print(f"Coef loss type: {type(coef_loss)}")
+            coef_loss = torch.zeros(1)
 
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
