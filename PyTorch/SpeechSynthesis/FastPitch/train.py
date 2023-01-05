@@ -786,7 +786,7 @@ def main():
 
         if args.ema_decay > 0:
             validate(ema_model, criterion, valset, args.batch_size, collate_fn,
-                     distributed_run, batch_to_gpu, args.local_rank)
+                     distributed_run, batch_to_gpu, args.local_rank, args)
 
         maybe_save_checkpoint(args, model, ema_model, optimizer, scaler, epoch,
                               total_iter, model_config)
@@ -796,7 +796,7 @@ def main():
         log(bmark_stats.get(args.benchmark_epochs_num), args.local_rank)
 
     validate(model, criterion, valset, args.batch_size, collate_fn,
-             distributed_run, batch_to_gpu, args.local_rank)
+             distributed_run, batch_to_gpu, args.local_rank, args)
 
     if args.local_rank == 0:
         wandb.finish()
