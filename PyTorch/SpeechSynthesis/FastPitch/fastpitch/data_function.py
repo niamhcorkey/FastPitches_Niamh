@@ -220,13 +220,14 @@ class TTSDataset(torch.utils.data.Dataset):
         else:
             coefs = None
 
+        mel = self.get_mel(audiopath)
+        text = self.get_text(text)
+
         if self.pitch_conditioning:
             pitch = self.get_pitch(index, mel.size(-1))
         else:
             pitch = None
 
-        mel = self.get_mel(audiopath)
-        text = self.get_text(text)
         energy = torch.norm(mel.float(), dim=0, p=2)
         attn_prior = self.get_prior(index, mel.shape[1], text.shape[0])
 
