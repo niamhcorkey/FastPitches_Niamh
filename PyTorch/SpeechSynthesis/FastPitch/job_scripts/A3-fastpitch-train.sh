@@ -3,7 +3,7 @@
 # grid engine options
 #$ -N fastpitches_train
 #$ -l h_rt=200:00:00
-#$ -l h_vmem=128G
+#$ -l h_vmem=64G
 #$ -pe gpu-titanx 1
 #$ -o /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stdout
 #$ -e /exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/job_logs/$JOB_NAME_$JOB_ID.stderr
