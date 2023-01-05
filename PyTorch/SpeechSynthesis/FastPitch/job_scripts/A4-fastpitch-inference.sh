@@ -47,8 +47,13 @@ export BATCH_SIZE=16  # this might need to be bigger than #utts in $PHRASES...
 # these affect model architecture => match to settings used during model training!
 export PHONE=true  # PHONE=true seems not to respect --p-arpabet?
 export ENERGY=true
+export PITCH=true
+export COEFFICIENTS=true
 export NUM_SPEAKERS=1
 export SPEAKER=0  # select speaker by index
+
+# Can control coefficients here
+export COEF_TARGET=None
 
 # I had trouble running this on GPU, something about the CUDA memory
 # allocation was off. Running on CPU works, but is quite slow (~15 minutes for

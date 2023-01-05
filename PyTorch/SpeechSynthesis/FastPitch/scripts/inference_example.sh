@@ -9,11 +9,19 @@
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
 : ${PHONE:=true}
-: ${ENERGY:=true}
 : ${DENOISING:=0.01}
 : ${WARMUP:=0}
 : ${REPEATS:=1}
 : ${CPU:=false}
+
+# Enable energy conditioning
+: ${ENERGY:=true}
+# Enable pitch conditioning
+: ${PITCH:=true}
+# Enable coefficient conditioning
+: ${COEFFICIENTS:=true}
+
+: ${COEF_TARGET:=None}
 
 : ${SPEAKER:=0}
 : ${NUM_SPEAKERS:=1}
@@ -33,11 +41,15 @@ ARGS+=" --repeats $REPEATS"
 ARGS+=" --warmup-steps $WARMUP"
 ARGS+=" --speaker $SPEAKER"
 ARGS+=" --n-speakers $NUM_SPEAKERS"
+ARGS+=" --coef_tgt $COEF_TARGET"
+
 [ "$CPU" = false ]          && ARGS+=" --cuda"
 [ "$CPU" = false ]          && ARGS+=" --cudnn-benchmark"
 [ "$AMP" = true ]           && ARGS+=" --amp"
 [ "$PHONE" = "true" ]       && ARGS+=" --p-arpabet 1.0"
+[ "$PITCH" = "true" ]       && ARGS+=" --pitch-conditioning"
 [ "$ENERGY" = "true" ]      && ARGS+=" --energy-conditioning"
+[ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$TORCHSCRIPT" = "true" ] && ARGS+=" --torchscript"
 
 mkdir -p "$OUTPUT_DIR"
