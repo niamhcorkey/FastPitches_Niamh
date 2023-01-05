@@ -156,7 +156,7 @@ def parse_args(parser):
                       help='Normalization value for pitch')
     cond.add_argument('--pitch-std', type=float, default=65.72038,
                       help='Normalization value for pitch')
-    cond.add_argument('--pitch-conditioning', action='store_true')
+    #cond.add_argument('--pitch-conditioning', action='store_true')
     cond.add_argument('--load-mel-from-disk', action='store_true',
                       help='Use mel-spectrograms cache on the disk')  # XXX
     #cond.add_argument('--coefficient-utt-conditioning', action='store_true',
