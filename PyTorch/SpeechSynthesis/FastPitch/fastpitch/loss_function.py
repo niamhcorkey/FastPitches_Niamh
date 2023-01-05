@@ -29,7 +29,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from common.utils import mask_from_lens
+from common.utils import mask_from_lens, to_gpu
 from fastpitch.attn_loss_function import AttentionCTCLoss
 
 
@@ -79,6 +79,7 @@ class FastPitchLoss(nn.Module):
             pitch_loss = (pitch_loss * dur_mask.unsqueeze(1)).sum() / dur_mask.sum()
         else:
             pitch_loss = torch.zeros(1)
+            pitch_loss = to_gpu(pitch_loss).long()
 
         if energy_pred is not None:
             energy_pred = F.pad(energy_pred, (0, ldiff, 0, 0), value=0.0)
@@ -86,12 +87,14 @@ class FastPitchLoss(nn.Module):
             energy_loss = (energy_loss * dur_mask).sum() / dur_mask.sum()
         else:
             energy_loss = torch.zeros(1)
+            energy_loss = to_gpu(energy_loss).long()
 
         if coef_pred is not None:
             coef_loss = F.mse_loss(coef_pred, coef_tgt, reduction='none')
             coef_loss = coef_loss.mean()
         else:
             coef_loss = torch.zeros(1)
+            coef_loss = to_gpu(coef_loss).long()
 
         # Attention loss
         attn_loss = self.attn_ctc_loss(attn_logprob, in_lens, out_lens)
