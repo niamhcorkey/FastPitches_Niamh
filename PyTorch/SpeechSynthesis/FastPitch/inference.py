@@ -128,6 +128,7 @@ def parse_args(parser):
     cond = parser.add_argument_group('conditioning on additional attributes')
     cond.add_argument('--n-speakers', type=int, default=1,
                       help='Number of speakers in the model.')
+    cond.add_argument('--coef-tgt', default=None)
 
     return parser
 
@@ -359,7 +360,8 @@ def main():
     gen_kw = {'pace': args.pace,
               'speaker': args.speaker,
               'pitch_tgt': None,
-              'pitch_transform': build_pitch_transformation(args)}
+              'pitch_transform': build_pitch_transformation(args),
+              'coef_tgt': args.coef_tgt}
 
     if args.torchscript:
         gen_kw.pop('pitch_transform')

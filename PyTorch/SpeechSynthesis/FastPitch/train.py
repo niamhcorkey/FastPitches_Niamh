@@ -156,6 +156,7 @@ def parse_args(parser):
                       help='Normalization value for pitch')
     cond.add_argument('--pitch-std', type=float, default=65.72038,
                       help='Normalization value for pitch')
+    cond.add_argument('--pitch-conditioning', action='store_true')
     cond.add_argument('--load-mel-from-disk', action='store_true',
                       help='Use mel-spectrograms cache on the disk')  # XXX
     #cond.add_argument('--coefficient-utt-conditioning', action='store_true',
@@ -388,7 +389,7 @@ def log_validation_batch(x, y_pred, rank):
 
 
 def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
-             batch_to_gpu, rank):
+             batch_to_gpu, rank, args):
     """Handles all the validation scoring and printing"""
     was_training = model.training
     model.eval()
@@ -414,7 +415,8 @@ def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
 
             loss, meta = criterion(y_pred, y, is_training=False, meta_agg='sum')
             if i % 5 == 0:
-                log_validation_batch(x, y_pred, rank)
+                if args.pitch_conditioning:
+                    log_validation_batch(x, y_pred, rank)
 
             if distributed_run:
                 for k, v in meta.items():
@@ -780,7 +782,7 @@ def main():
                            epoch_time)
 
         validate(model, criterion, valset, args.batch_size, collate_fn,
-                 distributed_run, batch_to_gpu, args.local_rank)
+                 distributed_run, batch_to_gpu, args.local_rank, args)
 
         if args.ema_decay > 0:
             validate(ema_model, criterion, valset, args.batch_size, collate_fn,
