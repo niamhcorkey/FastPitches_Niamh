@@ -128,7 +128,7 @@ def parse_args(parser):
     cond = parser.add_argument_group('conditioning on additional attributes')
     cond.add_argument('--n-speakers', type=int, default=1,
                       help='Number of speakers in the model.')
-    cond.add_argument('--coef-tgt', default=None)
+    cond.add_argument('--use-coef-tgt', action='store_true')
 
     return parser
 
@@ -197,7 +197,7 @@ def load_fields(fpath):
 
 
 def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
-                           batch_size=128, dataset=None, load_mels=False,
+                           batch_size=128, dataset=None, load_mels=False, load_coefs=False,
                            load_pitch=False, p_arpabet=0.0):
     tp = TextProcessing(symbol_set, text_cleaners, p_arpabet=p_arpabet)
 
@@ -222,6 +222,10 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
         fields['pitch'] = [
             torch.load(Path(dataset, fields['pitch'][i])) for i in order]
         fields['pitch_lens'] = torch.LongTensor([t.size(0) for t in fields['pitch']])
+
+    if load_coefs:
+        assert 'coefs' in fields
+        fields['coefs'] = [torch.load(fields['coefs'][i]) for i in order]
 
     if 'output' in fields:
         fields['output'] = [fields['output'][i] for i in order]
@@ -342,7 +346,7 @@ def main():
     fields = load_fields(args.input)
     batches = prepare_input_sequence(
         fields, device, args.symbol_set, args.text_cleaners, args.batch_size,
-        args.dataset_path, load_mels=(generator is None), p_arpabet=args.p_arpabet)
+        args.dataset_path, load_mels=(generator is None), load_coefs=args.use_coef_tgt, p_arpabet=args.p_arpabet)
 
     # Use real data rather than synthetic - FastPitch predicts len
     for _ in tqdm(range(args.warmup_steps), 'Warmup'):
@@ -360,8 +364,7 @@ def main():
     gen_kw = {'pace': args.pace,
               'speaker': args.speaker,
               'pitch_tgt': None,
-              'pitch_transform': build_pitch_transformation(args),
-              'coef_tgt': args.coef_tgt}
+              'pitch_transform': build_pitch_transformation(args)}
 
     if args.torchscript:
         gen_kw.pop('pitch_transform')

@@ -20,8 +20,10 @@
 : ${PITCH:=true}
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
+# Load in coefficient targets
+: ${USE_COEF_TARGET:=false}
 
-: ${COEF_TARGET:=None}
+
 
 : ${SPEAKER:=0}
 : ${NUM_SPEAKERS:=1}
@@ -41,7 +43,6 @@ ARGS+=" --repeats $REPEATS"
 ARGS+=" --warmup-steps $WARMUP"
 ARGS+=" --speaker $SPEAKER"
 ARGS+=" --n-speakers $NUM_SPEAKERS"
-ARGS+=" --coef_tgt $COEF_TARGET"
 
 [ "$CPU" = false ]          && ARGS+=" --cuda"
 [ "$CPU" = false ]          && ARGS+=" --cudnn-benchmark"
@@ -51,6 +52,7 @@ ARGS+=" --coef_tgt $COEF_TARGET"
 [ "$ENERGY" = "true" ]      && ARGS+=" --energy-conditioning"
 [ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$TORCHSCRIPT" = "true" ] && ARGS+=" --torchscript"
+[ "$USE_COEF_TARGET" = "false"]  && ARGS+=" --use-coef-tgt"
 
 mkdir -p "$OUTPUT_DIR"
 

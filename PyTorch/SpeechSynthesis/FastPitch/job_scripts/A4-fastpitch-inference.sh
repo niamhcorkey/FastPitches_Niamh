@@ -52,8 +52,8 @@ export COEFFICIENTS=true
 export NUM_SPEAKERS=1
 export SPEAKER=0  # select speaker by index
 
-# Can control coefficients here
-export COEF_TARGET=None
+# Can say whether to load coefficient targets from input inference files here
+export USE_COEF_TARGET=false
 
 # I had trouble running this on GPU, something about the CUDA memory
 # allocation was off. Running on CPU works, but is quite slow (~15 minutes for
