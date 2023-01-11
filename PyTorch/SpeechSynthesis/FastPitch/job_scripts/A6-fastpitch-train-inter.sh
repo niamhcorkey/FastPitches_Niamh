@@ -60,7 +60,7 @@ export APPEND_SPACES=false
 
 # match to number of requested GPUs
 export NUM_GPUS=2
-export BATCH_SIZE=6
+export BATCH_SIZE=2
 # run with automatic mixed precision or gradient accumulation over
 # multiple batches (might allow for larger batch sizes)
 export AMP=false
