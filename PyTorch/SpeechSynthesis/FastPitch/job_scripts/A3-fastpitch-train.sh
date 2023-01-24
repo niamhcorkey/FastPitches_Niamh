@@ -53,7 +53,7 @@ export TEXT_CLEANERS=english_cleaners_v2
 # enable energy conditioning (errors in loss logging if false)
 export ENERGY=true
 export PITCH=true
-export COEFFICIENTS=true
+export COEFFICIENTS=false
 export NSPEAKERS=1
 export SAMPLING_RATE=22050
 export APPEND_SPACES=false
