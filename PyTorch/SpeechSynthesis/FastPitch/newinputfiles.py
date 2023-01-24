@@ -19,10 +19,10 @@ def add_column(filepath, newtype):
 #add_column("filelists/ljs_audio_pitch_text_val.txt", "val")
 
 def absolute_paths_norm(filepath, newtype):
-    open(f"filelists/absolute_paths_norm_{newtype}.txt", 'w')
-    newfile = open(f"filelists/absolute_paths_norm_{newtype}.txt", 'a')
+    open(f"filelists/cstr_abs_paths_norm_{newtype}.txt", 'w')
+    newfile = open(f"filelists/cstr_abs_paths_norm_{newtype}.txt", 'a')
 
-    abspath = "/exports/chss/eddie/ppls/groups/lel_hcrc_cstr_students/s1936986_Niamh_Corkey/LJSpeech-1.1/"
+    abspath = "/disk/scratch1/s1936986/LJSpeech-1.1/"
 
     with open(filepath, 'r') as inputfile:
         for line in inputfile:
