@@ -117,6 +117,6 @@ fi
 
 mkdir -p "$OUTPUT_DIR"
 
-#: ${DISTRIBUTED:="-m torch.distributed.launch --nproc_per_node $NUM_GPUS"}
-# python3.8 $DISTRIBUTED train.py $ARGS "$@"
-python3.8 train.py $ARGS "$@"
+: ${DISTRIBUTED:="-m torch.distributed.launch --nproc_per_node $NUM_GPUS"}
+python3.8 $DISTRIBUTED train.py $ARGS "$@"
+#python3.8 train.py $ARGS "$@"
