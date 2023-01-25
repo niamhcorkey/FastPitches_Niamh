@@ -22,8 +22,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/trainfullutts}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
-: ${TRAIN_FILELIST:=filelists/ljs_audio_pitch_text_train_v3.txt}
-: ${VAL_FILELIST:=filelists/ljs_audio_pitch_text_val.txt}
+: ${TRAIN_FILELIST:=filelists/abs_main_train.txt}
+: ${VAL_FILELIST:=filelists/abs_main_val.txt}
 : ${AMP:=true}
 : ${SEED:=""}
 
