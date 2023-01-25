@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 . /etc/profile.d/modules.sh
-module load cuda/10.2.89
+export CUDA_HOME=/opt/cuda-10.2.89_440_33
 source /disk/scratch1/s1936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
-. /exports/applications/support/set_cuda_visible_devices.sh
+export CUDA_VISIBLE_DEVICES=1
 set -euo pipefail
 
 JOB_NAME=$1
@@ -20,7 +20,7 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/${JOB_NAME}}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/$JOB_NAME}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
 : ${TRAIN_FILELIST:=filelists/absolute_paths_norm_train.txt}
 : ${VAL_FILELIST:=filelists/absolute_paths_norm_val.txt}
