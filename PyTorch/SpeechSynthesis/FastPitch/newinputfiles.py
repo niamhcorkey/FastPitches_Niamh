@@ -9,12 +9,13 @@ def abs_path(og, type):
     abspath = "/disk/scratch1/s1936986/LJSpeech-1.1/"
     with open(og, 'r') as f:
         for line in f:
-            match = line_re.match(line)
-            wav = match.group(1)
-            pitch = match.group(2)
-            text = match.group(3)
-            newline = abspath + wav + "|" + abspath + pitch + "|" +  text +"\n"
-            newfile.write(newline)
+            if not line.startswith("m"):
+                match = line_re.match(line)
+                wav = match.group(1)
+                pitch = match.group(2)
+                text = match.group(3)
+                newline = abspath + wav + "|" + abspath + pitch + "|" +  text +"\n"
+                newfile.write(newline)
 
 abs_path("ljs_audio_pitch_text_val.txt", "val")
 
