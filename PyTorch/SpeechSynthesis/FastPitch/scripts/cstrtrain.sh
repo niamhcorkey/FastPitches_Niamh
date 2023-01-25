@@ -97,7 +97,7 @@ ARGS+=" --n-speakers $NSPEAKERS"
 [ "$SEED" != "" ]                  && ARGS+=" --seed $SEED"
 [ "$LOAD_MEL_FROM_DISK" = true ]   && ARGS+=" --load-mel-from-disk"
 [ "$LOAD_PITCH_FROM_DISK" = true ] && ARGS+=" --load-pitch-from-disk"
-[ "$PITCH_ONLINE_DIR" != "pitch" ]      && ARGS+=" --pitch-online-dir $PITCH_ONLINE_DIR"  # e.g., /dev/shm/pitch
+#[ "$PITCH_ONLINE_DIR" != "pitch" ]      && ARGS+=" --pitch-online-dir $PITCH_ONLINE_DIR"  # e.g., /dev/shm/pitch
 [ "$PITCH_ONLINE_METHOD" != "" ]   && ARGS+=" --pitch-online-method $PITCH_ONLINE_METHOD"
 [ "$APPEND_SPACES" = true ]        && ARGS+=" --prepend-space-to-text"
 [ "$APPEND_SPACES" = true ]        && ARGS+=" --append-space-to-text"
