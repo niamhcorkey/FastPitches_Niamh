@@ -23,8 +23,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/trainfullutts}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
-: ${TRAIN_FILELIST:=filelists/cstr_abs_paths_norm_train.txt}
-: ${VAL_FILELIST:=filelists/cstr_abs_paths_norm_val.txt}
+: ${TRAIN_FILELIST:=filelists/small_cstr_train.txt}
+: ${VAL_FILELIST:=filelists/small_cstr_val.txt}
 : ${AMP:=true}
 : ${SEED:=""}
 
