@@ -217,6 +217,8 @@ class TTSDataset(torch.utils.data.Dataset):
         if self.coefficient_utt_conditioning:
             uttcoefspath = self.audiopaths_and_text[index]['coefs']
             coefs = self.get_coefs(uttcoefspath)
+            print(f"COEFS TYPE: {type(coefs)}")
+            print(f"COEFS TYPE: {coefs.dtype}")
         else:
             coefs = None
 
