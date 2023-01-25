@@ -24,7 +24,7 @@ export OMP_NUM_THREADS=1
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
 : ${TRAIN_FILELIST:=filelists/cstr_abs_paths_norm_train.txt}
 : ${VAL_FILELIST:=filelists/cstr_abs_paths_norm_val.txt}
-: ${AMP:=false}
+: ${AMP:=true}
 : ${SEED:=""}
 
 : ${LEARNING_RATE:=0.1}
