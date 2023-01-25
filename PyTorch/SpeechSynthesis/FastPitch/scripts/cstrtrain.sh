@@ -39,8 +39,7 @@ export OMP_NUM_THREADS=1
 : ${PHONE:=true}
 # Enable energy conditioning
 : ${ENERGY:=true}
-# Enable pitch conditioning
-: ${PITCH:=true}
+
 
 
 
@@ -90,7 +89,6 @@ ARGS+=" --n-speakers $NSPEAKERS"
 [ "$EXPERIMENT_DESC" != "" ]       && ARGS+=" --experiment-desc \"${EXPERIMENT_DESC}\""
 [ "$AMP" = "true" ]                && ARGS+=" --amp"
 [ "$PHONE" = "true" ]              && ARGS+=" --p-arpabet 1.0"
-[ "$PITCH" = "true" ]              && ARGS+=" --pitch-conditioning"
 [ "$ENERGY" = "true" ]             && ARGS+=" --energy-conditioning"
 [ "$SEED" != "" ]                  && ARGS+=" --seed $SEED"
 [ "$LOAD_MEL_FROM_DISK" = true ]   && ARGS+=" --load-mel-from-disk"
