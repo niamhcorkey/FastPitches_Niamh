@@ -19,7 +19,7 @@ export OMP_NUM_THREADS=1
 
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=8}
-: ${GRAD_ACCUMULATION:=2}
+: ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/trainfullutts}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
 : ${TRAIN_FILELIST:=filelists/cstr_abs_paths_norm_train.txt}
