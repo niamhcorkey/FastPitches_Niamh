@@ -267,7 +267,7 @@ class TTSDataset(torch.utils.data.Dataset):
 
     def get_coefs(self, filename):
         coefs_np = np.load(filename)
-        coefs = coefs.astype("float32")
+        coefs_np = coefs_np.astype("float32")
         coefs = torch.from_numpy(coefs_np)
         return coefs
 
