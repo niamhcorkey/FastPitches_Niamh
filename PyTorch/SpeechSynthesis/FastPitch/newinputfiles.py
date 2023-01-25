@@ -17,5 +17,5 @@ def abs_path(og, type):
                 newline = abspath + wav + "|" + abspath + pitch + "|" +  text +"\n"
                 newfile.write(newline)
 
-abs_path("ljs_audio_pitch_text_test.txt", "test")
+abs_path("ljs_audio_pitch_text_train_v3.txt", "train")
 
