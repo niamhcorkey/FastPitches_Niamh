@@ -7,7 +7,7 @@ source activate fastpitch_ellsworth
 export CUDA_VISIBLE_DEVICES=1
 set -euo pipefail
 
-JOB_NAME=$1
+#JOB_NAME=$1
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
@@ -20,7 +20,7 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/$JOB_NAME}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/trainfullutts}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
 : ${TRAIN_FILELIST:=filelists/absolute_paths_norm_train.txt}
 : ${VAL_FILELIST:=filelists/absolute_paths_norm_val.txt}
