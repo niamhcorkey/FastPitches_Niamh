@@ -4,6 +4,7 @@
 export CUDA_HOME=/opt/cuda-10.2.89_440_33
 source /disk/scratch1/s1936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
+export CUDA_LAUNCH_BLOCKING=1
 export CUDA_VISIBLE_DEVICES=1
 set -euo pipefail
 
