@@ -2,7 +2,7 @@
 
 . /etc/profile.d/modules.sh
 export CUDA_HOME=/opt/cuda-10.2.89_440_33
-source /disk/scratch1/s1efwds936986/miniconda/bin/activate
+source /disk/scratch1/s1936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
 export CUDA_VISIBLE_DEVICES=1
 set -euo pipefail
