@@ -206,13 +206,11 @@ class TTSDataset(torch.utils.data.Dataset):
         #Indexing items using dictionary entries
         if self.n_speakers > 1:
             audiopath = self.audiopaths_and_text[index]['mels']
-            print(audiopath)
             text = self.audiopaths_and_text[index]['text']
             speaker = self.audiopaths_and_text[index]['speaker']
             speaker = int(speaker)
         else:
             audiopath = self.audiopaths_and_text[index]['mels']
-            print(audiopath)
             text = self.audiopaths_and_text[index]['text']
             speaker = None
 
@@ -223,7 +221,7 @@ class TTSDataset(torch.utils.data.Dataset):
         else:
             coefs = None
 
-        print(f"PATH: {audiopath}")
+        #print(f"PATH: {audiopath}")
         mel = self.get_mel(audiopath)
         text = self.get_text(text)
 
