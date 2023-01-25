@@ -223,6 +223,7 @@ class TTSDataset(torch.utils.data.Dataset):
         else:
             coefs = None
 
+        print(f"PATH: {audiopath}")
         mel = self.get_mel(audiopath)
         text = self.get_text(text)
 
