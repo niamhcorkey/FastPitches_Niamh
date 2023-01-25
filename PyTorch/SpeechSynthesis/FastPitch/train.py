@@ -526,7 +526,7 @@ def main():
         init_distributed(args, args.world_size, args.local_rank)
 
     #device = torch.device('cuda' if args.cuda else 'cpu')
-    device = torch.device('cuda:1')
+    device = torch.device('cuda:2')
 
     model_config = models.get_model_config('FastPitch', args)
     model = models.get_model('FastPitch', model_config, device)
