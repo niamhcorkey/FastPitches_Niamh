@@ -38,7 +38,6 @@ def absolute_paths_norm(filepath, newtype):
                 newline = "mels|pitch|coefs|text\n"
                 newfile.write(newline)
 
-absolute_paths_norm("filelists/ljs_audio_pitch_text_train_v3.txt", "train")
 
-
+newline = abspath + f"mels/{basename}.pt|" + abspath + f"pitch/{basename}.pt|" + abspath + f"coefs_norm/{basename}.npy|" + text
 
