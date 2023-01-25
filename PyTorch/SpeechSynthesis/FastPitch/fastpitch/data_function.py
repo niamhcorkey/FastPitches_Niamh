@@ -212,6 +212,7 @@ class TTSDataset(torch.utils.data.Dataset):
             speaker = int(speaker)
         else:
             audiopath = self.audiopaths_and_text[index]['mels']
+            print(audiopath)
             text = self.audiopaths_and_text[index]['text']
             speaker = None
 
