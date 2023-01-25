@@ -38,8 +38,8 @@ export DATASET_PATH=$DS_HOME/LJSpeech-1.1/wavs
 # LOAD_PITCH_FROM_DISK=true below, use ljs_audio_pitch_text_*.txt files
 # which point to saved pitch contours. If extracting pitches from audio
 # online with PITCH_ONLINE_DIR set below, use ljs_audio_text_*.txt files
-export TRAIN_FILELIST=$FP/filelists/abs_main_train.txt
-export VAL_FILELIST=$FP/filelists/abs_main_val.txt
+export TRAIN_FILELIST=$FP/filelists/abs_eddie_train.txt
+export VAL_FILELIST=$FP/filelists/abs_eddie_val.txt
 
 # metadata for wandb logging
 export PROJECT=fastpitches_eddie
