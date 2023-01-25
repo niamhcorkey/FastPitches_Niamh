@@ -2,7 +2,7 @@
 
 . /etc/profile.d/modules.sh
 module load cuda/10.2.89
-module load anaconda
+source /disk/scratch1/s1936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
 . /exports/applications/support/set_cuda_visible_devices.sh
 set -euo pipefail
