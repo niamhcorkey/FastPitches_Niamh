@@ -2,7 +2,7 @@
 
 . /etc/profile.d/modules.sh
 export CUDA_HOME=/opt/cuda-10.2.89_440_33
-source /disk/scratch1/s1936986/miniconda/bin/activate
+source /disk/scratch1/s1efwds936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
 export CUDA_VISIBLE_DEVICES=1
 set -euo pipefail
@@ -18,8 +18,8 @@ export EXPERIMENT_DESC="FastPitches defaults"
 export OMP_NUM_THREADS=1
 
 : ${NUM_GPUS:=1}
-: ${BATCH_SIZE:=16}
-: ${GRAD_ACCUMULATION:=1}
+: ${BATCH_SIZE:=8}
+: ${GRAD_ACCUMULATION:=2}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/trainfullutts}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
 : ${TRAIN_FILELIST:=filelists/cstr_abs_paths_norm_train.txt}
