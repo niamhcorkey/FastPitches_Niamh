@@ -72,8 +72,8 @@ export WARMUP_STEPS=1000
 export KL_LOSS_WARMUP=100
 
 # load saved pitch contours from disk after running prepare_dataset.py
-export LOAD_PITCH_FROM_DISK=true
-export LOAD_MEL_FROM_DISK=true  # something wrong with loading saved mels
+export LOAD_PITCH_FROM_DISK=false
+export LOAD_MEL_FROM_DISK=false  # something wrong with loading saved mels
 # or, cache extracted pitch contours to this dir during first epoch
 export PITCH_ONLINE_DIR=
 
