@@ -132,8 +132,6 @@ def parse_args(parser):
 
     return parser
 
-if args.use_coef_tgt:
-    print("THINKS TGT COEF IS ON?!?!")
 
 def load_model_from_ckpt(checkpoint_path, ema, model):
 
@@ -301,6 +299,9 @@ def main():
                                      allow_abbrev=False)
     parser = parse_args(parser)
     args, unk_args = parser.parse_known_args()
+
+    if args.use_coef_tgt:
+        print("THINKS TGT COEF IS ON?!?!")
 
     if args.p_arpabet > 0.0:
         cmudict.initialize(args.cmudict_path, keep_ambiguous=True)
