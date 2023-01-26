@@ -394,6 +394,9 @@ class FastPitch(nn.Module):
               energy_tgt=None, coef_tgt=None, pitch_transform=None, max_duration=75,
               speaker=0):
 
+        (inputs, input_lens, mel_tgt, mel_lens, pitch_dense, energy_dense,
+         speaker, attn_prior, audiopaths, coefs) = inputs
+
         if self.speaker_emb is None:
             spk_emb = 0
         else:
