@@ -35,7 +35,7 @@ CHECKPOINT=FastPitch_checkpoint_100.pt
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=false}
+: ${USE_COEF_TARGET:=true}
 
 
 

@@ -301,7 +301,7 @@ def main():
     args, unk_args = parser.parse_known_args()
 
     if args.use_coef_tgt:
-        print("THINKS TGT COEF IS ON?!?!")
+        print("THINKS TGT COEF IS ON")
 
     if args.p_arpabet > 0.0:
         cmudict.initialize(args.cmudict_path, keep_ambiguous=True)
