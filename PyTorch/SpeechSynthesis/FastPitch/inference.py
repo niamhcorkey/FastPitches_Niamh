@@ -128,10 +128,12 @@ def parse_args(parser):
     cond = parser.add_argument_group('conditioning on additional attributes')
     cond.add_argument('--n-speakers', type=int, default=1,
                       help='Number of speakers in the model.')
-    cond.add_argument('--use-coef-tgt', default=False)
+    cond.add_argument('--use-coef-tgt', action='store_true')
 
     return parser
 
+if args.use_coef_tgt:
+    print("THINKS TGT COEF IS ON?!?!")
 
 def load_model_from_ckpt(checkpoint_path, ema, model):
 
