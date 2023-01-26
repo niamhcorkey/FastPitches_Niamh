@@ -19,7 +19,7 @@ export EXPERIMENT_DESC="FastPitches defaults"
 export OMP_NUM_THREADS=1
 
 : ${NUM_GPUS:=1}
-: ${BATCH_SIZE:=8}
+: ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/fullutts2601}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
@@ -31,7 +31,7 @@ export OMP_NUM_THREADS=1
 : ${LEARNING_RATE:=0.1}
 
 # Adjust these when the amount of data changes
-: ${EPOCHS:=100}
+: ${EPOCHS:=1000}
 : ${EPOCHS_PER_CHECKPOINT:=50}
 : ${WARMUP_STEPS:=1000}
 : ${KL_LOSS_WARMUP:=100}
