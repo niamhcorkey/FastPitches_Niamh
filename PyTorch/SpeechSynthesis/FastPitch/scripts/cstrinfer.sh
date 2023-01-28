@@ -11,8 +11,8 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=trainfullutts
-CHECKPOINT=FastPitch_checkpoint_100.pt
+MODEL=fullutts2601
+CHECKPOINT=FastPitch_checkpoint_200.pt
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
