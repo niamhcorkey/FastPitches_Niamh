@@ -35,7 +35,7 @@ CHECKPOINT=FastPitch_checkpoint_100.pt
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets (for some reason true is false and false is true?)
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 
 
 
@@ -66,7 +66,7 @@ ARGS+=" --n-speakers $NUM_SPEAKERS"
 [ "$ENERGY" = "true" ]      && ARGS+=" --energy-conditioning"
 [ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$TORCHSCRIPT" = "true" ] && ARGS+=" --torchscript"
-[ "$USE_COEF_TARGET" = "true" ]  && ARGS+=" --use-coef-tgt"
+[ "$USE_COEF_TARGET" = "false" ]  && ARGS+=" --use-coef-tgt"
 
 mkdir -p "$OUTPUT_DIR"
 
