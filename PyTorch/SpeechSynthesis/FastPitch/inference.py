@@ -207,6 +207,7 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
 
     fields['text'] = [fields['text'][i] for i in order]
     fields['text_lens'] = torch.LongTensor([t.size(0) for t in fields['text']])
+    print(f"TEXT LENGTH: {[t.size(0) for t in fields['text']]}")
 
     for t in fields['text']:
         print(tp.sequence_to_text(t.numpy()))
@@ -216,14 +217,12 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
         fields['mel'] = [
             torch.load(Path(dataset, fields['mel'][i])).t() for i in order]
         fields['mel_lens'] = torch.LongTensor([t.size(0) for t in fields['mel']])
-        print(f"MEL SIZE: {[t.size(0) for t in fields['mel']]}")
 
     if load_pitch:
         assert 'pitch' in fields
         fields['pitch'] = [
             torch.load(Path(dataset, fields['pitch'][i])) for i in order]
         fields['pitch_lens'] = torch.LongTensor([t.size(0) for t in fields['pitch']])
-        print(f"PITCH SIZE: {[t.size(0) for t in fields['pitch']]}")
 
     if load_coefs:
         assert 'coefs' in fields
