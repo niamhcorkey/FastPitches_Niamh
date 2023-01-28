@@ -393,7 +393,7 @@ def main():
                     if args.use_coef_tgt:
                         mel, mel_lens, *_ = generator(b['text'], input_lens=b['text_lens'], coef_tgt=b['coefs'], **gen_kw) #add input_lens£
                     else:
-                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['input_lens'], **gen_kw)
+                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['text_lens'], **gen_kw)
 
                 gen_infer_perf = mel.size(0) * mel.size(2) / gen_measures[-1]
                 all_letters += b['text_lens'].sum().item()
