@@ -14,11 +14,13 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=fullutts2601
 CHECKPOINT=FastPitch_checkpoint_200.pt
 
+NAME=usingtargets
+
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
 : ${PHRASES:="phrases/devset10.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/$(basename ${PHRASES} .tsv)"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -35,7 +37,7 @@ CHECKPOINT=FastPitch_checkpoint_200.pt
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets (for some reason true is false and false is true?)
-: ${USE_COEF_TARGET:=false}
+: ${USE_COEF_TARGET:=true}
 
 
 
