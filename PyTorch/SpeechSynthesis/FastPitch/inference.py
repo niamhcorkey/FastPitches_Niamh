@@ -193,6 +193,7 @@ def load_fields(fpath):
     else:
         columns = ['text']
         fields = [lines]
+    print({c:f for c, f in zip(columns, fields)})
     return {c:f for c, f in zip(columns, fields)}
 
 
