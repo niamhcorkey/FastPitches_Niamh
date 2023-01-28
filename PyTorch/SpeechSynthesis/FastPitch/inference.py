@@ -216,12 +216,14 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
         fields['mel'] = [
             torch.load(Path(dataset, fields['mel'][i])).t() for i in order]
         fields['mel_lens'] = torch.LongTensor([t.size(0) for t in fields['mel']])
+        print(f"MEL SIZE: {[t.size(0) for t in fields['mel']]}")
 
     if load_pitch:
         assert 'pitch' in fields
         fields['pitch'] = [
             torch.load(Path(dataset, fields['pitch'][i])) for i in order]
         fields['pitch_lens'] = torch.LongTensor([t.size(0) for t in fields['pitch']])
+        print(f"PITCH SIZE: {[t.size(0) for t in fields['pitch']]}")
 
     if load_coefs:
         assert 'coefs' in fields
@@ -389,7 +391,10 @@ def main():
                 mel, mel_lens = b['mel'], b['mel_lens']
             else:
                 with torch.no_grad(), gen_measures:
-                    mel, mel_lens, *_ = generator(b['text'], **gen_kw)
+                    if args.use_coef_tgt:
+                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['input_lens'], coef_tgt=b['coefs'], **gen_kw) #add input_lens£
+                    else:
+                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['input_lens'], **gen_kw)
 
                 gen_infer_perf = mel.size(0) * mel.size(2) / gen_measures[-1]
                 all_letters += b['text_lens'].sum().item()

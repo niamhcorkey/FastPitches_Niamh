@@ -392,10 +392,7 @@ class FastPitch(nn.Module):
 
     def infer(self, inputs, pace=1.0, dur_tgt=None, pitch_tgt=None,
               energy_tgt=None, coef_tgt=None, pitch_transform=None, max_duration=75,
-              speaker=0):
-
-        (inputs, input_lens, mel_tgt, mel_lens, pitch_dense, energy_dense,
-         speaker, attn_prior, audiopaths, coefs) = inputs
+              speaker=0, input_lens=None):
 
         if self.speaker_emb is None:
             spk_emb = 0
