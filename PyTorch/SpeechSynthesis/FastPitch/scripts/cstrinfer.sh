@@ -66,7 +66,7 @@ ARGS+=" --n-speakers $NUM_SPEAKERS"
 [ "$ENERGY" = "true" ]      && ARGS+=" --energy-conditioning"
 [ "$COEFFICIENTS" = "true" ]       && ARGS+=" --coefficient-utt-conditioning"
 [ "$TORCHSCRIPT" = "true" ] && ARGS+=" --torchscript"
-[ "$USE_COEF_TARGET" = "false" ]  && ARGS+=" --use-coef-tgt"
+[ "$USE_COEF_TARGET" = "true" ]  && ARGS+=" --use-coef-tgt"
 
 mkdir -p "$OUTPUT_DIR"
 
