@@ -227,7 +227,7 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
 
     if load_coefs:
         assert 'coefs' in fields
-        fields['coefs'] = [torch.load(fields['coefs'][i]) for i in order]
+        fields['coefs'] = [torch.from_numpy(np.load(fields['coefs'][i]) for i in order)]
 
     if 'output' in fields:
         fields['output'] = [fields['output'][i] for i in order]
