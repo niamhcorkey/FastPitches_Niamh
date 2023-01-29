@@ -424,6 +424,7 @@ class FastPitch(nn.Module):
                 masked_coef_pred = coef_pred_ups * enc_mask_ups
                 coef_emb = self.coefficient_emb(masked_coef_pred).permute(0, 2, 1)
             else:
+                print(coef_tgt)
                 coef_tgt_ups = coef_tgt.unsqueeze(-1)
                 coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), 3, max_len) # [16, 3, 140]
 
