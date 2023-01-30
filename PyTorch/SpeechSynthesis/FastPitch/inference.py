@@ -392,7 +392,7 @@ def main():
             else:
                 with torch.no_grad(), gen_measures:
                     if args.use_coef_tgt:
-                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['text_lens'], coef_tgt=b['coefs'], **gen_kw) #add input_lens£
+                        mel, mel_lens, *_ = generator(b['text'], input_lens=b['text_lens'], coef_tgt=b['coefs'], **gen_kw)
                     else:
                         mel, mel_lens, *_ = generator(b['text'], input_lens=b['text_lens'], **gen_kw)
 
