@@ -425,7 +425,7 @@ class FastPitch(nn.Module):
                 coef_emb = self.coefficient_emb(masked_coef_pred).permute(0, 2, 1)
             else:
                 print(coef_tgt)
-                coef_tgt = torch.stack(coef_tgt,1)
+                coef_tgt = torch.stack(coef_tgt,0)
                 print(coef_tgt)
                 print(coef_tgt.size())
                 coef_tgt_ups = coef_tgt.unsqueeze(-1)
