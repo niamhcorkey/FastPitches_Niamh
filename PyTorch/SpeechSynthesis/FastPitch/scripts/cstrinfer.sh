@@ -37,7 +37,7 @@ NAME=coeftest
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets (for some reason true is false and false is true?)
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 
 
 
