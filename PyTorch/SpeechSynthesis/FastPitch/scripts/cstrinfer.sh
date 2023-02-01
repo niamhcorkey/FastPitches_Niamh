@@ -11,7 +11,7 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=baseline
+MODEL=baseline2601
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
 NAME=quotes
