@@ -11,8 +11,8 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=fullutts2601
-CHECKPOINT=FastPitch_checkpoint_540.pt
+MODEL=baseline2601
+CHECKPOINT=FastPitch_checkpoint_600.pt
 
 NAME=preds
 
