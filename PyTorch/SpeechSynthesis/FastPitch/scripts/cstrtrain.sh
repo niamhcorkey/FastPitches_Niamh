@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/fullutts2601}
-: ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
-: ${TRAIN_FILELIST:=filelists/ns_cstr_abs_paths_norm_train.txt}
-: ${VAL_FILELIST:=filelists/ns_cstr_abs_paths_norm_val.txt}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/phrasesphones}
+: ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
+: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
@@ -32,7 +32,7 @@ export OMP_NUM_THREADS=1
 
 # Adjust these when the amount of data changes
 : ${EPOCHS:=1000}
-: ${EPOCHS_PER_CHECKPOINT:=10}
+: ${EPOCHS_PER_CHECKPOINT:=50}
 : ${WARMUP_STEPS:=1000}
 : ${KL_LOSS_WARMUP:=100}
 
