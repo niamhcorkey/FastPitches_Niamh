@@ -766,8 +766,8 @@ def main():
 
         # Finished epoch
         epoch_loss /= epoch_iter
-        epoch_pitch_loss /= iter_pitch_loss
-        epoch_coef_loss /= iter_coef_loss
+        epoch_pitch_loss /= epoch_iter
+        epoch_coef_loss /= epoch_iter
         epoch_mel_loss /= epoch_iter
         epoch_time = time.perf_counter() - epoch_start_time
 
