@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/phrases2901}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/slopes}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
-: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/abs_chopped_train.txt}
-: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/abs_chopped_val.txt}
+: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/slopes_abs_chopped_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/slopes_abs_chopped_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
