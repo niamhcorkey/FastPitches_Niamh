@@ -1,0 +1,11 @@
+coefs|output|text
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/000.npy|000.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/100.npy|100.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/010.npy|010.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/001.npy|001.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/n100.npy|n100.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/n010.npy|n010.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/n001.npy|n001.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/1n10.npy|1n10.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/n110.npy|n110.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/real.npy|realtgt.wav|in the same place
