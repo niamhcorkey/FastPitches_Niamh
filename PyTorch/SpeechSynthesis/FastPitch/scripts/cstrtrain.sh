@@ -87,6 +87,7 @@ ARGS+=" --kl-loss-start-epoch 0"
 ARGS+=" --kl-loss-warmup-epochs $KL_LOSS_WARMUP"
 ARGS+=" --text-cleaners $TEXT_CLEANERS"
 ARGS+=" --n-speakers $NSPEAKERS"
+ARGS+=" --n-speakers $NSPEAKERS"
 
 [ "$PROJECT" != "" ]               && ARGS+=" --project \"${PROJECT}\""
 [ "$EXPERIMENT_DESC" != "" ]       && ARGS+=" --experiment-desc \"${EXPERIMENT_DESC}\""
