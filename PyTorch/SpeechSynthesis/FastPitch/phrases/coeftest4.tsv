@@ -1,0 +1,3 @@
+coefs|output|text
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/pslope.npy|pslope.wav|in the same place
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/nslope.npy|nslope.wav|in the same place
