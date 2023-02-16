@@ -68,7 +68,7 @@ export GRAD_ACCUMULATION=1
 # set random seed for ~reproducible runs
 export SEED=
 
-export EPOCHS=1
+export EPOCHS=3
 export EPOCHS_PER_CHECKPOINT=1
 export WARMUP_STEPS=1000
 export KL_LOSS_WARMUP=100
