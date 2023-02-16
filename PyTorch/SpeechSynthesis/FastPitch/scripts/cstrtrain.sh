@@ -55,6 +55,7 @@ export OMP_NUM_THREADS=1
 
 # For multispeaker models, add speaker ID = {0, 1, ...} as the last filelist column
 : ${NSPEAKERS:=1}
+: ${NCOEFFICIENTS:=3}
 : ${SAMPLING_RATE:=22050}
 
 # Adjust env variables to maintain the global batch size: NUM_GPUS x BATCH_SIZE x GRAD_ACCUMULATION = 256.
@@ -87,7 +88,7 @@ ARGS+=" --kl-loss-start-epoch 0"
 ARGS+=" --kl-loss-warmup-epochs $KL_LOSS_WARMUP"
 ARGS+=" --text-cleaners $TEXT_CLEANERS"
 ARGS+=" --n-speakers $NSPEAKERS"
-ARGS+=" --n-speakers $NSPEAKERS"
+ARGS+=" --n-coefficients $NCOEFFICIENTS"
 
 [ "$PROJECT" != "" ]               && ARGS+=" --project \"${PROJECT}\""
 [ "$EXPERIMENT_DESC" != "" ]       && ARGS+=" --experiment-desc \"${EXPERIMENT_DESC}\""

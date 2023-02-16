@@ -238,11 +238,11 @@ class FastPitch(nn.Module):
                 kernel_size=pitch_predictor_kernel_size,
                 dropout=p_pitch_predictor_dropout,
                 n_layers=pitch_predictor_n_layers,
-                n_predictions=3
+                n_predictions=self.n_coefficients
             )
 
             self.coefficient_emb = nn.Conv1d(
-                3, symbols_embedding_dim,
+                self.n_coefficients, symbols_embedding_dim,
                 kernel_size=energy_embedding_kernel_size,
                 padding=int((energy_embedding_kernel_size - 1) / 2))
 
@@ -338,9 +338,9 @@ class FastPitch(nn.Module):
             #coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  #[16, 3, 140]
 
             coef_tgt_ups = coef_tgt.unsqueeze(-1)
-            coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), 3, max_len)  # [16, 3, 140]
+            coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), self.n_coefficients, max_len)  # [16, 3, 140]
 
-            enc_mask_ups = enc_mask.expand(batch_size,max_len,3) #[16, 140, 1] to [16, 140, 3]
+            enc_mask_ups = enc_mask.expand(batch_size,max_len,self.n_coefficients) #[16, 140, 1] to [16, 140, 3]
             enc_mask_ups = enc_mask_ups.permute(0,2,1) #[16, 3, 140]
 
             masked_coef_tgt = coef_tgt_ups * enc_mask_ups
@@ -415,14 +415,14 @@ class FastPitch(nn.Module):
         if self.coefficient_utt_conditioning:
             max_len = max(input_lens)
             batch_size = log_dur_pred.size(dim=0)
-            enc_mask_ups = enc_mask.expand(batch_size, max_len, 3)  # [16, 140, 1] to [16, 140, 3]
+            enc_mask_ups = enc_mask.expand(batch_size, max_len, self.n_coefficients)  # [16, 140, 1] to [16, 140, 3]
             enc_mask_ups = enc_mask_ups.permute(0, 2, 1)  # [16, 3, 140]
             coef_pred = self.coefficient_predictor(enc_out, enc_mask)
             print(coef_pred)
 
             if coef_tgt is None:
                 coef_pred_ups = coef_pred.unsqueeze(-1)
-                coef_pred_ups = coef_pred_ups.expand(int(batch_size),3,max_len)  # [16, 3, 140]
+                coef_pred_ups = coef_pred_ups.expand(int(batch_size),self.n_coefficients,max_len)  # [16, 3, 140]
 
                 masked_coef_pred = coef_pred_ups * enc_mask_ups
                 coef_emb = self.coefficient_emb(masked_coef_pred).permute(0, 2, 1)
@@ -432,7 +432,7 @@ class FastPitch(nn.Module):
                 print(coef_tgt)
                 print(coef_tgt.size())
                 coef_tgt_ups = coef_tgt.unsqueeze(-1)
-                coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), 3, max_len) # [16, 3, 140]
+                coef_tgt_ups = coef_tgt_ups.expand(int(batch_size), self.n_coefficients, max_len) # [16, 3, 140]
 
                 masked_coef_tgt = coef_tgt_ups * enc_mask_ups
                 coef_emb = self.coefficient_emb(masked_coef_tgt).permute(0, 2, 1)
