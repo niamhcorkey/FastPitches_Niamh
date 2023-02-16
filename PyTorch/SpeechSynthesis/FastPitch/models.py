@@ -146,7 +146,8 @@ def get_model_config(model_name, args):
             energy_conditioning=args.energy_conditioning,
             energy_embedding_kernel_size=args.energy_embedding_kernel_size,
             # coefficient conditioning
-            coefficient_utt_conditioning=args.coefficient_utt_conditioning
+            coefficient_utt_conditioning=args.coefficient_utt_conditioning,
+            n_coefficients=args.n_coefficients
 
         )
         return model_config

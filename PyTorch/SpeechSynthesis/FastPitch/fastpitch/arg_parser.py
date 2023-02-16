@@ -122,6 +122,7 @@ def parse_fastpitch_args(parent, add_help=False):
 
     coef_pred = parser.add_argument_group('coefficient predictor parameters')
     coef_pred.add_argument('--coefficient-utt-conditioning', action='store_true')
+    coef_pred.add_argument('--n-coefficients', default=3)
 
     cond = parser.add_argument_group('conditioning parameters')
     cond.add_argument('--pitch-embedding-kernel-size', default=3, type=int,
