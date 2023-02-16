@@ -238,7 +238,7 @@ class FastPitch(nn.Module):
                 kernel_size=pitch_predictor_kernel_size,
                 dropout=p_pitch_predictor_dropout,
                 n_layers=pitch_predictor_n_layers,
-                n_predictions=self.n_coefficients
+                n_predictions=3
             )
 
             self.coefficient_emb = nn.Conv1d(
