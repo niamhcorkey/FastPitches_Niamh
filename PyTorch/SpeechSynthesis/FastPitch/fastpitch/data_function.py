@@ -412,14 +412,8 @@ class TTSCollate:
         audiopaths = [batch[i][7] for i in ids_sorted_decreasing]
 
         if batch[0][8] is not None:
-            print(type(batch[0][8]))
-            print(batch[0][8])
-            try:
-                print(f"SIZE OF THING IN BATCH: {len(batch[0][8])}")
-                n_coefs = len(batch[0][8])
-            except TypeError:
-                print(f"SIZE OF THING IN BATCH: 1")
-                n_coefs = 1
+            print(f"SIZE OF THING IN BATCH: {len(batch[0][8])}")
+            n_coefs = len(batch[0][8])
             coefs_padded = torch.zeros(mel_padded.size(0), n_coefs, dtype=batch[0][8].dtype)
 
             for i in range(len(ids_sorted_decreasing)):
