@@ -55,7 +55,7 @@ export OMP_NUM_THREADS=1
 
 # For multispeaker models, add speaker ID = {0, 1, ...} as the last filelist column
 : ${NSPEAKERS:=1}
-: ${NCOEFFICIENTS:=1}
+: ${NCOEFFICIENTS:=3}
 : ${SAMPLING_RATE:=22050}
 
 # Adjust env variables to maintain the global batch size: NUM_GPUS x BATCH_SIZE x GRAD_ACCUMULATION = 256.
