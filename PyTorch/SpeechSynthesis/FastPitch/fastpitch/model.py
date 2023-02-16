@@ -228,7 +228,7 @@ class FastPitch(nn.Module):
                 kernel_size=energy_embedding_kernel_size,
                 padding=int((energy_embedding_kernel_size - 1) / 2))
 
-        self.n_coefficients = n_coefficients
+        self.n_coefficients = int(n_coefficients)
         print(f"NUM COEFFICIENTS: {self.n_coefficients}")
         print(type(3))
         print(type(self.n_coefficients))
