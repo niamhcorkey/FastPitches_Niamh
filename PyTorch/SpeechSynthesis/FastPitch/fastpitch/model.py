@@ -230,6 +230,8 @@ class FastPitch(nn.Module):
 
         self.n_coefficients = n_coefficients
         print(f"NUM COEFFICIENTS: {self.n_coefficients}")
+        print(type(3))
+        print(type(self.n_coefficients))
         self.coefficient_utt_conditioning = coefficient_utt_conditioning
         if coefficient_utt_conditioning:
             self.coefficient_predictor = LSTMPredictor(
