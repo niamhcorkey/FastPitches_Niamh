@@ -23,8 +23,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/slopes}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
-: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/slopes_abs_chopped_train.txt}
-: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/slopes_abs_chopped_val.txt}
+: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/slope_abs_chopped_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/slope_abs_chopped_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
@@ -55,7 +55,7 @@ export OMP_NUM_THREADS=1
 
 # For multispeaker models, add speaker ID = {0, 1, ...} as the last filelist column
 : ${NSPEAKERS:=1}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=1}
 : ${SAMPLING_RATE:=22050}
 
 # Adjust env variables to maintain the global batch size: NUM_GPUS x BATCH_SIZE x GRAD_ACCUMULATION = 256.

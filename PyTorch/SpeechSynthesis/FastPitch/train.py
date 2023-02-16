@@ -594,7 +594,6 @@ def main():
         attn_loss_scale=args.attn_loss_scale)
 
     collate_fn = TTSCollate()
-    print("CALLING COLLATE")
 
     if args.local_rank == 0:
         prepare_tmp(args.pitch_online_dir)
