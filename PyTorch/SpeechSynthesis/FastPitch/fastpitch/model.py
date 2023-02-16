@@ -242,7 +242,7 @@ class FastPitch(nn.Module):
             )
 
             self.coefficient_emb = nn.Conv1d(
-                self.n_coefficients, symbols_embedding_dim,
+                3, symbols_embedding_dim,
                 kernel_size=energy_embedding_kernel_size,
                 padding=int((energy_embedding_kernel_size - 1) / 2))
 
