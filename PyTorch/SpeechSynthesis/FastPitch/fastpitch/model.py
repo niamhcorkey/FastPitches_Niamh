@@ -230,8 +230,6 @@ class FastPitch(nn.Module):
 
         self.n_coefficients = int(n_coefficients)
         print(f"NUM COEFFICIENTS: {self.n_coefficients}")
-        print(type(3))
-        print(type(self.n_coefficients))
         self.coefficient_utt_conditioning = coefficient_utt_conditioning
         if coefficient_utt_conditioning:
             self.coefficient_predictor = LSTMPredictor(
@@ -240,11 +238,11 @@ class FastPitch(nn.Module):
                 kernel_size=pitch_predictor_kernel_size,
                 dropout=p_pitch_predictor_dropout,
                 n_layers=pitch_predictor_n_layers,
-                n_predictions=3
+                n_predictions=self.n_coefficients
             )
 
             self.coefficient_emb = nn.Conv1d(
-                3, symbols_embedding_dim,
+                self.n_coefficients, symbols_embedding_dim,
                 kernel_size=energy_embedding_kernel_size,
                 padding=int((energy_embedding_kernel_size - 1) / 2))
 
