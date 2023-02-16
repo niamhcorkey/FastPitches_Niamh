@@ -23,8 +23,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/trained_models/slopescorrect}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
-: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/slopes3_abs_chopped_train.txt}
-: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/slopes3_abs_chopped_val.txt}
+: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/3slopes_abs_chopped_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/3slopes_abs_chopped_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
