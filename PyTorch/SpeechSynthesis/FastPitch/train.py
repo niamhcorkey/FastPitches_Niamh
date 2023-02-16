@@ -697,7 +697,6 @@ def main():
                 meta = {k: reduce_tensor(v, args.world_size) for k, v in meta.items()}
             else:
                 reduced_loss = loss.item()
-                print(f"LOSS: {reduced_loss}")
                 reduced_num_frames = num_frames.item()
             if np.isnan(reduced_loss):
                 raise Exception("loss is NaN")
