@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/phrasesphones}
-: ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
-: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
-: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/fulluttsphones}
+: ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
+: ${TRAIN_FILELIST:=${FP}/filelists/phones_cstr_abs_paths_norm_train.txt}
+: ${VAL_FILELIST:=${FP}/filelists/phones_cstr_abs_paths_norm_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 

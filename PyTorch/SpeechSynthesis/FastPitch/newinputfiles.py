@@ -39,7 +39,7 @@ def absolute_paths_norm(filepath, newtype):
                 newfile.write(newline)
 
 
-def change_coef_path(filelist, type):
+def change_coef_path(inputfile, newtype):
     open(f"filelists/phones_cstr_abs_paths_norm_{newtype}.txt", 'w')
     newfile = open(f"filelists/phones_cstr_abs_paths_norm_{newtype}.txt", 'a')
 
