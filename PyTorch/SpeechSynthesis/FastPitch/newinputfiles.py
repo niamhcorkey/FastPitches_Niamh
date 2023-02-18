@@ -1,4 +1,4 @@
-
+import re
 
 def add_column(filepath, newtype):
     open(f"filelists/ljs_audio_pitch_coefs_text_{newtype}.txt", 'w')
@@ -39,5 +39,19 @@ def absolute_paths_norm(filepath, newtype):
                 newfile.write(newline)
 
 
-newline = abspath + f"mels/{basename}.pt|" + abspath + f"pitch/{basename}.pt|" + abspath + f"coefs_norm/{basename}.npy|" + text
+def change_coef_path(filelist, type):
+    open(f"filelists/phones_cstr_abs_paths_norm_{newtype}.txt", 'w')
+    newfile = open(f"filelists/phones_cstr_abs_paths_norm_{newtype}.txt", 'a')
 
+    with open(filepath, 'r') as inputfile:
+        for line in inputfile:
+
+            if len(line) > 30:
+                newline = re.sub("coefs_norm", "coefs_phones_norm", line)
+                newfile.write(newline)
+
+            else:
+                newline = "mels|pitch|coefs|text\n"
+                newfile.write(newline)
+
+change_coef_path("filelists/ns_cstr_abs_paths_norm_train.txt", "train")
