@@ -11,16 +11,16 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=slopes
-CHECKPOINT=FastPitch_checkpoint_700.pt
+MODEL=phrasesphones
+CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=slopestest700
+NAME=utt1
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/pred.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/$(basename $NAME .tsv)"}
+: ${PHRASES:="phrases/utt1_continuum.tsv"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/continuum/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -36,8 +36,8 @@ NAME=slopestest700
 : ${PITCH:=true}
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
-# Load in coefficient targets (for some reason true is false and false is true?)
-: ${USE_COEF_TARGET:=false}
+# Load in coefficient targets
+: ${USE_COEF_TARGET:=true}
 
 
 
