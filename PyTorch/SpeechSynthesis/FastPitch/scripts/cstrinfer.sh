@@ -14,12 +14,12 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=slopescorrect
 CHECKPOINT=FastPitch_checkpoint_900.pt
 
-NAME=realtgts
+NAME=predictions
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/slopes_realtgts.tsv"}
+: ${PHRASES:="phrases/slopes_predictions.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/slopescontrollabilitytest/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
@@ -37,7 +37,7 @@ NAME=realtgts
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=1}
 
 
