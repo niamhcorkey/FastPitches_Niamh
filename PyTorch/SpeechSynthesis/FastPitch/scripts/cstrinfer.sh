@@ -38,6 +38,7 @@ NAME=continuum
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=true}
+: ${NCOEFFICIENTS:=1}
 
 
 
@@ -59,6 +60,7 @@ ARGS+=" --repeats $REPEATS"
 ARGS+=" --warmup-steps $WARMUP"
 ARGS+=" --speaker $SPEAKER"
 ARGS+=" --n-speakers $NUM_SPEAKERS"
+ARGS+=" --n-coefficients $NCOEFFICIENTS"
 
 [ "$CPU" = false ]          && ARGS+=" --cuda"
 [ "$CPU" = false ]          && ARGS+=" --cudnn-benchmark"
