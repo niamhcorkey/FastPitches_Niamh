@@ -700,13 +700,11 @@ def main():
                 print(f"LOSS: {reduced_loss}")
                 reduced_num_frames = num_frames.item()
             if np.isnan(reduced_loss):
-                print(f"NAN NAN NAN NAN NAN NAN NAN NAN NAN NAN")
-                #raise Exception("loss is NaN")
+                raise Exception("loss is NaN")
 
             accumulated_steps += 1
-            if not np.isnan(reduced_loss):
-                iter_loss += reduced_loss
-                iter_num_frames += reduced_num_frames
+            iter_loss += reduced_loss
+            iter_num_frames += reduced_num_frames
             iter_meta = {k: iter_meta.get(k, 0) + meta.get(k, 0) for k in meta}
 
             if accumulated_steps % args.grad_accumulation == 0:
