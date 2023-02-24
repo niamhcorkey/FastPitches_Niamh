@@ -38,7 +38,7 @@ NAME=slopesphones
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=false}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=1}
 
 
 
