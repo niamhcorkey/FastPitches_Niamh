@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/fulluttsphones}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/fulluttsslopes}
 : ${DATASET_PATH:=${DS_HOME}/LJSpeech-1.1/wavs}
-: ${TRAIN_FILELIST:=${FP}/filelists/phones_cstr_abs_paths_norm_train.txt}
-: ${VAL_FILELIST:=${FP}/filelists/phones_cstr_abs_paths_norm_val.txt}
+: ${TRAIN_FILELIST:=${DS_HOME}/LJSpeech-1.1/slope_abs_full_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/LJSpeech-1.1/slope_abs_full_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
@@ -55,7 +55,7 @@ export OMP_NUM_THREADS=1
 
 # For multispeaker models, add speaker ID = {0, 1, ...} as the last filelist column
 : ${NSPEAKERS:=1}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=1}
 : ${SAMPLING_RATE:=22050}
 
 # Adjust env variables to maintain the global batch size: NUM_GPUS x BATCH_SIZE x GRAD_ACCUMULATION = 256.
