@@ -35,7 +35,7 @@ NAME=baseline
 # Enable pitch conditioning
 : ${PITCH:=true}
 # Enable coefficient conditioning
-: ${COEFFICIENTS:=true}
+: ${COEFFICIENTS:=false}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=3}
