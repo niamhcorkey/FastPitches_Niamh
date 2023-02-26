@@ -19,7 +19,7 @@ NAME=listening
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/realtgts.tsv"}
+: ${PHRASES:="phrases/predictions.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/phrasescontrollabilitytest/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
@@ -37,7 +37,7 @@ NAME=listening
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=3}
 
 
