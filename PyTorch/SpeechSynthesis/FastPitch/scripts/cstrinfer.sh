@@ -14,12 +14,12 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=fulluttsphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=continuum
+NAME=predvstgt
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/fullutts_continuum.tsv"}
+: ${PHRASES:="phrases/realtgts10.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/fulluttscontrollabilitytest/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
