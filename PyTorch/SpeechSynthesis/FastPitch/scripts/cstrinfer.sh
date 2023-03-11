@@ -11,10 +11,10 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=baselinephrases
+MODEL=fulluttsphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=baselinephrases
+NAME=coefsfullutts
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
@@ -35,7 +35,7 @@ NAME=baselinephrases
 # Enable pitch conditioning
 : ${PITCH:=true}
 # Enable coefficient conditioning
-: ${COEFFICIENTS:=false}
+: ${COEFFICIENTS:=true}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=3}
