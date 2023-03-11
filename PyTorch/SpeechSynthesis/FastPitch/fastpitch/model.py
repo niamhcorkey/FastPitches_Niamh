@@ -254,8 +254,7 @@ class FastPitch(nn.Module):
 
     def binarize_attention(self, attn, in_lens, out_lens):
         """For training purposes only. Binarizes attention with MAS.
-           These will no longer recieve a gradient.
-
+           These will no longer receive a gradient.
         Args:
             attn: B x 1 x max_mel_len x max_text_len
         """
