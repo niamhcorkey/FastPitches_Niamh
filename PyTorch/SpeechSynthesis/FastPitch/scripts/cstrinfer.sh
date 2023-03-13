@@ -14,13 +14,13 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=phrasesslopes
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=preds
+NAME=realtgts
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/testslopes.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/rmsetest/slopes/$(basename $NAME .tsv)"}
+: ${PHRASES:="phrases/testcoefsphrases.tsv"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/rmsetest/phrases/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -37,8 +37,8 @@ NAME=preds
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=false}
-: ${NCOEFFICIENTS:=1}
+: ${USE_COEF_TARGET:=true}
+: ${NCOEFFICIENTS:=3}
 
 
 
