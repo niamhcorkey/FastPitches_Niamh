@@ -14,7 +14,7 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=fulluttsphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=realtgts
+NAME=preds
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
@@ -37,7 +37,7 @@ NAME=realtgts
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=3}
 
 
