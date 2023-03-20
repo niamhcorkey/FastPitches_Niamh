@@ -1,3 +1,3 @@
 coefs|output|text
-/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.tsv|statement.wav|he's your brother
-/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.tsv|question.wav|he's your brother
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|statement.wav|he's your brother
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|question.wav|he's your brother
