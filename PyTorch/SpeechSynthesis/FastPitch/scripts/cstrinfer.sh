@@ -14,13 +14,13 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=phrasesphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=transfertest
+NAME=phrasesphones
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/transfer.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/$(basename $NAME .tsv)"}
+: ${PHRASES:="phrases/books.tsv"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/books/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -37,7 +37,7 @@ NAME=transfertest
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=true}
+: ${USE_COEF_TARGET:=false}
 : ${NCOEFFICIENTS:=3}
 
 
