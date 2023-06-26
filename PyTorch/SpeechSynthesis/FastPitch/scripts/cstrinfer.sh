@@ -17,10 +17,10 @@ CHECKPOINT=FastPitch_checkpoint_1000.pt
 NAME=phrasesphones
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
-: ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
+: ${FASTPITCH:="$DS_HOME/diss/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
 : ${PHRASES:="phrases/books.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/books/$(basename $NAME .tsv)"}
+: ${OUTPUT_DIR:="$DS_HOME/diss/fastpitch_audio/books/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
