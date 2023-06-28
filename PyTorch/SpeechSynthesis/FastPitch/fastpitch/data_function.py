@@ -168,6 +168,8 @@ class TTSDataset(torch.utils.data.Dataset):
         if not load_mel_from_disk:
             self.max_wav_value = max_wav_value
             print(f"SR: {sampling_rate}")
+            sampling_rate = 48000
+            print(f"SR: {sampling_rate}")
             self.sampling_rate = sampling_rate
             self.stft = layers.TacotronSTFT(
                 filter_length, hop_length, win_length,
