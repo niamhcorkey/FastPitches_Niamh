@@ -167,6 +167,7 @@ class TTSDataset(torch.utils.data.Dataset):
         self.load_mel_from_disk = load_mel_from_disk
         if not load_mel_from_disk:
             self.max_wav_value = max_wav_value
+            print(f"SR: {sampling_rate}")
             self.sampling_rate = sampling_rate
             self.stft = layers.TacotronSTFT(
                 filter_length, hop_length, win_length,
@@ -249,9 +250,6 @@ class TTSDataset(torch.utils.data.Dataset):
     def get_mel(self, filename):
         if not self.load_mel_from_disk:
             audio, sampling_rate = load_wav_to_torch(filename)
-            print(sampling_rate)
-            print(self.sampling_rate)
-            print(self.stft.sampling_rate)
             if sampling_rate != self.stft.sampling_rate:
                 raise ValueError("{} SR doesn't match target {} SR".format(
                     sampling_rate, self.stft.sampling_rate))
