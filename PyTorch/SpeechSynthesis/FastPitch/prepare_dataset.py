@@ -88,7 +88,7 @@ def main():
     print(unk_args)
     if len(unk_args) > 0:
         print('PROBLEM')
-        #raise ValueError(f'Invalid options {unk_args}')
+        raise ValueError(f'Invalid options {unk_args}')
 
     DLLogger.init(backends=[JSONStreamBackend(Verbosity.DEFAULT, Path(args.dataset_path, args.log_file)),
                             StdOutBackend(Verbosity.VERBOSE)])
