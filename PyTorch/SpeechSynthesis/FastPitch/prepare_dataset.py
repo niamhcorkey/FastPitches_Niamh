@@ -104,7 +104,7 @@ def main():
 
     for filelist in args.wav_text_filelists:
 
-        print(f'Processing {filelist}...')
+        print('Processing {}...'.format(filelist))
 
         dataset = TTSDataset(
             args.dataset_path,
