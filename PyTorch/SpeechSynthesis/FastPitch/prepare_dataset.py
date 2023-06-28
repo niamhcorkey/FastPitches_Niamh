@@ -148,7 +148,7 @@ def main():
             for p in fpaths:
                 fname = Path(p).name
                 if fname in all_filenames:
-                    raise ValueError(f'Filename is not unique: {fname}')
+                    raise ValueError('Filename is not unique: {}'.format(fname))
                 all_filenames.add(fname)
 
             if args.extract_mels:
