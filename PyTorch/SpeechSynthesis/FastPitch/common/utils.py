@@ -61,6 +61,7 @@ def load_wav_to_torch(full_path, force_sampling_rate=None):
         data, sampling_rate = librosa.load(full_path, sr=force_sampling_rate)
     else:
         sampling_rate, data = read(full_path)
+        print(f"SAMPLE: {sampling_rate}")
 
     return torch.FloatTensor(data.astype(np.float32)), sampling_rate
 
