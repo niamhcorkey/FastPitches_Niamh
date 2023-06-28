@@ -84,6 +84,7 @@ def main():
     parser = argparse.ArgumentParser(description='FastPitch Data Pre-processing')
     parser = parse_args(parser)
     args, unk_args = parser.parse_known_args()
+    print(unk_args)
     if len(unk_args) > 0:
         raise ValueError(f'Invalid options {unk_args}')
 
