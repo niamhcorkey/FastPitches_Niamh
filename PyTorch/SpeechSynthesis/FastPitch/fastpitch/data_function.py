@@ -88,7 +88,7 @@ def estimate_pitch(wav, mel_len, method='pyin', normalize_mean=None,
 
     if method == 'pyin':
 
-        snd, sr = librosa.load(wav)
+        snd, sr = librosa.load(wav, sr=None)
         pitch_mel, voiced_flag, voiced_probs = librosa.pyin(
             snd, fmin=librosa.note_to_hz('C2'),
             fmax=librosa.note_to_hz('C7'), frame_length=1024)
@@ -167,8 +167,6 @@ class TTSDataset(torch.utils.data.Dataset):
         self.load_mel_from_disk = load_mel_from_disk
         if not load_mel_from_disk:
             self.max_wav_value = max_wav_value
-            print(f"SR: {sampling_rate}")
-            sampling_rate = 48000
             print(f"SR: {sampling_rate}")
             self.sampling_rate = sampling_rate
             self.stft = layers.TacotronSTFT(
