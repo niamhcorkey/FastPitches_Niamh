@@ -142,7 +142,7 @@ class TTSDataset(torch.utils.data.Dataset):
                  pitch_mean=214.72203,  # LJSpeech defaults
                  pitch_std=65.72038,
                  max_wav_value=None,
-                 sampling_rate=48000,
+                 sampling_rate=None,
                  filter_length=None,
                  hop_length=None,
                  win_length=None,
@@ -249,6 +249,9 @@ class TTSDataset(torch.utils.data.Dataset):
     def get_mel(self, filename):
         if not self.load_mel_from_disk:
             audio, sampling_rate = load_wav_to_torch(filename)
+            print(sampling_rate)
+            print(self.sampling_rate)
+            print(self.stft.sampling_rate)
             if sampling_rate != self.stft.sampling_rate:
                 raise ValueError("{} SR doesn't match target {} SR".format(
                     sampling_rate, self.stft.sampling_rate))
