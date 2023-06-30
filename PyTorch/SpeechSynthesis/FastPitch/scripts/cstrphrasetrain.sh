@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/baselinephrases}
-: ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
-: ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
-: ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
+: ${OUTPUT_DIR:=${DS_HOME}/sgile/trained_models/baselinephrases}
+: ${DATASET_PATH:=${DS_HOME}/sgile/original}
+: ${TRAIN_FILELIST:=${DS_HOME}/sgile/original/training.txt}
+: ${VAL_FILELIST:=${DS_HOME}/sgile/original/validation.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
@@ -43,7 +43,7 @@ export OMP_NUM_THREADS=1
 # Enable pitch conditioning
 : ${PITCH:=true}
 # Enable coefficient conditioning
-: ${COEFFICIENTS:=false}
+: ${COEFFICIENTS:=true}
 
 
 : ${TEXT_CLEANERS:=english_cleaners_v2}
