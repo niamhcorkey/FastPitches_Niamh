@@ -19,7 +19,7 @@ export EXPERIMENT_DESC="FastPitches defaults"
 export OMP_NUM_THREADS=1
 
 : ${NUM_GPUS:=1}
-: ${BATCH_SIZE:=16}
+: ${BATCH_SIZE:=4}
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/sgile/trained_models/baselinephrases}
 : ${DATASET_PATH:=${DS_HOME}/sgile/original}
