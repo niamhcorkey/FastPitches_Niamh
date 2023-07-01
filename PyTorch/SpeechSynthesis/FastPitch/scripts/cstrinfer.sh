@@ -18,7 +18,7 @@ NAME=baseline
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
-: ${BATCH_SIZE:=16}
+: ${BATCH_SIZE:=6}
 : ${PHRASES:="phrases/books.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/sgile/fastpitch_audio/books/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
