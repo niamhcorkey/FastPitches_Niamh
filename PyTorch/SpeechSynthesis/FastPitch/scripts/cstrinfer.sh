@@ -14,7 +14,7 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=baselinephrases
 CHECKPOINT=FastPitch_checkpoint_400.pt
 
-NAME=baseline
+NAME=baseline1000
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
