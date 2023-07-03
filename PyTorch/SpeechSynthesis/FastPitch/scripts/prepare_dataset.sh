@@ -2,7 +2,7 @@
 
 set -e
 
-: ${DATA_DIR:=/disk/scratch1/s1936986/sgile/downsamples}
+: ${DATA_DIR:=/disk/scratch1/s1936986/sgile/downsampled}
 : ${ARGS="--extract-mels"}
 
 python prepare_dataset.py \
