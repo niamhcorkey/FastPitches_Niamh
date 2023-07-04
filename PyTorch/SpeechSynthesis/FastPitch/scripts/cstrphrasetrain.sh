@@ -21,10 +21,10 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=8}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/sgile/trained_models/baselinephrases}
-: ${DATASET_PATH:=${DS_HOME}/sgile/original}
-: ${TRAIN_FILELIST:=${DS_HOME}/sgile/original/training.txt}
-: ${VAL_FILELIST:=${DS_HOME}/sgile/original/validation.txt}
+: ${OUTPUT_DIR:=${DS_HOME}/sgile/trained_models/baselinedownsampled}
+: ${DATASET_PATH:=${DS_HOME}/sgile/downsampled}
+: ${TRAIN_FILELIST:=${DS_HOME}/sgile/downsampled/training.txt}
+: ${VAL_FILELIST:=${DS_HOME}/sgile/downsampled/validation.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 

@@ -139,8 +139,8 @@ class TTSDataset(torch.utils.data.Dataset):
                  load_pitch_from_disk=True,
                  pitch_conditioning=True,
                  coefficient_utt_conditioning=False,
-                 pitch_mean= 96.97455293816438, #214.72203  # LJSpeech defaults
-                 pitch_std= 24.263669193016945,  #65.72038,
+                 pitch_mean= 200.0369854545905, #214.72203  # LJSpeech defaults
+                 pitch_std= 93.008257444552,  #65.72038,
                  max_wav_value=None,
                  sampling_rate=None,
                  filter_length=None,
