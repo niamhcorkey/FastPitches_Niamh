@@ -11,7 +11,7 @@ from .cmudict import valid_symbols
 _arpabet = ['@' + s for s in valid_symbols]
 
 
-def get_symbols(symbol_set='english_basic'):
+def get_symbols(symbol_set='english_basic', symbol_type='phone'):
     if symbol_set == 'english_basic':
         _pad = '_'
         _punctuation = '!\'(),.:;? '
