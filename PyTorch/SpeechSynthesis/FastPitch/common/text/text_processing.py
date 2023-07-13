@@ -199,7 +199,7 @@ class PhoneProcessor(object):
                     self.symbol_to_id[s]
                 except KeyError:
                     print(f"'{text}'")
-                    exit
+                    exit()
             #return [self.symbol_to_id[s] for s in text.split(' ')]
 
     def ids_to_text(self, ids):
