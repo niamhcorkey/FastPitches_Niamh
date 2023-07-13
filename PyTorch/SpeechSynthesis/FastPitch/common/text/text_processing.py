@@ -172,6 +172,7 @@ class PhoneProcessor(object):
 
         if symbol_type == 'phone':
             self.symbol_to_id = {s: i for i, s in enumerate(self.symbols)}
+            print(self.symbol_to_id)
             self.id_to_symbol = {i: s for i, s in enumerate(self.symbols)}
 
     def phones_to_ids(self, text):

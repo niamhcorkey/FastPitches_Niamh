@@ -42,7 +42,7 @@ def get_symbols(symbol_set='english_basic', symbol_type='phone'):
                    '@@r', 'w', 'b', 'uu;', 'y', 'd', 'uu', 'ur', 'uh', 'z', 'e', 'zh', 'ii;',
                    'oi', 'f', 'l=', 'our', 'x', 'g', 'aer', 'h', 'ch', 'i', '?', 'owr', 'hw']
         symbols = _pad + _silence + _oov + _phones
-        print(symbols)
+
     else:
         raise Exception("{} symbol set does not exist".format(symbol_set))
 
