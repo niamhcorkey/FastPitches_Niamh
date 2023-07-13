@@ -162,3 +162,42 @@ class TextProcessing(object):
             return text_encoded, text_clean, text_arpabet
 
         return text_encoded
+
+
+class PhoneProcessor(object):
+    def __init__(self, symbol_set, symbol_type='phone'):
+        self.symbol_set = symbol_set
+        self.symbol_type = symbol_type
+        self.symbols = get_symbols(symbol_set, symbol_type)
+
+        if symbol_type == 'phone':
+            self.symbol_to_id = {s: i for i, s in enumerate(self.symbols)}
+            self.id_to_symbol = {i: s for i, s in enumerate(self.symbols)}
+
+    def phones_to_ids(self, text):
+        # TODO: could also handle X-SAMPA this way if mapping through IPA
+        # using panphon
+        if self.symbol_set.startswith('ipa'):
+            # Text can be either space-delimited phone strings or phonetized
+            # words, e.g. 'sp ðə kæt sp'
+            symbol_ids = []
+            for word in text.split(' '):
+                if word in self.sil_symbols:
+                    symbol_ids.append(self.symbol_to_id[word])
+                else:
+                    for s in self.ft.ipa_segs(word):
+                        symbol_ids.append(self.symbol_to_id[s])
+            return symbol_ids
+        else:
+            # Assuming space-delimited phone strings, e.g. 'sp D @ k { t sp'
+            return [self.symbol_to_id[s] for s in text.split(' ')]
+
+        def ids_to_text(self, ids):
+            return ' '.join(self.id_to_symbol[i] for i in ids)
+
+        def encode_text(self, text):
+            if self.symbol_type == 'pf':
+                text_encoded = self.phones_to_pfs(text)
+            else:
+                text_encoded = self.phones_to_ids(text)
+            return text_encoded

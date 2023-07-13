@@ -31,6 +31,17 @@ def get_symbols(symbol_set='english_basic'):
         _accented = 'áçéêëñöøćž'
         _letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
         symbols = list(_punctuation + _math + _special + _accented + _letters) + _arpabet
+
+    elif symbol_set == 'unisyn_edi':
+        _pad = ['_']
+        _silence = ['SIL', 'SP']
+        _oov = ['SPN']
+        _phones = ['@', 'k', 'm=', 'l', 'm', 'dh', 'ir;', 'n', 'ir', 'ii', 'ur;', 'ng',
+                   'n=', 'p', 'sh', 'ei', 'er', 'r', 'jh', 's', 'eir', 't', 'oo', 'ow',
+                   'ou', 'or', 'ae', 'ai', 'ar', 't^', 'th', '@r', 'v', 'a',
+                   '@@r', 'w', 'b', 'uu;', 'y', 'd', 'uu', 'ur', 'uh', 'z', 'e', 'zh', 'ii;',
+                   'oi', 'f', 'l=', 'our', 'x', 'g', 'aer', 'h', 'ch', 'i', '?', 'owr', 'hw']
+        symbols = _pad + _silence + _oov + _phones
     else:
         raise Exception("{} symbol set does not exist".format(symbol_set))
 

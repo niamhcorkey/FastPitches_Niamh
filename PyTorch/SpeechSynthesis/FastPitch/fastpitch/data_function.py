@@ -38,7 +38,7 @@ from scipy import ndimage
 from scipy.stats import betabinom
 
 import common.layers as layers
-from common.text.text_processing import TextProcessing
+from common.text.text_processing import TextProcessing, PhoneProcessor
 from common.utils import load_wav_to_torch, load_filepaths_and_text, to_gpu
 
 
@@ -132,7 +132,7 @@ class TTSDataset(torch.utils.data.Dataset):
                  audiopaths_and_text,
                  text_cleaners,
                  n_mel_channels,
-                 symbol_set='english_basic',
+                 symbol_set='unisyn_edi',
                  p_arpabet=1.0,
                  n_speakers=1,
                  load_mel_from_disk=True,
@@ -183,7 +183,7 @@ class TTSDataset(torch.utils.data.Dataset):
             'Only 0.0 and 1.0 p_arpabet is currently supported. '
             'Variable probability breaks caching of betabinomial matrices.')
 
-        self.tp = TextProcessing(symbol_set, text_cleaners, p_arpabet=p_arpabet)
+        self.tp = PhoneProcessor(symbol_set, symbol_type='phone')
         self.n_speakers = n_speakers
         self.pitch_tmp_dir = pitch_online_dir
         self.f0_method = pitch_online_method
@@ -274,7 +274,7 @@ class TTSDataset(torch.utils.data.Dataset):
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
-        space = [self.tp.encode_text("A A")[1]]
+        space = [self.tp.encode_text(" ")[1]]
 
         if self.prepend_space_to_text:
             text = space + text
