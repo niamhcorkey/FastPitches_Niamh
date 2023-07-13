@@ -167,12 +167,13 @@ class TextProcessing(object):
 class PhoneProcessor(object):
     def __init__(self, symbol_set, symbol_type='phone'):
         self.symbol_set = symbol_set
+        print(self.symbol_set)
         self.symbol_type = symbol_type
         self.symbols = get_symbols(symbol_set, symbol_type)
+        print(self.symbols)
 
         if symbol_type == 'phone':
             self.symbol_to_id = {s: i for i, s in enumerate(self.symbols)}
-            print(self.symbol_to_id)
             self.id_to_symbol = {i: s for i, s in enumerate(self.symbols)}
 
     def phones_to_ids(self, text):
