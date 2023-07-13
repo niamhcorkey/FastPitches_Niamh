@@ -12,9 +12,9 @@ DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
 MODEL=baselinedownsampled
-CHECKPOINT=FastPitch_checkpoint_450.pt
+CHECKPOINT=FastPitch_checkpoint_850.pt
 
-NAME=basedown450
+NAME=basedown850
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
