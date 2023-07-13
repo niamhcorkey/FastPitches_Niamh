@@ -192,10 +192,10 @@ class PhoneProcessor(object):
             # Assuming space-delimited phone strings, e.g. 'sp D @ k { t sp'
             return [self.symbol_to_id[s] for s in text.split(' ')]
 
-        def ids_to_text(self, ids):
+    def ids_to_text(self, ids):
             return ' '.join(self.id_to_symbol[i] for i in ids)
 
-        def encode_text(self, text):
+    def encode_text(self, text):
             if self.symbol_type == 'pf':
                 text_encoded = self.phones_to_pfs(text)
             else:
