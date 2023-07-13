@@ -274,13 +274,13 @@ class TTSDataset(torch.utils.data.Dataset):
 
     def get_text(self, text):
         text = self.tp.encode_text(text)
-        space = [self.tp.encode_text(" ")[1]]
+        #space = [self.tp.encode_text("")[1]]
 
-        if self.prepend_space_to_text:
-            text = space + text
+        #if self.prepend_space_to_text:
+        #    text = space + text
 
-        if self.append_space_to_text:
-            text = text + space
+        #if self.append_space_to_text:
+        #    text = text + space
         return torch.LongTensor(text)
 
     def get_prior(self, index, mel_len, text_len):
