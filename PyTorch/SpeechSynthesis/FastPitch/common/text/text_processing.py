@@ -169,7 +169,7 @@ class PhoneProcessor(object):
         self.symbol_set = symbol_set
         print(self.symbol_set)
         self.symbol_type = symbol_type
-        self.symbols = get_symbols(symbol_set, symbol_type)
+        self.symbols = get_symbols('unisyn_edi', symbol_type)
         print(self.symbols)
 
         if symbol_type == 'phone':
