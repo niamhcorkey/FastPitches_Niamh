@@ -190,15 +190,8 @@ class PhoneProcessor(object):
             return symbol_ids
         else:
             # Assuming space-delimited phone strings, e.g. 'sp D @ k { t sp'
-            print(text)
-            print([s for s in text.split(' ')])
-            for s in text.split(' '):
-                try:
-                    self.symbol_to_id[s]
-                except KeyError:
-                    print(f"'{text}'")
-                    exit()
-            #return [self.symbol_to_id[s] for s in text.split(' ')]
+
+            return [self.symbol_to_id[s] for s in text.split(' ')]
 
     def ids_to_text(self, ids):
             return ' '.join(self.id_to_symbol[i] for i in ids)
