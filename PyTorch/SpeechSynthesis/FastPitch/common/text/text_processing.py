@@ -167,10 +167,8 @@ class TextProcessing(object):
 class PhoneProcessor(object):
     def __init__(self, symbol_set='unisyn_edi', symbol_type='phone'):
         self.symbol_set = 'unisyn_edi'
-        print(self.symbol_set)
         self.symbol_type = symbol_type
         self.symbols = get_symbols('unisyn_edi', symbol_type)
-        print(self.symbols)
 
         if symbol_type == 'phone':
             self.symbol_to_id = {s: i for i, s in enumerate(self.symbols)}
