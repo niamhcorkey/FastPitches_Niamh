@@ -165,7 +165,7 @@ class TextProcessing(object):
 
 
 class PhoneProcessor(object):
-    def __init__(self, symbol_set, symbol_type='phone'):
+    def __init__(self, symbol_set='unisyn_edi', symbol_type='phone'):
         self.symbol_set = symbol_set
         print(self.symbol_set)
         self.symbol_type = symbol_type
