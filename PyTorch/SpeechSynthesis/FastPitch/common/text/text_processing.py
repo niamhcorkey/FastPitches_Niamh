@@ -166,7 +166,7 @@ class TextProcessing(object):
 
 class PhoneProcessor(object):
     def __init__(self, symbol_set='unisyn_edi', symbol_type='phone'):
-        self.symbol_set = symbol_set
+        self.symbol_set = 'unisyn_edi'
         print(self.symbol_set)
         self.symbol_type = symbol_type
         self.symbols = get_symbols('unisyn_edi', symbol_type)
@@ -192,6 +192,7 @@ class PhoneProcessor(object):
             return symbol_ids
         else:
             # Assuming space-delimited phone strings, e.g. 'sp D @ k { t sp'
+            print([s for s in text.split(' ')])
             return [self.symbol_to_id[s] for s in text.split(' ')]
 
     def ids_to_text(self, ids):
