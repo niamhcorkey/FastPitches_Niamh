@@ -210,8 +210,8 @@ def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
     fields['text_lens'] = torch.LongTensor([t.size(0) for t in fields['text']])
     print(f"TEXT LENGTH: {[t.size(0) for t in fields['text']]}")
 
-    for t in fields['text']:
-        print(tp.sequence_to_text(t.numpy()))
+    #for t in fields['text']:
+        #print(tp.sequence_to_text(t.numpy()))
 
     if load_mels:
         assert 'mel' in fields
