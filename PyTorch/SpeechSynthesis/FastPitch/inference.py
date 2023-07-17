@@ -46,7 +46,7 @@ from common import utils
 from common.tb_dllogger import (init_inference_metadata, stdout_metric_format,
                                 unique_log_fpath)
 from common.text import cmudict
-from common.text.text_processing import TextProcessing
+from common.text.text_processing import TextProcessing, PhoneProcessor
 from pitch_transform import pitch_transform_custom
 from waveglow import model as glow
 from waveglow.denoiser import Denoiser
@@ -122,7 +122,7 @@ def parse_args(parser):
     text_processing.add_argument('--text-cleaners', nargs='*',
                                  default=['english_cleaners_v2'], type=str,
                                  help='Type of text cleaners for input text')
-    text_processing.add_argument('--symbol-set', type=str, default='english_basic',
+    text_processing.add_argument('--symbol-set', type=str, default='unisyn_edi',
                                  help='Define symbol set for input text')
 
     cond = parser.add_argument_group('conditioning on additional attributes')
