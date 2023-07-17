@@ -50,7 +50,7 @@ def get_symbols(symbol_set='unisyn_edi', symbol_type='phone'):
 
 
 def get_pad_idx(symbol_set='english_basic'):
-    if symbol_set in {'english_basic', 'english_basic_lowercase'}:
+    if symbol_set in {'english_basic', 'english_basic_lowercase', 'unisyn_edi'}:
         return 0
     else:
         raise Exception("{} symbol set not used yet".format(symbol_set))
