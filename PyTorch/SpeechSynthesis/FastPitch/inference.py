@@ -122,7 +122,7 @@ def parse_args(parser):
     text_processing.add_argument('--text-cleaners', nargs='*',
                                  default=['english_cleaners_v2'], type=str,
                                  help='Type of text cleaners for input text')
-    text_processing.add_argument('--symbol-set', type=str, default='unisyn_edi',
+    text_processing.add_argument('--symbol-set', type=str, default='english_basic',
                                  help='Define symbol set for input text')
 
     cond = parser.add_argument_group('conditioning on additional attributes')
@@ -200,7 +200,7 @@ def load_fields(fpath):
 def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
                            batch_size=128, dataset=None, load_mels=False, load_coefs=False,
                            load_pitch=False, p_arpabet=0.0):
-    tp = TextProcessing(symbol_set, text_cleaners, p_arpabet=p_arpabet)
+    tp = PhoneProcessor(symbol_set, symbol_type='phone')
 
     fields['text'] = [torch.LongTensor(tp.encode_text(text))
                       for text in fields['text']]
