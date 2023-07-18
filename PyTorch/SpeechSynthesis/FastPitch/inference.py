@@ -197,10 +197,10 @@ def load_fields(fpath):
     return {c:f for c, f in zip(columns, fields)}
 
 
-def prepare_input_sequence(fields, device, symbol_set, text_cleaners,
+def prepare_input_sequence(fields, device, text_cleaners,
                            batch_size=128, dataset=None, load_mels=False, load_coefs=False,
                            load_pitch=False, p_arpabet=0.0):
-    tp = PhoneProcessor(symbol_set, symbol_type='phone')
+    tp = PhoneProcessor(symbol_type='phone')
 
     fields['text'] = [torch.LongTensor(tp.encode_text(text))
                       for text in fields['text']]
@@ -351,7 +351,7 @@ def main():
 
     fields = load_fields(args.input)
     batches = prepare_input_sequence(
-        fields, device, args.symbol_set, args.text_cleaners, args.batch_size,
+        fields, device, args.text_cleaners, args.batch_size,
         args.dataset_path, load_mels=(generator is None), load_coefs=args.use_coef_tgt, p_arpabet=args.p_arpabet)
 
     # Use real data rather than synthetic - FastPitch predicts len

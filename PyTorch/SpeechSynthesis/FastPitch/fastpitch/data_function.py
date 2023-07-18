@@ -183,7 +183,7 @@ class TTSDataset(torch.utils.data.Dataset):
             'Only 0.0 and 1.0 p_arpabet is currently supported. '
             'Variable probability breaks caching of betabinomial matrices.')
 
-        self.tp = PhoneProcessor(symbol_set, symbol_type='phone')
+        self.tp = PhoneProcessor(symbol_type='phone')
         self.n_speakers = n_speakers
         self.pitch_tmp_dir = pitch_online_dir
         self.f0_method = pitch_online_method

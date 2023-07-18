@@ -14,17 +14,17 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=newsymbols
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=newsymbolstest
+NAME=newsymbols3
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=6}
-: ${PHRASES:="phrases/testphones.tsv"}
+: ${PHRASES:="phrases/booksphones.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/sgile/fastpitch_audio/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
-: ${PHONE:=true}
+: ${PHONE:=false}
 : ${DENOISING:=0.01}
 : ${WARMUP:=0}
 : ${REPEATS:=1}
