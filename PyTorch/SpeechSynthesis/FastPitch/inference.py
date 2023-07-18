@@ -122,7 +122,7 @@ def parse_args(parser):
     text_processing.add_argument('--text-cleaners', nargs='*',
                                  default=['english_cleaners_v2'], type=str,
                                  help='Type of text cleaners for input text')
-    text_processing.add_argument('--symbol-set', type=str, default='english_basic',
+    text_processing.add_argument('--symbol-set', type=str, default='unisyn_edi',
                                  help='Define symbol set for input text')
 
     cond = parser.add_argument_group('conditioning on additional attributes')
