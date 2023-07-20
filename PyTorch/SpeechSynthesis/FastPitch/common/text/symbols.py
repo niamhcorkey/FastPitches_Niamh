@@ -38,7 +38,7 @@ def get_symbols(symbol_set='unisyn_edi', symbol_type='phone'):
         _oov = ['SPN']
         _phones = ['@', 'k', 'm=', 'l', 'm', 'dh', 'ir;', 'n', 'ir', 'ii', 'ur;', 'ng',
                    'n=', 'p', 'sh', 'ei', 'er', 'r', 'jh', 's', 'eir', 't', 'oo', 'ow',
-                   'ou', 'or', 'ae', 'ai', 'ar', 't^', 'th', '@r', 'v', 'a',
+                   'ou', 'or', 'ae', 'ai', 'ar', 't^', 'th', '@r', 'v', 'a', 'oir',
                    '@@r', 'w', 'b', 'uu;', 'y', 'd', 'uu', 'ur', 'uh', 'z', 'e', 'zh', 'ii;',
                    'oi', 'f', 'l=', 'our', 'x', 'g', 'aer', 'h', 'ch', 'i', '?', 'owr', 'hw']
         symbols = _pad + _silence + _oov + _phones
