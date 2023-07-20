@@ -127,7 +127,7 @@ def parse_args(parser):
     data.add_argument('--text-cleaners', nargs='*',
                       default=['english_cleaners'], type=str,
                       help='Type of text cleaners for input text')
-    data.add_argument('--symbol-set', type=str, default='english_basic',
+    data.add_argument('--symbol-set', type=str, default='unisyn_edi',
                       help='Define symbol set for input text')
     data.add_argument('--p-arpabet', type=float, default=0.0,
                       help='Probability of using arpabets instead of graphemes '
@@ -459,6 +459,25 @@ def adjust_learning_rate(total_iter, opt, learning_rate, warmup_iters=None):
 
     for param_group in opt.param_groups:
         param_group['lr'] = learning_rate * scale
+
+def plot_attn_maps(y, fnames, step, n=4, label='Predicted alignment'):
+    bs = len(fnames)
+    n = min(n, bs)
+    s = bs // n
+    fnames = fnames[::s]
+    _, dec_mask, *_, attn_softs, attn_hards, attn_hard_durs, _ = y
+    attn_softs = attn_softs[::s].cpu().numpy()
+    attn_hards = attn_hards[::s].cpu().numpy()
+    attn_hard_durs = attn_hard_durs[::s].cpu().numpy()
+    text_lens = np.count_nonzero(attn_hard_durs, 1)
+    mel_lens = dec_mask[::s].cpu().numpy().squeeze(2).sum(1)
+    for attn_soft, attn_hard, mel_len, text_len, fname in zip(
+            attn_softs, attn_hards, mel_lens, text_lens, fnames):
+        attn_soft = attn_soft[:,:mel_len,:text_len].squeeze(0).transpose()
+        attn_hard = attn_hard[:,:mel_len,:text_len].squeeze(0).transpose()
+        utt_id = os.path.splitext(os.path.basename(fname))[0]
+        logger.log_attn_maps_tb(
+            step, '{}/{}'.format(label, utt_id), attn_soft, attn_hard, tb_subset='val')
 
 
 def apply_ema_decay(model, ema_model, decay):
