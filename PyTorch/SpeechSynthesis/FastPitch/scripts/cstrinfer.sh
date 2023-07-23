@@ -11,10 +11,10 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=newsymbols
+MODEL=phoneinput
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=newsymbols3
+NAME=phoneinput
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
