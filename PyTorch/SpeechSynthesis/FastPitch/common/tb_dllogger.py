@@ -1,7 +1,9 @@
 import atexit
+import datetime
 import glob
 import os
 import re
+import matplotlib.pyplot as plt
 import numpy as np
 
 import torch
@@ -15,11 +17,7 @@ tb_loggers = {}
 
 
 class TBLogger:
-    """
-    xyz_dummies: stretch the screen with empty plots so the legend would
-                 always fit for other plots
-    """
-    def __init__(self, enabled, log_dir, name, interval=1, dummies=True):
+    def __init__(self, enabled, log_dir, name, interval=1):
         self.enabled = enabled
         self.interval = interval
         self.cache = {}
@@ -28,9 +26,6 @@ class TBLogger:
                 log_dir=os.path.join(log_dir, name),
                 flush_secs=120, max_queue=200)
             atexit.register(self.summary_writer.close)
-            if dummies:
-                for key in ('aaa', 'zzz'):
-                    self.summary_writer.add_scalar(key, 0.0, 1)
 
     def log(self, step, data):
         for k, v in data.items():
@@ -51,12 +46,31 @@ class TBLogger:
             norms = [p.grad.norm().item() for p in model.parameters()
                      if p.grad is not None]
             for stat in ('max', 'min', 'mean'):
-                self.log_value(step, f'grad_{stat}', getattr(np, stat)(norms),
+                self.log_value(step, f'Gradients/{stat}', getattr(np, stat)(norms),
                                stat=stat)
+
+    def log_spectrogram(self, step, key, spectrogram):
+        if self.enabled:
+            fig, ax = plt.subplots(figsize=(10, 2))
+            im = ax.imshow(spectrogram,
+                           aspect='auto', origin='lower', interpolation='none')
+            fig.canvas.draw()
+            self.summary_writer.add_figure(key, fig, step)
+
+    def log_audio(self, step, key, audio, sampling_rate):
+        if self.enabled:
+            self.summary_writer.add_audio(key, audio, step, sampling_rate)
+
+    def log_attn_maps(self, step, key, attn_soft, attn_hard):
+        if self.enabled:
+            fig, axs = plt.subplots(2, 1)
+            axs[0].imshow(attn_soft, aspect='auto', origin='lower')
+            axs[1].imshow(attn_hard, aspect='auto', origin='lower')
+            fig.canvas.draw()
+            self.summary_writer.add_figure(key, fig, step)
 
 
 def unique_log_fpath(log_fpath):
-
     if not os.path.isfile(log_fpath):
         return log_fpath
 
@@ -82,12 +96,17 @@ def stdout_step_format(step):
 
 
 def stdout_metric_format(metric, metadata, value):
-    name = metadata.get("name", metric + " : ")
+    name = metadata.get("name", metric + ": ")
     unit = metadata.get("unit", None)
     format = f'{{{metadata.get("format", "")}}}'
     fields = [name, format.format(value) if value is not None else value, unit]
     fields = [f for f in fields if f is not None]
     return "| " + " ".join(fields)
+
+
+def prefix_format(timestamp):
+    timestamp = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    return "[{}] ".format(timestamp)
 
 
 def init(log_fpath, log_dir, enabled=True, tb_subsets=[], **tb_kw):
@@ -97,33 +116,48 @@ def init(log_fpath, log_dir, enabled=True, tb_subsets=[], **tb_kw):
                                       unique_log_fpath(log_fpath)),
                     StdOutBackend(Verbosity.VERBOSE,
                                   step_format=stdout_step_format,
-                                  metric_format=stdout_metric_format)]
+                                  metric_format=stdout_metric_format,
+                                  prefix_format=prefix_format)]
     else:
         backends = []
 
     dllogger.init(backends=backends)
-    dllogger.metadata("train_lrate", {"name": "lrate", "format": ":>3.2e"})
+    dllogger.metadata("train_Hyperparameters/Learning rate", {"name": "lrate", "format": ":>3.2e"})
 
     for id_, pref in [('train', ''), ('train_avg', 'avg train '),
                       ('val', '  avg val '), ('val_ema', '  EMA val ')]:
 
-        dllogger.metadata(f"{id_}_loss",
+        dllogger.metadata(f"{id_}_Loss/Total",
                           {"name": f"{pref}loss", "format": ":>5.2f"})
-        dllogger.metadata(f"{id_}_mel_loss",
-                          {"name": f"{pref}mel loss", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Loss/Mel",
+                          {"name": f"{pref}mel", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Loss/Duration",
+                          {"name": f"{pref}dur", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Loss/Pitch",
+                          {"name": f"{pref}pitch", "format": ":>5.2f"})
 
-        dllogger.metadata(f"{id_}_kl_loss",
-                          {"name": f"{pref}kl loss", "format": ":>5.5f"})
-        dllogger.metadata(f"{id_}_kl_weight",
+        dllogger.metadata(f"{id_}_Loss/Alignment",
+                          {"name": f"{pref}align", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Align/Attention loss",
+                          {"name": f"{pref}attn loss", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Align/KL loss",
+                          {"name": f"{pref}kl loss", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Align/KL weight",
                           {"name": f"{pref}kl weight", "format": ":>5.5f"})
 
-        dllogger.metadata(f"{id_}_frames/s",
+        dllogger.metadata(f"{id_}_Error/Duration",
+                          {"name": f"{pref}dur error", "format": ":>5.2f"})
+        dllogger.metadata(f"{id_}_Error/Pitch",
+                          {"name": f"{pref}pitch error", "format": ":>5.2f"})
+
+        dllogger.metadata(f"{id_}_Time/FPS",
                           {"name": None, "unit": "frames/s", "format": ":>10.2f"})
-        dllogger.metadata(f"{id_}_took",
+        dllogger.metadata(f"{id_}_Time/Iter time",
                           {"name": "took", "unit": "s", "format": ":>3.2f"})
 
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%dT%H.%M.%S')
     global tb_loggers
-    tb_loggers = {s: TBLogger(enabled, log_dir, name=s, **tb_kw)
+    tb_loggers = {s: TBLogger(enabled, log_dir, name=os.path.join(s, timestamp), **tb_kw)
                   for s in tb_subsets}
 
 
@@ -134,7 +168,7 @@ def init_inference_metadata():
                   ('letters/s', None, ':>10.2f')]
 
     for perc in ['', 'avg', '90%', '95%', '99%']:
-        for model in ['fastpitch', 'waveglow', '']:
+        for model in ['fastpitch', 'hifi-gan', '']:
             for mod, unit, format in modalities:
 
                 name = f'{perc} {model} {mod}'.strip().replace('  ', ' ')
@@ -157,14 +191,21 @@ def log_grads_tb(tb_total_steps, grads, tb_subset='train'):
     tb_loggers[tb_subset].log_grads(tb_total_steps, grads)
 
 
+def log_spectrogram_tb(tb_total_steps, key, spectrogram, tb_subset='train'):
+    tb_loggers[tb_subset].log_spectrogram(tb_total_steps, key, spectrogram)
+
+
+def log_audio_tb(tb_total_steps, key, audio, sampling_rate, tb_subset='train'):
+    tb_loggers[tb_subset].log_audio(tb_total_steps, key, audio, sampling_rate)
+
+
+def log_attn_maps_tb(tb_total_steps, key, attn_soft, attn_hard, tb_subset='train'):
+    tb_loggers[tb_subset].log_attn_maps(tb_total_steps, key, attn_soft, attn_hard)
+
+
 def parameters(data, verbosity=0, tb_subset=None):
     for k,v in data.items():
         dllogger.log(step="PARAMETER", data={k:v}, verbosity=verbosity)
-
-    if tb_subset is not None and tb_loggers[tb_subset].enabled:
-        tb_data = {k:v for k,v in data.items()
-                   if type(v) in (str, bool, int, float)}
-        tb_loggers[tb_subset].summary_writer.add_hparams(tb_data, {})
 
 
 def flush():

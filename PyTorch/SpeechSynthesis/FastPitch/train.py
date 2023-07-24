@@ -47,6 +47,7 @@ from torch.nn.parallel import DistributedDataParallel
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler
 
+import common.tb_dllogger as logger
 import models
 from common.text import cmudict
 from common.utils import BenchmarkStats, prepare_tmp
@@ -387,9 +388,34 @@ def log_validation_batch(x, y_pred, rank):
     plot_batch_mels([[validation_dict[key] for key in pred_specs_keys],
                      [validation_dict[key] for key in tgt_specs_keys]], rank)
 
+def plot_spectrograms(y, fnames, step, n=4, label='Predicted spectrogram', mas=False):
+    """Plot spectrograms for n utterances in batch"""
+    bs = len(fnames)
+    n = min(n, bs)
+    s = bs // n
+    fnames = fnames[::s]
+    if label == 'Predicted spectrogram':
+        # y: mel_out, dec_mask, dur_pred, log_dur_pred, pitch_pred
+        mel_specs = y[0][::s].transpose(1, 2).cpu().numpy()
+        mel_lens = y[1][::s].squeeze().cpu().numpy().sum(axis=1) - 1
+    elif label == 'Reference spectrogram':
+        # y: mel_padded, dur_padded, dur_lens, pitch_padded
+        mel_specs = y[0][::s].cpu().numpy()
+        if mas:
+            mel_lens = y[2][::s].cpu().numpy()  # output_lengths
+        else:
+            mel_lens = y[1][::s].cpu().numpy().sum(axis=1) - 1
+    for mel_spec, mel_len, fname in zip(mel_specs, mel_lens, fnames):
+        mel_spec = mel_spec[:, :mel_len]
+        utt_id = os.path.splitext(os.path.basename(fname))[0]
+        logger.log_spectrogram_tb(
+            step, '{}/{}'.format(label, utt_id), mel_spec, tb_subset='val')
 
-def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
-             batch_to_gpu, rank, args):
+
+def validate(model, epoch, total_iter, criterion, valset, batch_size, collate_fn, distributed_run,
+             batch_to_gpu, rank, args, use_gt_durations=False, ema=False,
+             mas=True, attention_kl_loss=None, kl_weight=None,
+             vocoder=None, sampling_rate=22050, hop_length=256, audio_interval=5):
     """Handles all the validation scoring and printing"""
     was_training = model.training
     model.eval()
@@ -427,6 +453,22 @@ def validate(model, criterion, valset, batch_size, collate_fn, distributed_run,
                 for k, v in meta.items():
                     val_meta[k] += v
                 val_num_frames = num_frames.item()
+
+            # log spectrograms and generated audio for first few utterances
+            if (i == 0) and (epoch % audio_interval == 0 if epoch is not None else True):
+                # TODO: sort utterances by mel length rather than more variable text length
+                # for consistent sample across different experiments
+                batch_audiopaths_and_text = sorted(valset.audiopaths_and_text[:batch_size],
+                                                       key=lambda x: len(
+                                                           valset.get_text(x['text'])),
+                                                       reverse=True)
+                tb_fnames = [i['mels'] for i in batch_audiopaths_and_text]
+                plot_spectrograms(
+                    y_pred, tb_fnames, total_iter, n=4, label='Predicted spectrogram', mas=mas)
+
+                if mas:
+                    plot_attn_maps(y_pred, tb_fnames, total_iter, n=4,
+                                       label='Predicted alignment')
 
         val_meta = {k: v / len(valset) for k, v in val_meta.items()}
 
@@ -804,11 +846,11 @@ def main():
         bmark_stats.update(epoch_num_frames, epoch_loss, epoch_mel_loss,
                            epoch_time)
 
-        validate(model, criterion, valset, args.batch_size, collate_fn,
+        validate(model, epoch, total_iter, criterion, valset, args.batch_size, collate_fn,
                  distributed_run, batch_to_gpu, args.local_rank, args)
 
         if args.ema_decay > 0:
-            validate(ema_model, criterion, valset, args.batch_size, collate_fn,
+            validate(ema_model, epoch, total_iter, criterion, valset, args.batch_size, collate_fn,
                      distributed_run, batch_to_gpu, args.local_rank, args)
 
         maybe_save_checkpoint(args, model, ema_model, optimizer, scaler, epoch,
@@ -818,7 +860,7 @@ def main():
     if len(bmark_stats) > 0:
         log(bmark_stats.get(args.benchmark_epochs_num), args.local_rank)
 
-    validate(model, criterion, valset, args.batch_size, collate_fn,
+    validate(model, epoch, total_iter, criterion, valset, args.batch_size, collate_fn,
              distributed_run, batch_to_gpu, args.local_rank, args)
 
     if args.local_rank == 0:

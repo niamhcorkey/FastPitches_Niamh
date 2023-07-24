@@ -84,7 +84,7 @@ ARGS+=" --dur-predictor-loss-scale 0.1"
 ARGS+=" --pitch-predictor-loss-scale 0.1"
 
 # Autoalign & new features
-ARGS+=" --kl-loss-start-epoch 0"
+ARGS+=" --kl-loss-start-epoch 50"
 ARGS+=" --kl-loss-warmup-epochs $KL_LOSS_WARMUP"
 ARGS+=" --text-cleaners $TEXT_CLEANERS"
 ARGS+=" --n-speakers $NSPEAKERS"
