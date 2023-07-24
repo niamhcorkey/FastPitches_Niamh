@@ -463,10 +463,8 @@ def validate(model, epoch, total_iter, criterion, valset, batch_size, collate_fn
                                                            valset.get_text(x['text'])),
                                                        reverse=True)
                 tb_fnames = [i['mels'] for i in batch_audiopaths_and_text]
-                plot_spectrograms(
-                    y_pred, tb_fnames, total_iter, n=4, label='Predicted spectrogram', mas=mas)
-
                 if mas:
+                    print("PLOTTING ATTENTION")
                     plot_attn_maps(y_pred, tb_fnames, total_iter, n=4,
                                        label='Predicted alignment')
 
