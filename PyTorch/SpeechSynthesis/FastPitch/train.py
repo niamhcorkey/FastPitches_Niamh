@@ -453,22 +453,6 @@ def validate(model, epoch, total_iter, criterion, valset, batch_size, collate_fn
                 for k, v in meta.items():
                     val_meta[k] += v
                 val_num_frames = num_frames.item()
-
-'''
-            # log spectrograms and generated audio for first few utterances
-            if (i == 0) and (epoch % audio_interval == 0 if epoch is not None else True):
-                # TODO: sort utterances by mel length rather than more variable text length
-                # for consistent sample across different experiments
-                batch_audiopaths_and_text = sorted(valset.audiopaths_and_text[:batch_size],
-                                                       key=lambda x: len(
-                                                           valset.get_text(x['text'])),
-                                                       reverse=True)
-                tb_fnames = [i['mels'] for i in batch_audiopaths_and_text]
-                if mas:
-                    print("PLOTTING ATTENTION")
-                    plot_attn_maps(y_pred, tb_fnames, total_iter, n=4,
-                                       label='Predicted alignment')
-'''
         val_meta = {k: v / len(valset) for k, v in val_meta.items()}
 
     val_meta['took'] = time.perf_counter() - tik
@@ -868,3 +852,19 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+'''
+# log spectrograms and generated audio for first few utterances
+            if (i == 0) and (epoch % audio_interval == 0 if epoch is not None else True):
+                # TODO: sort utterances by mel length rather than more variable text length
+                # for consistent sample across different experiments
+                batch_audiopaths_and_text = sorted(valset.audiopaths_and_text[:batch_size],
+                                                       key=lambda x: len(
+                                                           valset.get_text(x['text'])),
+                                                       reverse=True)
+                tb_fnames = [i['mels'] for i in batch_audiopaths_and_text]
+                if mas:
+                    print("PLOTTING ATTENTION")
+                    plot_attn_maps(y_pred, tb_fnames, total_iter, n=4,
+                                       label='Predicted alignment')
+'''
