@@ -454,6 +454,7 @@ def validate(model, epoch, total_iter, criterion, valset, batch_size, collate_fn
                     val_meta[k] += v
                 val_num_frames = num_frames.item()
 
+'''
             # log spectrograms and generated audio for first few utterances
             if (i == 0) and (epoch % audio_interval == 0 if epoch is not None else True):
                 # TODO: sort utterances by mel length rather than more variable text length
@@ -467,7 +468,7 @@ def validate(model, epoch, total_iter, criterion, valset, batch_size, collate_fn
                     print("PLOTTING ATTENTION")
                     plot_attn_maps(y_pred, tb_fnames, total_iter, n=4,
                                        label='Predicted alignment')
-
+'''
         val_meta = {k: v / len(valset) for k, v in val_meta.items()}
 
     val_meta['took'] = time.perf_counter() - tik
