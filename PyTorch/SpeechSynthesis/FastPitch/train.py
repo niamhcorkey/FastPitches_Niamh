@@ -375,7 +375,7 @@ def log_validation_batch(x, y_pred, rank):
     y_pred_fields = ['mel_out', 'dec_mask', 'dur_pred', 'log_dur_pred',
                      'pitch_pred', 'pitch_tgt', 'energy_pred',
                      'energy_tgt', 'attn_soft', 'attn_hard',
-                     'attn_hard_dur', 'attn_logprob']
+                     'attn_hard_dur', 'attn_logprob', 'coef_pred', 'coef_tgt']
 
     validation_dict = dict(zip(x_fields + y_pred_fields,
                                list(x) + list(y_pred)))
@@ -505,9 +505,7 @@ def plot_attn_maps(y, fnames, step, n=4, label='Predicted alignment'):
     n = min(n, bs)
     s = bs // n
     fnames = fnames[::s]
-    _, dec_mask, *_, attn_softs, attn_hards, attn_hard_durs, _ = y
-    for thing in y:
-        print(thing)
+    _, dec_mask, *_, attn_softs, attn_hards, attn_hard_durs, _, _, _ = y
     attn_softs = attn_softs[::s].cpu().numpy()
     attn_hards = attn_hards[::s].cpu().numpy()
     attn_hard_durs = attn_hard_durs[::s].cpu().numpy()
@@ -515,7 +513,6 @@ def plot_attn_maps(y, fnames, step, n=4, label='Predicted alignment'):
     mel_lens = dec_mask[::s].cpu().numpy().squeeze(2).sum(1)
     for attn_soft, attn_hard, mel_len, text_len, fname in zip(
             attn_softs, attn_hards, mel_lens, text_lens, fnames):
-        print(f"ATTN SOFT: {attn_soft}")
         attn_soft = attn_soft[:,:mel_len,:text_len].squeeze(0).transpose()
         attn_hard = attn_hard[:,:mel_len,:text_len].squeeze(0).transpose()
         utt_id = os.path.splitext(os.path.basename(fname))[0]
