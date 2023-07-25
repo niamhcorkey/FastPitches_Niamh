@@ -506,6 +506,8 @@ def plot_attn_maps(y, fnames, step, n=4, label='Predicted alignment'):
     s = bs // n
     fnames = fnames[::s]
     _, dec_mask, *_, attn_softs, attn_hards, attn_hard_durs, _ = y
+    for thing in y:
+        print(thing)
     attn_softs = attn_softs[::s].cpu().numpy()
     attn_hards = attn_hards[::s].cpu().numpy()
     attn_hard_durs = attn_hard_durs[::s].cpu().numpy()
