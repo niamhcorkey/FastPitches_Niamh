@@ -513,6 +513,7 @@ def plot_attn_maps(y, fnames, step, n=4, label='Predicted alignment'):
     mel_lens = dec_mask[::s].cpu().numpy().squeeze(2).sum(1)
     for attn_soft, attn_hard, mel_len, text_len, fname in zip(
             attn_softs, attn_hards, mel_lens, text_lens, fnames):
+        print(f"ATTN SOFT: {attn_soft}")
         attn_soft = attn_soft[:,:mel_len,:text_len].squeeze(0).transpose()
         attn_hard = attn_hard[:,:mel_len,:text_len].squeeze(0).transpose()
         utt_id = os.path.splitext(os.path.basename(fname))[0]
