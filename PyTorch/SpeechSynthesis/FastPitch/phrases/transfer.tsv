@@ -1,3 +1,29 @@
 coefs|output|text
-/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|statement.wav|it's raining in Glasgow
-/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|question.wav|it's raining in Glasgow
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|glasgow_s.wav|it's raining in Glasgow
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|glasgow_q.wav|it's raining in Glasgow
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|sister_s.wav|she said that she's your sister
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|sister_q.wav|she said that she's your sister
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|eat_s.wav|you're going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|eat_q.wav|you're going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|joking_s.wav|you think I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|joking_q.wav|you think I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|umbrella_s.wav|you broke my umbrella
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|umbrella_q.wav|you broke my umbrella
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|eight_s.wav|her son is eight years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|eight_q.wav|her son is eight years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|flight_s.wav|he missed his flight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|flight_q.wav|he missed his flight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|tidied_s.wav|you've tidied up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|tidied_q.wav|you've tidied up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|country_s.wav|she only listens to country music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|country_q.wav|she only listens to country music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|pizza_s.wav|we're having pizza for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|pizza_q.wav|we're having pizza for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|trumpet_s.wav|he's played the trumpet for 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|trumpet_q.wav|he's played the trumpet for 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|story_s.wav|I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|story_q.wav|I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|dad_s.wav|you must have met my dad before
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|dad_q.wav|you must have met my dad before
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|newspaper_s.wav|She's on the front page of the newspaper
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|newspaper_q.wav|She's on the front page of the newspaper
