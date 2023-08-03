@@ -8,19 +8,19 @@ export CUDA_LAUNCH_BLOCKING=1
 export CUDA_VISIBLE_DEVICES=3
 set -euo pipefail
 
-DS_HOME=/disk/scratch1/s1936986
+DS_HOME=/disk/scratch1/s1936986/diss
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
 MODEL=phrasesphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=phrasesphones
+NAME=transfertest1
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/books.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/books/$(basename $NAME .tsv)"}
+: ${PHRASES:="phrases/transfer.tsv"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/conference/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -37,7 +37,7 @@ NAME=phrasesphones
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
-: ${USE_COEF_TARGET:=false}
+: ${USE_COEF_TARGET:=true}
 : ${NCOEFFICIENTS:=3}
 
 
