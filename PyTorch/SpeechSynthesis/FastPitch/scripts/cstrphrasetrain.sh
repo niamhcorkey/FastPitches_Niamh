@@ -9,7 +9,7 @@ export CUDA_VISIBLE_DEVICES=2
 set -euo pipefail
 
 #JOB_NAME=$1
-DS_HOME=/disk/scratch1/s1936986/diss
+DS_HOME=/disk/scratch1/s1936986
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
 # metadata for wandb logging
@@ -21,7 +21,7 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/6coefs}
+: ${OUTPUT_DIR:=${DS_HOME}/diss/trained_models/6coefs}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
 : ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
 : ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
