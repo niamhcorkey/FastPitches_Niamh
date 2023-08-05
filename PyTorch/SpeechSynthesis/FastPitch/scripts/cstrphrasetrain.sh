@@ -9,7 +9,7 @@ export CUDA_VISIBLE_DEVICES=2
 set -euo pipefail
 
 #JOB_NAME=$1
-DS_HOME=/disk/scratch1/s1936986
+DS_HOME=/disk/scratch1/s1936986/diss
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
 # metadata for wandb logging
@@ -21,7 +21,7 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/trained_models/baselinephrases}
+: ${OUTPUT_DIR:=${DS_HOME}/trained_models/6coefs}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
 : ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
 : ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
@@ -43,7 +43,7 @@ export OMP_NUM_THREADS=1
 # Enable pitch conditioning
 : ${PITCH:=true}
 # Enable coefficient conditioning
-: ${COEFFICIENTS:=false}
+: ${COEFFICIENTS:=true}
 
 
 : ${TEXT_CLEANERS:=english_cleaners_v2}
@@ -55,7 +55,7 @@ export OMP_NUM_THREADS=1
 
 # For multispeaker models, add speaker ID = {0, 1, ...} as the last filelist column
 : ${NSPEAKERS:=1}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=6}
 : ${SAMPLING_RATE:=22050}
 
 # Adjust env variables to maintain the global batch size: NUM_GPUS x BATCH_SIZE x GRAD_ACCUMULATION = 256.
