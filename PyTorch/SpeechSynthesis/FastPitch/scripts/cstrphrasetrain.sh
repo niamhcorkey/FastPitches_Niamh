@@ -23,8 +23,8 @@ export OMP_NUM_THREADS=1
 : ${GRAD_ACCUMULATION:=1}
 : ${OUTPUT_DIR:=${DS_HOME}/sgile/trained_models/phoneinput3}
 : ${DATASET_PATH:=${DS_HOME}/sgile/downsampled}
-: ${TRAIN_FILELIST:=${DS_HOME}/sgile/downsampled/train_train_phones.txt}
-: ${VAL_FILELIST:=${DS_HOME}/sgile/downsampled/val_val_phones.txt}
+: ${TRAIN_FILELIST:=${DS_HOME}/sgile/downsampled/train_train.txt}
+: ${VAL_FILELIST:=${DS_HOME}/sgile/downsampled/val_val.txt}
 : ${AMP:=false}
 : ${SEED:=""}
 
