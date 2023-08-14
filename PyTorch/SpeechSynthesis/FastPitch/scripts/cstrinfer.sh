@@ -38,7 +38,7 @@ NAME=6coefs_transfertest
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=true}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=6}
 
 
 
