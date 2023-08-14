@@ -11,15 +11,15 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986/diss
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=phrasesphones
+MODEL=6coefs
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=transfertest2
+NAME=6coefs_transfertest
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/transfer2.tsv"}
+: ${PHRASES:="phrases/transfer6.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/conference/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
