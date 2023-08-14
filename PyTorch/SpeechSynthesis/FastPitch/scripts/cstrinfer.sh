@@ -14,12 +14,12 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=phrasesphones
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=transfertest5
+NAME=transfertest6
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/transfer5.tsv"}
+: ${PHRASES:="phrases/transfer6.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/conference/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
