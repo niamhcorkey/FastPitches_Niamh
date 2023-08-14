@@ -1,0 +1,29 @@
+coefs|output|text
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|storm_s.wav|there's supposed to be a storm tonight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|storm_q.wav|there's supposed to be a storm tonight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|cousins_s.wav|apparently you have twelve cousins
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|cousins_q.wav|apparently you have twelve cousins
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|tomato_s.wav|a tomato is actually a fruit
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|tomato_q.wav|a tomato is actually a fruit
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|serious_s.wav|you cannot be serious
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|serious_q.wav|you cannot be serious
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|sunglasses_s.wav|you broke my favourite sunglasses
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|sunglasses_q.wav|you broke my favourite sunglasses
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|daughter_s.wav|her daughter just turned five years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|daughter_q.wav|her daughter just turned five years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|train_s.wav|he missed the last train home
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|train_q.wav|he missed the last train home
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|door_s.wav|you definitely locked the door before we left
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|door_q.wav|you definitely locked the door before we left
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|classical_s.wav|she only listens to classical music now
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|classical_q.wav|she only listens to classical music now
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|wine_s.wav|we finished that bottle of wine
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|wine_q.wav|we finished that bottle of wine
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|piano_s.wav|he's taken up piano lessons again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|piano_q.wav|he's taken up piano lessons again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|unicorn_s.wav|the national animal of Scotland is the unicorn
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|unicorn_q.wav|the national animal of Scotland is the unicorn
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|grandma_s.wav|grandma is going to be ninety next year
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|grandma_q.wav|grandma is going to be ninety next year
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/statement.npy|plane_s.wav|he knows how to fly a plane
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/question.npy|plane_q.wav|he knows how to fly a plane
