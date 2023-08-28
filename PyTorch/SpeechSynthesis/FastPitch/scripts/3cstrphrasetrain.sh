@@ -5,7 +5,7 @@ export CUDA_HOME=/opt/cuda-10.2.89_440_33
 source /disk/scratch1/s1936986/miniconda/bin/activate
 source activate fastpitch_ellsworth
 
-export CUDA_VISIBLE_DEVICES=1
+export CUDA_VISIBLE_DEVICES=3
 set -euo pipefail
 
 #JOB_NAME=$1
@@ -21,7 +21,7 @@ export OMP_NUM_THREADS=1
 : ${NUM_GPUS:=1}
 : ${BATCH_SIZE:=16}
 : ${GRAD_ACCUMULATION:=1}
-: ${OUTPUT_DIR:=${DS_HOME}/diss/trained_models/8coefs}
+: ${OUTPUT_DIR:=${DS_HOME}/diss/trained_models/8coefs_incpitch}
 : ${DATASET_PATH:=${DS_HOME}/LJ_Chopped/wavs}
 : ${TRAIN_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_train.txt}
 : ${VAL_FILELIST:=${DS_HOME}/LJ_Chopped/newabs_chopped_val.txt}
@@ -41,7 +41,7 @@ export OMP_NUM_THREADS=1
 # Enable energy conditioning
 : ${ENERGY:=true}
 # Enable pitch conditioning
-: ${PITCH:=false}
+: ${PITCH:=true}
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 
