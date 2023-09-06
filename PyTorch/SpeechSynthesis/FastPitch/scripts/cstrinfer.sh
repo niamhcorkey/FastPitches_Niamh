@@ -11,10 +11,10 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986/diss
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=8coefs
+MODEL=8coefs_incpitch
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=norm_nopitch
+NAME=norm_incpitch
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
@@ -33,7 +33,7 @@ NAME=norm_nopitch
 # Enable energy conditioning
 : ${ENERGY:=true}
 # Enable pitch conditioning
-: ${PITCH:=false}
+: ${PITCH:=true}
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
