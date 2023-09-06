@@ -1,0 +1,57 @@
+coefs|output|text
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|glasgow_s.wav|it's raining in Glasgow
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|glasgow_q.wav|it's raining in Glasgow
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|sister_s.wav|she said that she's your sister
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|sister_q.wav|she said that she's your sister
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|eat_s.wav|you're going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|eat_q.wav|you're going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|joking_s.wav|you think I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|joking_q.wav|you think I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|umbrella_s.wav|you broke my umbrella
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|umbrella_q.wav|you broke my umbrella
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|eight_s.wav|her son is eight years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|eight_q.wav|her son is eight years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|flight_s.wav|he missed his flight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|flight_q.wav|he missed his flight
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|tidied_s.wav|you've tidied up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|tidied_q.wav|you've tidied up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|country_s.wav|she only listens to country music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|country_q.wav|she only listens to country music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|pizza_s.wav|we're having pizza for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|pizza_q.wav|we're having pizza for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|trumpet_s.wav|he's played the trumpet for 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|trumpet_q.wav|he's played the trumpet for 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|story_s.wav|I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|story_q.wav|I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|dad_s.wav|you must have met my dad before
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|dad_q.wav|you must have met my dad before
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|newspaper_s.wav|She's on the front page of the newspaper
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|newspaper_q.wav|She's on the front page of the newspaper
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|edin_s.wav|it's sunny in Edinburgh
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|edin_q.wav|it's sunny in Edinburgh
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|brother_s.wav|he said that he's your brother
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|brother_q.wav|he said that he's your brother
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|eat_s.wav|your going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|eat_q.wav|your going to eat all of that
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|joking_s.wav|he thinks I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|joking_q.wav|he thinks I'm joking
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|trampoline_s.wav|you broke my trampoline
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|trampoline_q.wav|you broke my trampoline
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|five_s.wav|her daughter is five years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|five_q.wav|her daughter is five years old
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|train_s.wav|he missed his train
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|train_q.wav|he missed his train
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|cleaned_s.wav|you've cleaned up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|cleaned_q.wav|you've cleaned up in here
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|rap_s.wav|she only listens to rap music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|rap_q.wav|she only listens to rap music
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|pasta_s.wav|weer having pasta for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|pasta_q.wav|weer having pasta for dinner again
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|violin_s.wav|he's played the violin for the past 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|violin_q.wav|he's played the violin for the past 10 years
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|story_s.wav|I think I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|story_q.wav|I think I've already told you that story
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|grandma_s.wav|you have never met my grandma
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|grandma_q.wav|you have never met my grandma
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8s_unnorm.npy|drive_s.wav|he never learned how to drive
+/disk/scratch1/s1936986/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch/coeftargets/8q_unnorm.npy|drive_q.wav|he never learned how to drive
