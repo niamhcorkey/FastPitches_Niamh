@@ -11,16 +11,16 @@ set -euo pipefail
 DS_HOME=/disk/scratch1/s1936986/diss
 FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 
-MODEL=phrasesphones
+MODEL=8coefs
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=transfertest6
+NAME=norm_nopitch
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/trained_models/$MODEL/$CHECKPOINT"}
 : ${BATCH_SIZE:=16}
-: ${PHRASES:="phrases/transfer6.tsv"}
-: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/conference/$(basename $NAME .tsv)"}
+: ${PHRASES:="phrases/8coefs_norm.tsv"}
+: ${OUTPUT_DIR:="$DS_HOME/fastpitch_audio/8coefstest/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
 : ${AMP:=false}
 : ${TORCHSCRIPT:=false}
@@ -33,12 +33,12 @@ NAME=transfertest6
 # Enable energy conditioning
 : ${ENERGY:=true}
 # Enable pitch conditioning
-: ${PITCH:=true}
+: ${PITCH:=false}
 # Enable coefficient conditioning
 : ${COEFFICIENTS:=true}
 # Load in coefficient targets
 : ${USE_COEF_TARGET:=true}
-: ${NCOEFFICIENTS:=3}
+: ${NCOEFFICIENTS:=8}
 
 
 
