@@ -14,11 +14,11 @@ FP=${DS_HOME}/FastPitches_Niamh/PyTorch/SpeechSynthesis/FastPitch
 MODEL=phoneinput3
 CHECKPOINT=FastPitch_checkpoint_1000.pt
 
-NAME=phoneinputtest3
+NAME=batchsize1test
 
 : ${WAVEGLOW:="pretrained_models/waveglow/nvidia_waveglow256pyt_fp16.pt"}
 : ${FASTPITCH:="$DS_HOME/sgile/trained_models/$MODEL/$CHECKPOINT"}
-: ${BATCH_SIZE:=6}
+: ${BATCH_SIZE:=1}
 : ${PHRASES:="phrases/testphones_updated.tsv"}
 : ${OUTPUT_DIR:="$DS_HOME/sgile/fastpitch_audio/$(basename $NAME .tsv)"}
 : ${LOG_FILE:="$OUTPUT_DIR/nvlog_infer.json"}
